@@ -51,7 +51,9 @@
               </div>
               <div class="panel-body">
                 <address>
-                  <span>Deducted From Salary</span>
+                  <span id="paymentName_browse">
+                    <xsl:value-of select="sqroot/body/bodyContent/form/formPages/formPage[@pageNo='1']/formSections/formSection[@sectionNo='5']/formCols/formCol[@colNo='1']/formRows/formRow[@rowNo='1']/fields/field/textBox/value/." />
+                  </span>
                 </address>
               </div>
             </div>
@@ -95,7 +97,7 @@
                 <script>
                   var GUIDs = getQueryVariable("GUID");
                   //var GUIDs = getCookie("cartID");
-                  LoadNewPart('account_form_orders_child', 'orders', 'tapcs3deta', "PCSOGUID = '"+GUIDs+"'", '');
+                  LoadNewPart('account_form_orders_child', 'orders', 'tapcs3deta', "PCSOGUID = '"+GUIDs+"'", '', 1, 200, 'productname asc');
                 </script>
               </div>
               <div class="totalAmountArea">

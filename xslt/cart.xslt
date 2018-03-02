@@ -8,6 +8,7 @@
 
   <xsl:template match="/">
     <script>
+
       <!--loadStyle('OPHContent/themes/themeTWO/scripts/jquery-ui/jquery-ui.css');
       loadStyle('OPHContent/themes/themeTWO/scripts/bootstrap/css/bootstrap.min.css');
       loadStyle('OPHContent/themes/themeTWO/scripts/font-awesome/css/font-awesome.min.css');
@@ -141,11 +142,11 @@
               © 2016 Copyright <a style="color:white" href="http://www.loreal.com/">L'oreal Indonesia</a>
             </p>
           </div>
-          <div class="col-sm-5 col-xs-12">
+          <!--<div class="col-sm-5 col-xs-12">
             <p class="poweredby">
               Powered By <a href="http://operahouse.systems/" style="color:white">OPERAHOUSE.SYSTEMS</a>
             </p>
-          </div>
+          </div>-->
         </div>
       </div>
     </div>
@@ -185,7 +186,20 @@
         </div>
       </div>
     </div>
-    
+
+    <div class="modal fade limit-modal" id="limitmodal" tabindex="-1" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+            <h3 class="modal-title">Remaining Limit</h3>
+          </div>
+          <div class="modal-body" id="limitmodalbody">
+            Loading Please Wait...
+          </div>
+        </div>
+      </div>
+    </div>
     
     <!-- Message -->
     <div id="popupMsg" class="alert alert-warning" style="background:#47BAC1; color:white; position:fixed; z-index:1000; top:5%;  right:3%; width:350px; margin:0 auto; display:none">
@@ -211,6 +225,7 @@
     <script>
       $( document ).ajaxStop(function() {
         $("#content-loader").show("slow").delay(500).fadeOut();
+         <!--$('.select2').select2();-->
       });
     </script>
   </xsl:template>

@@ -33,7 +33,7 @@
               </div>-->
               <div class="form-group">
                 <div class="col-md-offset-10 col-md-2 col-sm-offset-9 col-sm-3">
-                  <a class="btn btn-primary btn-block" onClick="SaveData('caUSERFRON', 'userform', '', '{/sqroot/body/bodyContent/form/info/GUID/.}')">SAVE INFO</a>
+                  <a class="btn btn-primary btn-block" onClick="SaveData('user', 'userform', '', '{/sqroot/body/bodyContent/form/info/GUID/.}')">SAVE INFO</a>
                 </div>
               </div>
             </form>
@@ -77,7 +77,7 @@
     <div class="col-md-10 col-sm-9">
       <xsl:choose>
         <xsl:when test="../@isEditable = 1">
-          <input type="password" class="form-control" id="{../@fieldName}" name="{../@fieldName}" placeholder="Please type your old or new password" value="{value/.}" />
+          <input type="password" class="form-control" id="{../@fieldName}" name="{../@fieldName}" placeholder="" value="{value/.}" />
         </xsl:when>
         <xsl:otherwise>
           <input type="password" class="form-control" id="{../@fieldName}" name="{../@fieldName}" placeholder="" value="{value/.}" readonly="readonly" />

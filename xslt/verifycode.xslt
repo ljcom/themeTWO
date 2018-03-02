@@ -35,7 +35,6 @@
       loadScript('OPHContent/themes/themeTWO/scripts/owl-carousel/owl.carousel.js');
       loadScript('OPHContent/themes/themeTWO/scripts/js/custom.js');
 
-      if (getCookie("isLogin")==1) window.location='?';
 
       if (getQueryVariable("verifycode") != undefined){
       ForgotPwdMail('verifycode');
@@ -171,11 +170,11 @@
               © 2016 Copyright <a style="color:white" href="http://www.loreal.com/">L'oreal Indonesia</a>
             </p>
           </div>
-          <div class="col-sm-5 col-xs-12">
+          <!--<div class="col-sm-5 col-xs-12">
             <p class="poweredby">
               Powered By <a href="http://operahouse.systems/" style="color:white">OPERAHOUSE.SYSTEMS</a>
             </p>
-          </div>
+          </div>-->
         </div>
       </div>
     </div>

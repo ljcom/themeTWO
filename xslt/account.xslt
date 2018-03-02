@@ -45,7 +45,7 @@
       LoadNewPartView('account_form_orders', 'contentAccount', 'tapcs3');
       }
       else{
-      var filterkey = "carolGUID = '<xsl:value-of select="sqroot/header/info/user/userGUID/." />' and status in(100,300,399,400,500)";
+      var filterkey = "carolGUID = '<xsl:value-of select="sqroot/header/info/user/userGUID/." />' and status != '0'";
           LoadNewPart('account_browse_orders', 'contentAccount', 'tapcs3', filterkey, '');
         }
       }else if (getQueryVariable("code")=='wish'){
@@ -180,11 +180,11 @@
               © 2016 Copyright <a style="color:white" href="http://www.loreal.com/">L'oreal Indonesia</a>
             </p>
           </div>
-          <div class="col-sm-5 col-xs-12">
+          <!--<div class="col-sm-5 col-xs-12">
             <p class="poweredby">
               Powered By <a href="http://operahouse.systems/" style="color:white">OPERAHOUSE.SYSTEMS</a>
             </p>
-          </div>
+          </div>-->
         </div>
       </div>
     </div>
@@ -225,6 +225,19 @@
       </div>
     </div>
 
+    <div class="modal fade limit-modal" id="limitmodal" tabindex="-1" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+            <h3 class="modal-title">Remaining Limit</h3>
+          </div>
+          <div class="modal-body" id="limitmodalbody">
+            Loading Please Wait...
+          </div>
+        </div>
+      </div>
+    </div>
     <!-- Message -->
     <div id="popupMsg" class="alert alert-warning" style="background:#47BAC1; color:white; position:fixed; z-index:1000; top:5%;  right:3%; width:350px; margin:0 auto; display:none">
       <button type="button" class="close" onclick="hidePopUp('popupMsg')" aria-hidden="true" style="color:white; opacity:1;">

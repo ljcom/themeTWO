@@ -132,13 +132,25 @@ function ChangePages(type, id) {
 
 
 function searchFront() {
+    var type = '', event = '', eventcode = ''
+    if (getQueryVariable("type") != '' && getQueryVariable("type") != undefined) type = '&type=' + getQueryVariable("type");
+    if (getQueryVariable("event") != '' && getQueryVariable("event") != undefined) event = '&event=' + getQueryVariable("event");
+    if (getQueryVariable("eventcode") != '' && getQueryVariable("eventcode") != undefined) eventcode = '&eventcode=' + getQueryVariable("eventcode");
+
+    setCookie("bpageno", "1", 0, 1, 0);
     searchText = document.getElementById("searchText").value;
-    window.location.href = 'index.aspx?env=front&code=maprodfron' + '&type=' + getQueryVariable("type") + '&bSearchText=' + searchText;
+    window.location.href = 'index.aspx?env=front&code=maprodfron' + type + event + eventcode + '&bSearchText=' + searchText;
 }
 function searchkeypressFront(e) {
     if (e.keyCode == 13) {
+        var type = '', event = '', eventcode = ''
+        if (getQueryVariable("type") != '' && getQueryVariable("type") != undefined) type = '&type=' + getQueryVariable("type");
+        if (getQueryVariable("event") != '' && getQueryVariable("event") != undefined) event = '&event=' + getQueryVariable("event");
+        if (getQueryVariable("eventcode") != '' && getQueryVariable("eventcode") != undefined) eventcode = '&eventcode=' + getQueryVariable("eventcode");
+
+        setCookie("bpageno", "1", 0, 1, 0);
         searchText = document.getElementById("searchText").value;
-        window.location.href = 'index.aspx?env=front&code=maprodfron' + '&type=' + getQueryVariable("type") + '&bSearchText=' + searchText;
+        window.location.href = 'index.aspx?env=front&code=maprodfron' + type + event + eventcode + '&bSearchText=' + searchText;
     }
 }
 function loginkeypressFront(e) {
@@ -157,6 +169,9 @@ function createPaging(totalrows, filename, id) {
     filename = "'" + filename + "'";
     id = "'" + id + "'";
     var pagenow = getCookie("bpageno");
+
+    if (pagenow == undefined || pagenow == '') pagenow = 1;
+
     if (totalpages > 5 && pagenow > 5) {
         lenpage = parseInt(pagenow) - 5;
     } else {
@@ -232,6 +247,10 @@ function productChangeView(type, id) {
     var sqlfilter = getQueryVariable("sqlfilter");
     var sortorder = getCookie("sortorder");
 
+    if (getQueryVariable("event") != '' && getQueryVariable("event") != undefined) {
+        sqlfilter = "evenGUID  =" + getQueryVariable("event");
+    }
+
     if (bpageno == '' || bpageno == undefined) { bpageno = 1 }
     if (showpage == '' || showpage == undefined) { showpage = 21 }
     if (sortOrder == '' || sortOrder == undefined) { sortOrder = '' }
@@ -252,6 +271,10 @@ function GoNextPage(filename, id, bpageno, showpage) {
     var searchText = getQueryVariable("bSearchText");
     var sqlfilter = getQueryVariable("sqlfilter");
     var sortorder = getCookie("sortorder");
+
+    if (getQueryVariable("event") != '' && getQueryVariable("event") != undefined) {
+        sqlfilter = "evenGUID = " + getQueryVariable("event") ;
+    } 
 
     setCookie("bpageno", bpageno, 0, 1, 0);
     setCookie("showpage", showpage, 0, 1, 0);
@@ -336,8 +359,12 @@ function SortingBy(xsltname, id, code) {
     if (bpageno == '' || bpageno == undefined || bpageno > 1) { bpageno = 1; }
     if (showpage == '' || showpage == undefined) { showpage = 20; }
     if (bSearchText == '' || bSearchText == undefined) { bSearchText = ''; }
+    if (getQueryVariable("event") != '' && getQueryVariable("event") != undefined) {
+        sqlfilter = "evenGUID = " + getQueryVariable("event");
+    }
     if (sqlfilter == '' || sqlfilter == undefined) { sqlfilter = ''; }
 
+        
     setCookie("bpageno", bpageno, 0, 1, 0);
     setCookie("showpage", showpage, 0, 1, 0);
 
@@ -421,14 +448,25 @@ function changePlusMinus(e) {
 
 function changeColorMenuFront() {
     var code = getCode().toLowerCase();
+    var eventcode = getQueryVariable("eventcode");
+    var menuCon = ''
     if (code == 'home') {
-        if (document.getElementById("prim-Home")) document.getElementById("prim-Home").style.color = '#47BAC1';
-    } else if (code == 'maprodfron') {
-        if (document.getElementById("prim-Shop")) document.getElementById("prim-Shop").style.color = '#47BAC1';
-    } else if (code == 'maprodfron' || code == 'account' || code == 'causerfron' || code == 'tapcs3') {
-        if (document.getElementById("prim-My Account")) document.getElementById("prim-My Account").style.color = '#47BAC1';
+        menuCon = document.getElementById("prim-Home")
+    } else if (code == 'maprodfron' && eventcode == 'online') {
+        menuCon = document.getElementById("prim-e-kitashop")
+    } else if (code == 'maprodfron' && eventcode == 'bazaar') {
+        menuCon = document.getElementById("prim-e-Bazaar")
+    }
+    else if (code == 'maprodfron') {
+        menuCon = document.getElementById("prim-Shop")
+    } else if (code == 'account' || code == 'causerfron' || code == 'tapcs3') {
+        menuCon = document.getElementById("prim-My Account")
+    }
+    if (menuCon != undefined && menuCon != null && menuCon != ''){
+        menuCon.style.color = '#47BAC1';
     }
 }
+
 function waitUntil(isready, success, error, count, interval) {
     if (count === undefined) {
         count = 3000;
@@ -539,7 +577,7 @@ function changePwd() {
     }
     else {
         var dfLength = dataForm.length;
-        var code = 'caupwd';
+        var code = 'user';
         dataForm = dataForm.substring(2, dfLength);
         dataForm = dataForm.split('%3C').join('%26lt%3B');
         path = "OPHCore/api/default.aspx?code=" + code + "&mode=save&cfunctionlist=" + GUID + "&",
@@ -556,11 +594,13 @@ function changePwd() {
                 var result = $(data).text();
                 if (result) {
                     //window.location = 'index.aspx?env=front&code=verifycode';
-                    alert(result);
+//                    alert(result);
+                    window.location = 'index.aspx?env=front&code=login2';
+                
                 } else {
                     window.location = 'index.aspx?env=front&code=login2';
                 }
-
+		setCookie("lastPar", "index.aspx?env=FRONT&code=home", 0, 1, 0);
             }
         });
     }
@@ -584,5 +624,96 @@ function saveThemeTWO(code, guid, location, formId) {
         }
         stopLoadingScreen();
 
+    });
+}
+function clearCookies() {
+    setCookie("bpageno", "1", 0, 1, 0);
+    setCookie("showpage", "21", 0, 1, 0);
+    setCookie("bSearchText", "", 0, 1, 0);
+    setCookie("sortOrder", "", 0, 1, 0);
+    setCookie("parentctgr1", "", 0, 3, 0);
+    setCookie("parentctgr2", "", 0, 3, 0);
+}
+function goToProductDetails(url) {
+    var searchtext = getQueryVariable("bSearchText"), event = getQueryVariable("event"), eventcode = getQueryVariable("eventcode");
+
+    if (searchtext != undefined && searchtext != '') searchtext = '&bSearchText=' + searchtext;
+    else searchtext = '';
+    if (event != undefined && event != '') event = '&event=' + event; 
+    else event = '';
+    if (eventcode != undefined && eventcode != '') eventcode = '&eventcode=' + eventcode; 
+    else eventcode = '';
+
+    var newurl
+    newurl = url + searchtext + event + eventcode;
+    window.location.replace(newurl);
+}
+function goToProductBrowse(){
+    var code = 'maprodfron';
+    var url = 'index.aspx?code='+ code 
+    var searchtext = getQueryVariable("bSearchText"), event = getQueryVariable("event"), eventcode = getQueryVariable("eventcode");
+
+    if (searchtext != undefined && searchtext != '') searchtext = '&bSearchText=' + searchtext;
+    else searchtext = '';
+    if (event != undefined && event != '') event = '&event=' + event;
+    else event = '';
+    if (eventcode != undefined && eventcode != '') eventcode = '&eventcode=' + eventcode;
+    else eventcode = '';
+
+    var newurl
+    newurl = url + searchtext + event + eventcode;
+    window.location.replace(newurl);
+}
+function colapsingMenu() {
+
+}
+function findParent(numbers, guid) {
+    var parent1 = '', parent2 = ''
+    if (numbers == 3) {
+        
+        parent1 = document.getElementById('parent_' + guid).value;
+        setCookie("parentctgr1", parent1, 0, 3, 0);
+
+        parent2 = document.getElementById('parent_' + parent1).value;
+        setCookie("parentctgr2", parent2, 0, 3, 0);
+
+    } else if (numbers == 2) {
+
+        parent2 = document.getElementById('parent_' + guid).value;
+        setCookie("parentctgr2", parent2, 0, 3, 0);
+    }
+}
+function generatePayment(code, tablename, formid, locations, GUID, delcookie) {
+    if (GUID == ''){GUID = getGUID()}
+    var path = 'OPHCore/api/midtrans.aspx?mode=checkdata&code=' + tablename + '&GUID=' + GUID
+    var id = "#" + formid
+    //$.post(path, $(id).serialize());
+    var dataForm = $(id).serialize() //.split('_').join('');
+
+    var dfLength = dataForm.length;
+    dataForm = dataForm.split('%3C').join('%26lt%3B');
+
+    $.ajax({
+        url: path,
+        data: dataForm,
+        crossdomain: true,
+        type: 'POST',
+        dataType: "xml",
+        timeout: 80000,
+        beforeSend: function () {
+            //setCursorWait(this);
+        },
+        success: function (data) {
+            var result = $(data).find("message").text();
+            var newUrl = $(data).find("newurl").text();
+           
+            if (result) {
+                document.getElementById("popupMsgContent").innerHTML = result;
+                $("#popupMsg").show("slow")
+            }
+            if (newUrl) {
+                window.location = newUrl
+            }
+        }
     });
 }

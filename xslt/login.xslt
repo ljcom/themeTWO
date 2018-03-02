@@ -203,11 +203,11 @@
               © 2016 Copyright <a style="color:white" href="http://www.loreal.com/">L'oreal Indonesia</a>
             </p>
           </div>
-          <div class="col-sm-5 col-xs-12">
+          <!--<div class="col-sm-5 col-xs-12">
             <p class="poweredby">
               Powered By <a href="http://operahouse.systems/" style="color:white">OPERAHOUSE.SYSTEMS</a>
             </p>
-          </div>
+          </div>-->
         </div>
       </div>
     </div>
@@ -276,19 +276,20 @@
     </script>
   </xsl:template>
   <!--primary front menu-->
+
   <xsl:template match="sqroot/header/menus/menu[@code='primaryfront']/submenus/submenu">
     <li class="dropdown">
       <xsl:choose>
-        <xsl:when test="(@mode)='treeroot'">
-          <a href="{pageURL/.}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+        <xsl:when test="(@type)='treeroot'">
+          <a href="{pageURL/.}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id="prim-{caption/.}">
             <xsl:value-of select="caption/." />
           </a>
           <ul class="dropdown-menu dropdown-menu-right">
             <xsl:apply-templates select="submenus/submenu[@mode='treeview']" />
           </ul>
         </xsl:when>
-        <xsl:when test="(@mode)='label'">
-          <a href="{pageURL/.}">
+        <xsl:when test="(@type)='label'">
+          <a href="{pageURL/.}" id="prim-{caption/.}">
             <xsl:value-of select="caption/." />
           </a>
         </xsl:when>
@@ -296,12 +297,11 @@
     </li>
   </xsl:template>
 
-  <xsl:template match="submenus/submenu[@mode='treeview']">
+  <xsl:template match="submenus/submenu[@type='treeview']">
     <li>
-      <a href="{pageURL/.}">
+      <a class="needlogin" data-toggle="modal" href="{pageURL/.}">
         <xsl:value-of select="caption/." />
       </a>
     </li>
   </xsl:template>
-
 </xsl:stylesheet>
