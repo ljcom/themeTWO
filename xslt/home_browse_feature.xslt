@@ -16,9 +16,9 @@
       loadScript('OPHContent/themes/themeTWO/scripts/countdown/jquery.syotimer.js');
       loadScript('OPHContent/themes/themeTWO/scripts/custom-me.js');-->
 
-      loadScript('OPHContent/themes/themeTWO/scripts/bootstrap/js/bootstrap.min.js');
-      loadScript('OPHContent/themes/themeTWO/scripts/owl-carousel/owl.carousel.js');
-      loadScript('OPHContent/themes/themeTWO/scripts/js/custom.js');
+      loadScript('OPHContent/cdn/bootstrap/js/bootstrap.min.js');
+      loadScript('OPHContent/cdn/owl-carousel/owl.carousel.js');
+      loadScript('OPHContent/cdn/bigbag-theme/js/custom.js');
 
       $('.homeslider').css('display', 'block');
       $('#loadingslider').remove();
