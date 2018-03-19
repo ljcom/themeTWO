@@ -18,6 +18,9 @@
     <jsFile>OPHContent/cdn/selectbox/jquery.selectbox-0.1.3.min.js</jsFile>
     <jsFile>OPHContent/cdn/countdown/jquery.syotimer.js</jsFile>
     <jsFile>OPHContent/cdn/lazyload/lazyload.js</jsFile>
+    <jsFile>OPHContent/cdn/bootstrap/js/bootstrap.min.js</jsFile>
+    <jsFile>OPHContent/cdn/bigbag-theme/js/custom.js</jsFile>
+    <jsFile>OPHContent/cdn/owl-carousel/owl.carousel.js</jsFile>
     <jsFile>OPHContent/themes/themeTWO/custom-me.js</jsFile>
 
   </manifest>
