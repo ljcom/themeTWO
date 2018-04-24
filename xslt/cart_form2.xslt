@@ -74,8 +74,8 @@
                         </div>
                         <div class="panel-body">
                           <address>
-                            <strong id="">
-                              <xsl:value-of select="sqroot/body/bodyContent/form/formPages/formPage[@pageNo='1']/formSections/formSection[@sectionNo='1']/formCols/formCol[@colNo='1']/formRows/formRow[@rowNo='1']/fields/field/textBox/value/." />
+                            <strong id="documentnumber">
+                              <xsl:value-of select="sqroot/body/bodyContent/form/formPages/formPage[@pageNo='1']/formSections/formSection/formCols/formCol[@colNo='5']/formRows/formRow[@rowNo='3']/fields/field/textBox/value/." />
                             </strong>
                             <br />
                             <span id="PCSO_CustomerAddress_browse">a</span>
@@ -166,9 +166,11 @@
                           <div class="col-sm-4 col-sm-offset-8 col-xs-12">
                             <ul class="list-unstyled">
                               <li>
-                                Total (Include PPN) <span>
-                                  Rp.  <xsl:value-of select="format-number(sqroot/body/bodyContent/form/formPages/formPage[@pageNo='1']/formSections/formSection/formCols/formCol[@colNo='5']/formRows/formRow[@rowNo='2']/fields/field/textBox/value/., '#,##0', 'dot-dec')" />
+                                Total (Include PPN) Rp.  
+                                <span id="TotalAmount">
+                                    <xsl:value-of select="format-number(sqroot/body/bodyContent/form/formPages/formPage[@pageNo='1']/formSections/formSection/formCols/formCol[@colNo='5']/formRows/formRow[@rowNo='2']/fields/field/textBox/value/., '#,##0', 'dot-dec')" />
                                 </span>
+                                
                               </li>
                             </ul>
                           </div>
@@ -191,6 +193,183 @@
                         </ul>
                       </div>
                     </div>
+
+                    <form action="https://staging.doku.com/Suite/Receive" id="MerchatPaymentPage" name="MerchatPaymentPage" method="post" >
+                    <table width="600" border="0" cellspacing="1" cellpadding="5">
+                      <tr>
+                        <td width="100" class="field_label">BASKET</td>
+                        <td width="500" class="field_input">
+                          <input name="BASKET" type="text" id="BASKET" value="" size="100" />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td width="100" class="field_label">BASKET TOTAL</td>
+                        <td width="500" class="field_input">
+                          <input name="BASKET" type="text" id="BASKETTOTAL" value="0" size="100" />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td width="100" class="field_label">MALLID</td>
+                        <td width="500" class="field_input">
+                          <input name="MALLID" type="text" id="MALLID" value="10986498" size="12" />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td width="100" class="field_label">CHAINMERCHANT</td>
+                        <td width="500" class="field_input">
+                          <input name="CHAINMERCHANT" type="text" id="CHAINMERCHANT" value="NA" size="12" />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="field_label">CURRENCY</td>
+                        <td class="field_input">
+                          <input name="CURRENCY" type="text" id="CURRENCY" value="360" size="3" maxlength="3" />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="field_label">PURCHASECURRENCY</td>
+                        <td class="field_input">
+                          <input name="PURCHASECURRENCY" type="text" id="PURCHASECURRENCY" value="360" size="3" maxlength="3" />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="field_label">AMOUNT</td>
+                        <td class="field_input">
+                          <input name="AMOUNT" type="text" id="AMOUNT" value="10000.00" size="12" />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="field_label">PURCHASEAMOUNT</td>
+                        <td class="field_input">
+                          <input name="PURCHASEAMOUNT" type="text" id="PURCHASEAMOUNT" value="10000.00" size="12" />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="field_label">TRANSIDMERCHANT</td>
+                        <td class="field_input">
+                          <input name="TRANSIDMERCHANT" type="text" id="TRANSIDMERCHANT" size="16" />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="field_label">WORDS</td>
+                        <td class="field_input">
+                          <input type="text" id="WORDS" name="WORDS"  size="60" />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="field_label">REQUESTDATETIME</td>
+                        <td class="field_input">
+                          <input name="REQUESTDATETIME" type="text" id="REQUESTDATETIME" size="14" maxlength="14" />
+                          (YYYYMMDDHHMMSS)
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td class="field_label">SESSIONID</td>
+                        <td class="field_input">
+                          <input type="text" id="SESSIONID" name="SESSIONID" />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="field_label">PAYMENTCHANNEL</td>
+                        <td class="field_input">
+                          <select name="PAYMENTCHANNEL" id="PAYMENTCHANNEL">
+                            <option value="">None</option>
+                            <!--<option value="4">Doku Wallet</option>-->
+                            <option selected="selected" value="15">Credit Card</option>
+                            <option value="36">Bank Transfer</option>
+                            <!--<option value="2">Clickpay Mandiri</option>
+				<option value="6">BRIPay</option>
+				<option value="24">BCA KlikPay- DEBIT</option>
+				<option value="5">ATM (Virtual Account)</option>-->
+                          </select>
+
+                        </td>
+                      </tr>
+                      <tr>
+                        <td width="100" class="field_label">EMAIL</td>
+                        <td width="500" class="field_input">
+                          <input name="EMAIL" type="text" id="EMAIL" value="marwandi@nsiapay.net" size="50" />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="field_label">NAME</td>
+                        <td class="field_input">
+                          <input name="NAME" type="text" id="NAME" value="Doku Test" size="30" maxlength="50" />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="field_label">ADDRESS</td>
+                        <td class="field_input">
+                          <input name="ADDRESS" type="text" id="ADDRESS" value="Jl. jendral Sudirman Kav.5" size="50" maxlength="50" />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="field_label">COUNTRY</td>
+                        <td class="field_input">
+                          <input name="COUNTRY" type="text" id="COUNTRY" value="360" size="50" maxlength="50" />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="field_label">STATE</td>
+                        <td class="field_input">
+                          <input name="STATE" type="text" id="STATE" value="Jakarta" size="50" maxlength="50" />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="field_label">CITY</td>
+                        <td class="field_input">
+                          <input name="CITY" type="text" id="CITY" value="JAKARTA SELATAN" size="50" maxlength="50" />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="field_label">PROVINCE</td>
+                        <td class="field_input">
+                          <input name="PROVINCE" type="text" id="PROVINCE" value="JAKARTA" size="50" maxlength="50" />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="field_label">ZIPCODE</td>
+                        <td class="field_input">
+                          <input name="ZIPCODE" type="text" id="ZIPCODE" value="12000" size="6" maxlength="10" />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="field_label">HOMEPHONE</td>
+                        <td class="field_input">
+                          <input name="HOMEPHONE" type="text" id="HOMEPHONE" value="0217998391" size="12" maxlength="20" />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="field_label">MOBILEPHONE</td>
+                        <td class="field_input">
+                          <input name="MOBILEPHONE" type="text" id="MOBILEPHONE" value="0217998391" size="12" maxlength="20" />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="field_label">WORKPHONE</td>
+                        <td class="field_input">
+                          <input name="WORKPHONE" type="text" id="WORKPHONE" value="0217998391" size="12" maxlength="20" />
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="field_label">BIRTHDATE</td>
+                        <td class="field_input">
+                          <input name="BIRTHDATE" type="text" id="BIRTHDATE" value="19880101" size="12" maxlength="20" />
+                        </td>
+                      </tr>
+
+                    </table><br /><br />
+                    <input name="submit" type="submit" class="bt_submit" id="submit" value="SUBMIT" />
+                    </form>
+                    <script >
+
+                    //genInvoice();
+                    getRequestDateTime();
+                    genSessionID();
+                    genDokuValues();
+
+                    </script>
                   </div>
                 </div>
               </div>
@@ -220,7 +399,7 @@
           <xsl:attribute name="disabled">disabled</xsl:attribute>
         </xsl:if>
         <xsl:if test="../@isEditable=0 or /sqroot/header/custompermissions/custompermission/allowchangepayment/.=1">
-          <xsl:attribute name="onchange">autosuggest_onchange(this, '<xsl:value-of select="preview/."/>', getCode(), '<xsl:value-of select="/sqroot/body/bodyContent/form/info/GUID/."/>', 'formheader'); SaveData('taPCS2','formpayment', 'index.aspx?code=tapcs2&amp;GUID=<xsl:value-of select="/sqroot/body/bodyContent/form/info/GUID/."/>', '', '0', '', '0')</xsl:attribute>
+          <xsl:attribute name="onchange">autosuggest_onchange(this, '<xsl:value-of select="preview/."/>', getCode(), '<xsl:value-of select="/sqroot/body/bodyContent/form/info/GUID/."/>', 'formheader'); SaveData('taPCS2','formpayment', 'index.aspx?code=tapcs2&amp;GUID=<xsl:value-of select="/sqroot/body/bodyContent/form/info/GUID/."/>', '', '0', '', '0');genPaymentChannel()</xsl:attribute>
         </xsl:if>
         <option></option>
       </select>

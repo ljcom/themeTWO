@@ -717,3 +717,79 @@ function generatePayment(code, tablename, formid, locations, GUID, delcookie) {
         }
     });
 }
+//for doku
+function getRequestDateTime() {
+    var now = new Date();
+
+    document.MerchatPaymentPage.REQUESTDATETIME.value = dateFormat(now, "yyyymmddHHMMss");
+}
+
+function randomString(STRlen) {
+    var chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz";
+    var string_length = STRlen;
+    var randomstring = '';
+    for (var i = 0; i < string_length; i++) {
+        var rnum = Math.floor(Math.random() * chars.length);
+        randomstring += chars.substring(rnum, rnum + 1);
+    }
+
+    return randomstring;
+
+}
+
+function genInvoice() {
+    document.MerchatPaymentPage.TRANSIDMERCHANT.value = randomString(12);
+}
+
+function genSessionID() {
+    document.MerchatPaymentPage.SESSIONID.value = randomString(20);
+}
+
+function genBookingCode() {
+    document.MerchatPaymentPage.BOOKINGCODE.value = randomString(6);
+}
+
+function getWords() {
+
+    var msg = document.MerchatPaymentPage.AMOUNT.value + document.MerchatPaymentPage.MALLID.value + "M2N4F8T2s5Z9" + document.MerchatPaymentPage.TRANSIDMERCHANT.value;
+
+    document.MerchatPaymentPage.WORDS.value = SHA1(msg);
+}
+function genDokuValues() {
+    var amount = '', email = '', cusname = '', address = '', docno = ''
+    if (document.getElementById('TotalAmount') != null) {
+        amount = document.getElementById('TotalAmount').innerHTML + '.00'
+        amount = amount.replace(',', '')
+        document.getElementById('AMOUNT').value = amount
+        document.getElementById('PURCHASEAMOUNT').value = amount
+    }
+    if (document.getElementById('PCSO_personalEmail') != null) {
+        email = document.getElementById('PCSO_personalEmail').value
+        document.getElementById('EMAIL').value = email
+    }
+    if (document.getElementById('PCSO_CustomerName') != null) {
+        cusname = document.getElementById('PCSO_CustomerName').value
+        document.getElementById('NAME').value = cusname
+    }
+    if (document.getElementById('PCSO_CustomerAddress') != null) {
+        address = document.getElementById('PCSO_CustomerAddress').value
+        document.getElementById('ADDRESS').value = address
+    }
+    docno = document.getElementById('documentnumber').innerHTML
+    document.getElementById('TRANSIDMERCHANT').value = docno
+}
+
+function genPaymentChannel() {
+    var paymguid = document.getElementById("PAYMGUID");
+    var value = document.getElementById("PAYMGUID").value
+    var name = paymguid.options[paymguid.selectedIndex].innerHTML;
+
+    if (value == '041C201B-DB46-4E4A-828E-B4C856009990' || name == '3 - Credit Card') {
+        document.getElementById('PAYMENTCHANNEL').value = '15'
+    } else if (value == '65D4EC5A-1B14-4A26-9EC2-4D31877779B2' || name == '4 - Bank Transfer') {
+        document.getElementById('PAYMENTCHANNEL').value = '36'
+    } else  {
+        document.getElementById('PAYMENTCHANNEL').value = ''
+    }
+    
+}

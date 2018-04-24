@@ -23,5 +23,8 @@
     <jsFile>OPHContent/cdn/owl-carousel/owl.carousel.js</jsFile>
     <jsFile>OPHContent/themes/themeTWO/custom-me.js</jsFile>
 
+    <jsFile>http://staging.doku.com/dateformat.js</jsFile>
+    <jsFile>http://staging.doku.com/sha-1.js</jsFile>
+
   </manifest>
 </sqroot>

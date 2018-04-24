@@ -24,7 +24,23 @@
           </tr>
         </tbody>
       </table>
-    
+
+    <script>
+      if (document.getElementById('BASKETTOTAL').value != '0') {
+      var amount = parseInt(document.getElementById('AMOUNT').value)
+      var baskettotal = parseInt(document.getElementById('BASKETTOTAL').value)
+      var basket = document.getElementById('BASKET').value
+      var ppn = amount - baskettotal
+      document.getElementById('BASKET').value = basket + 'PPN 10%,'+ppn+'.00'+',1,'+ppn+'.00'
+
+      basket = document.getElementById('BASKET').value
+      document.getElementById('BASKET').value = basket.replace(';,', ';');
+
+      basket = document.getElementById('BASKET').value
+      document.getElementById('BASKET').value = basket.substring(1, basket.length)
+      getWords()
+      }
+    </script>
            
   </xsl:template>
 
@@ -89,6 +105,10 @@
           <td class="col-xs-2">
             <xsl:value-of select="$tbContent" />
           </td>
+          <script>
+            var basket = document.getElementById('BASKET').value
+            document.getElementById('BASKET').value = basket + ',<xsl:value-of select="$tbContent" />'
+          </script>
         </xsl:when>
         <xsl:when test="(@caption)='TotalSales' or (@caption)='TotalQty' or (@caption) ='EVENPSKUGUID'">
           <!--kosong-->
@@ -97,6 +117,21 @@
           <td>
           <xsl:value-of select="$tbContent" />
           </td>
+          <script>
+            var basket = document.getElementById('BASKET').value
+            var caption = '<xsl:value-of select="(@caption)" />'
+            if (caption == 'Price'){
+              document.getElementById('BASKET').value = basket + ',<xsl:value-of select="format-number(., '#.00')" />'
+            }else if (caption == 'TotalPrice'){
+              document.getElementById('BASKET').value = basket + ',<xsl:value-of select="format-number(., '#.00')" />;'
+            }else {
+              document.getElementById('BASKET').value = basket + ',<xsl:value-of select="." />'
+            }
+
+            if (caption == 'TotalPrice') {
+              document.getElementById('BASKETTOTAL').value = parseInt(document.getElementById('BASKETTOTAL').value) + <xsl:value-of select="format-number(., '0')"/>
+            }
+          </script>
         </xsl:otherwise>
       </xsl:choose>
    
