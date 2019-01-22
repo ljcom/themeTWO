@@ -18,13 +18,18 @@
               <div class="media">
                 <div class="media-left productSlider" id="productsliders">
                   Loading Please Wait...
+                  <div class="carousel-inner">
+                    <div class="item active" data-thumb="0" style="text-align:center !important; height:400px;">
+                      <img style="margin:0 auto;  height:100%;  width: auto;" src="ophcontent/themes/themeTWO/images/white.png" onerror="this.src='ophcontent/themes/themeTWO/images/white.png'" alt="image"/>
+                    </div>
+                  </div>
                 </div>
                 <div class="media-body">
                   <ul class="list-inline">
                     <li>
                       <a onclick="goToProductBrowse()" href="#" style="color:black;" >
                         <span><ix class="fa fa-reply" aria-hidden="true"></ix>
-                        </span> Continue Shopping
+                        </span> Back to list
                       </a>
                     </li>
                   </ul>
@@ -34,7 +39,7 @@
                       <input type="number" id="Availaible" class="form-control" name="Availaible" style="width:70px;text-align:center" value="1" min="1" />
                     </span>
                     <div class="btn-area">
-                      <a class="btn btn-primary btn-block" onclick="AddToCart('maPRODFRON', 'productform')">
+                      <a class="btn btn-primary btn-block" onclick="AddToCart('{/sqroot/header/info/code/id/.}', 'productform')">
                         Add to cart <span style="margin-left:50px; font-size:20px;"><ix class="fa fa-angle-right" aria-hidden="true"></ix></span>
                       </a>
                     </div>
@@ -55,7 +60,7 @@
     <xsl:variable name="imageprod">
       OPHContent/documents/<xsl:value-of select="sqroot/header/info/account/." />/<xsl:value-of select="fields/field[@caption = 'productphotos']/." />
     </xsl:variable>
-    <input type="hidden" id="EVENPSKUGUID" name="EVENPSKUGUID" value="{@GUID}" />
+    <input type="hidden" id="cid" name="cid" value="{@GUID}" />
     <input type="hidden" id="cartID" name="cartID" value="" />
     <script>
       document.getElementById("cartID").value = getCookie("cartID");
@@ -125,18 +130,19 @@
     <div style="display:none" id="CTGRGUIDs">
       &#xA0;<xsl:value-of select="fields/field[@caption = 'CTGRGUID']/." /></div>
     <script>
-      var filter = "PRODGUID = '"+  document.getElementById("PRODGUID").value +"'" ;
-      LoadNewPart('product_browse_child', 'productsliders', 'maprodfronfoto', filter, ''); 
+      var filter = "parentDocGUID='"+  document.getElementById("cid").value +"'" ;
+      LoadNewPart('product_browse_child', 'productsliders', '<xsl:value-of select="/sqroot/header/info/code/id/." />foto', filter, ''); 
       var x = document.getElementById("PageTitle");
       //x.innerHTML = '<xsl:value-of select="fields/field[@caption = 'ID']/." /> - <xsl:value-of select="fields/field[@caption = 'Name']/." />';
       x.innerHTML = '';
       x.style.fontSize = '14px';
       <!--x.innerHTML = '<xsl:apply-templates select="/sqroot/body/bodyContent/form/formPages/formPage[pageNo='1']/formSections/formSection[sectionNo='1']/formCols/formCol[colNo='1']/formRows/formRow[rowNo='1']/fields/field/textBox/value/." />';-->
-              
-   
+
+
       var searchtext = document.getElementById('CTGRGUIDs').innerHTML;
-      var filter = "PRODGUID != " + "'" + document.getElementById('PRODGUID').value + "'";
-      LoadNewPart('product_form_related', 'relatedProduct', 'maprodfron', filter, searchtext, '1', '4');
+      //var filter = "PRODGUID != " + "'" + document.getElementById('PRODGUID').value + "'";
+      var filter = "parentDocGUID!='"+  document.getElementById("cid").value +"'" ;
+      LoadNewPart('product_form_related', 'relatedProduct', '<xsl:value-of select="/sqroot/header/info/code/id/." />', filter, searchtext, '1', '4');
     </script>
   </xsl:template>
 </xsl:stylesheet>

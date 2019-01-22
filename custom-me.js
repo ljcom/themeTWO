@@ -7,43 +7,8 @@ function stopLoadingScreen() {
     });
 }
 
-function loadContent2(id, f) {
-    //main content
-    var searchText
-    if (getQueryVariable("bSearchText") != undefined || getQueryVariable("bSearchText") == '') {
-        searchText = '&bSearchText=' + getQueryVariable("bSearchText");
-    } else {
-        searchText = '';
-    }
-    var filename
-    if (getPage() == 'product' && getMode() == 'browse') {
-        if (getQueryVariable("type") == 'list')
-            filename = 'product_browse_list';
-        else
-            filename = 'product_browse';
-    } else {
-        filename = getPage() + '_' + getMode();
-    }
 
-    if (getCode() == 'DUMY')
-        var xmldoc = 'OPHContent/themes/' + loadThemeFolder() + '/sample.xml';
-    else {
-        //var xmldoc = 'OPHContent/themes/' + loadThemeFolder() + '/sample.xml';
-        var xmldoc = 'OPHCore/api/default.aspx?mode=' + getMode() + '&code=' + getCode() + '&GUID=' + getGUID() + searchText + '&date=' + getUnique();
-    }
-
-    var divname = [id];
-    var xsldoc = ['OPHContent/themes/' + loadThemeFolder() + '/xslt/' + filename + '.xslt'];
-
-    pushTheme(divname, xmldoc, xsldoc, true);
-    //showXML(id, xmldoc, xsldoc, true, true, function () {
-    //    //run this to make the default value effect appear
-    //    //preview(1, vCode, vGUID);
-    //    if (typeof f == "function") f();
-    //    //if (isAdhoc) setCursorDefault();
-    //});
-
-} function LoadNewPart(filename, id, code, sqlfilter, searchText, bpageno, showpage, sortOrder) {
+function LoadNewPart(filename, id, code, sqlfilter, searchText, bpageno, showpage, sortOrder) {
     if (filename == 'product') {
         filename = filename + '_' + getCookie('browsetype');
         bpageno = getCookie("bpageno");
@@ -257,7 +222,7 @@ function productChangeView(type, id) {
     if (searchText == undefined) { searchText = "" }
     if (sqlfilter == undefined) { sqlfilter = "" }
     if (sortorder == undefined) { sortorder = "" }
-
+    setCookie(getCode()+"_view", type);
     LoadNewPart(filename, id, code, sqlfilter, bSearchText, bpageno, showpage, sortorder);
 
     stopLoadingScreen();
@@ -310,6 +275,44 @@ function NewTabAnotherPage(url) {
     window.open(url, '_blank');
 }
 
+
+function loadContent2(id, f) {
+    //main content
+    var searchText
+    if (getQueryVariable("bSearchText") != undefined || getQueryVariable("bSearchText") == '') {
+        searchText = '&bSearchText=' + getQueryVariable("bSearchText");
+    } else {
+        searchText = '';
+    }
+    var filename
+    if (getPage() == 'product' && getMode() == 'browse') {
+        if (getQueryVariable("type") == 'list')
+            filename = 'product_browse_list';
+        else
+            filename = 'product_browse';
+    } else {
+        filename = getPage() + '_' + getMode();
+    }
+
+    if (getCode() == 'DUMY')
+        var xmldoc = 'OPHContent/themes/' + loadThemeFolder() + '/sample.xml';
+    else {
+        //var xmldoc = 'OPHContent/themes/' + loadThemeFolder() + '/sample.xml';
+        var xmldoc = 'OPHCore/api/default.aspx?mode=' + getMode() + '&code=' + getCode() + '&GUID=' + getGUID() + searchText + '&date=' + getUnique();
+    }
+
+    var divname = [id];
+    var xsldoc = ['OPHContent/themes/' + loadThemeFolder() + '/xslt/' + filename + '.xslt'];
+
+    pushTheme(divname, xmldoc, xsldoc, true);
+    //showXML(id, xmldoc, xsldoc, true, true, function () {
+    //    //run this to make the default value effect appear
+    //    //preview(1, vCode, vGUID);
+    //    if (typeof f == "function") f();
+    //    //if (isAdhoc) setCursorDefault();
+    //});
+
+} 
 function loadContent2(id, f) {
     //main content
     var searchText
@@ -345,7 +348,7 @@ function loadContent2(id, f) {
 }
 
 function SortingBy(xsltname, id, code) {
-    var fieldtype = $("select#guiest_id1").val();
+    var fieldtype = $("select#combo_setOrder").val();
 
     if (xsltname == 'product') {
         xsltname = xsltname + '_' + getCookie('browsetype');

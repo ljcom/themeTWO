@@ -10,6 +10,11 @@
   <xsl:variable name="uppercase" select="'ABCDEFGHIJKLMNOPQRSTUVWXYZ'" />
 
   <xsl:template match="/">
+
+    <xsl:variable name="imageprod">
+      OPHContent/documents/<xsl:value-of select="sqroot/header/info/account/." />/<xsl:value-of select="fields/field[@caption = 'productphotos']/." />
+    </xsl:variable>
+
     <!-- MAIN CONTENT SECTION -->
     <section class="mainContent clearfix">
       <div class="container">
@@ -36,8 +41,8 @@
              
    
               var searchtext = document.getElementById('CTGRGUIDs').innerHTML;
-              var filter = "PRODGUID != " + "'" + document.getElementById('PRODGUID').value + "'";
-              LoadNewPart('product_form_related', 'relatedProduct', 'maprodfron', filter, searchtext, '1', '4');
+              var filter="PRODGUID != " + "'" + document.getElementById('PRODGUID').value + "'";
+              LoadNewPart('product_form_related', 'relatedProduct', '<xsl:value-of select="/sqroot/header/info/code/id/." />', filter, searchtext, '1', '4');
             </script>
           </div>
         
@@ -59,7 +64,7 @@
   <xsl:template match="formCols/formCol">
     <ul class="list-inline">
       <li>
-        <a href="?code=maprodfron" style="color:black;">
+        <a href="?code={/sqroot/header/info/code/id/.}" style="color:black;">
           <span><ix class="fa fa-reply" aria-hidden="true"></ix>
           </span> Continue Shopping
         </a>
@@ -74,7 +79,7 @@
     <!--<form action="../../../../OPHCore/api/default.aspx?mode=save&amp;code={../../../../../../info/state/code/.}" method="post">-->
     <form action="#" method="post" id="productform">
    
-      <input type="hidden" id="EVENPSKUGUID" name="EVENPSKUGUID" value="{../../../../../../info/GUID/.}" />
+      <input type="hidden" id="cid" name="cid" value="{../../../../../../info/GUID/.}" />
       <input type="hidden" id="cartID" name="cartID" value="" />
       <script>
         document.getElementById("cartID").value = getCookie("cartID");
@@ -151,8 +156,8 @@
   <!--Children-->
   <xsl:template match="sqroot/body/bodyContent/form/children">
      <script>
-      var filter = "<xsl:value-of select="child/parentkey/." /> = '"+  document.getElementById("PRODGUID").value +"'" ;
-       LoadNewPart('product_browse_child', 'productsliders', 'maprodfronfoto', filter, '');
+      var filter = "<xsl:value-of select="child/parentkey/." />='"+  document.getElementById("cid").value +"'" ;
+       LoadNewPart('product_browse_child', 'productsliders', '<xsl:value-of select="/sqroot/header/info/code/id/." />foto', filter, '');
       <!--alert(filter);-->
     </script>
   </xsl:template>

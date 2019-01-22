@@ -27,22 +27,27 @@
       setCookie("sortorder", sortOrder, 0, 1, 0);
       }
 
-
+      loadContent(1);
       if (getQueryVariable("GUID") != undefined &amp;&amp; getQueryVariable("GUID")){
         //loadContent2('contentWrapper');
-        LoadNewPart('product_browse_detail', 'contentWrapper', 'maprodfron', "EVENPSKUGUID = '"+getQueryVariable("GUID")+"'", '', '', '', '');
-      }else{
+		    //loadContent(1);
+        //LoadNewPart('product_browse_detail', 'contentWrapper', '<xsl:value-of select="/sqroot/header/info/code/id/." />', "docGUID = '"+getQueryVariable("GUID")+"'", '', '', '', '');
+      }
+      else{
         //added 06 june 2017
         var sqlfilter = ''
         if (getQueryVariable("event") != '' &amp;&amp; getQueryVariable("event") != undefined) {
           sqlfilter = "evenGUID = " + getQueryVariable("event")
         }
-        
-        if (getQueryVariable("type") == 'list'){
-          LoadNewPart('product_browse_list', 'contentBrowse', 'maprodfron', sqlfilter, bSearchText, bpageno, showpage, sortOrder);
-        }else{
-         LoadNewPart('product_browse', 'contentBrowse', 'maprodfron', sqlfilter, bSearchText, bpageno, showpage, sortOrder);
-        }
+        //var modeView = getCookie(getCode()+'_view');
+        //if (modeView == undefined) modeView='browse';
+
+        //LoadNewPart('product_'+modeView, 'contentBrowse', '<xsl:value-of select="/sqroot/header/info/code/id/." />', sqlfilter, bSearchText, bpageno, showpage, sortOrder);
+      //if (getQueryVariable("type") == 'list'){
+      //LoadNewPart('product_browse_list', 'contentBrowse', '<xsl:value-of select="/sqroot/header/info/code/id/." />', sqlfilter, bSearchText, bpageno, showpage, sortOrder);
+        //}else{
+         //LoadNewPart('product_browse', 'contentBrowse', '<xsl:value-of select="/sqroot/header/info/code/id/." />', sqlfilter, bSearchText, bpageno, showpage, sortOrder);
+        //}
       }
 
       <!--setCookie("bpageno", "1", 0, 1, 0);
@@ -141,7 +146,10 @@
 
     });
   </script>
-    
+    <xsl:variable name="logo">
+      OPHContent/documents/<xsl:value-of select="/sqroot/header/info/account/."/>/logo/logo.png
+    </xsl:variable>
+	
     <!--HEADER-->
     <div class="header clearfix headerV3">
       <!-- TOPBAR -->
@@ -196,7 +204,7 @@
               <span class="icon-bar"> &#xA0;</span>
             </button>
             <a class="navbar-brand" href="index.aspx?code=home" >
-              <img src="OPHContent/themes/themeTWO/images/logo2.png" style="width:200px;" alt="logo" />
+              <img src="{$logo}" style="width:200px;margin-bottom:10px" alt="logo" />
             </a>
           </div>
 
@@ -225,9 +233,9 @@
     <section class="lightSection clearfix pageHeader">
       <div class="container">
         <div class="row">
-          <div class="col-xs-6">
+          <div class="col-md-6 col-xs-12">
             <div class="page-title">
-              <h2 id="PageTitle" style="color:black;">Product</h2>
+              <h2 id="PageTitle" style="color:black;"><xsl:value-of select="/sqroot/header/info/title" /></h2>
             </div>
           </div>
           <!--<div class="col-xs-6">
@@ -248,31 +256,8 @@
       <section class="mainContent clearfix productsContent" >
         <div class="container">
           <div class="row">
-            <div class="col-md-3 col-sm-4 col-xs-12 sideBar">
-              <xsl:apply-templates select="sqroot/header/filters/filter" />
-             
-            </div>
-            <div class="col-md-9 col-sm-8 col-xs-12">
-              <div class="row filterArea">
-                <div class="col-xs-6" style="font-size:8px;">
-                  <select name="guiest_id1" id="guiest_id1" class="select-drop" onchange="SortingBy('product', 'contentBrowse', getCode())">
-                    <option value="name asc">Default sorting</option>
-                    <option value="id asc">Order By Item Code</option>
-                    <option value="priceDiscount Desc">Sort from the highest price</option>
-                    <option value="priceDiscount Asc">Sort from the lowest price</option>
-                  </select>
-                </div>
-                <div class="col-xs-6">
-                  <div class="btn-group pull-right" role="group">
-                    <button type="button" class="btn btn-default" id="gridtab" onclick="productChangeView('browse', 'contentBrowse')">
-                      <span><ix class="fa fa-th" aria-hidden="true"></ix></span><span>Grid</span>
-                    </button>
-                    <button type="button" class="btn btn-default" id="listtab" onclick="productChangeView('browse_list', 'contentBrowse')">
-                      <span><ix class="fa fa-th-list" aria-hidden="true"></ix></span><span>List</span> 
-                   </button>
-                  </div>
-                </div>
-              </div>
+            
+            <div class="col-md-12 col-sm-12 col-xs-12">
               <div id="contentBrowse">
                 Loading Please wait...
               </div>      
@@ -341,7 +326,7 @@
         <div class="row">
           <div class="col-sm-7 col-xs-12">
             <p>
-              © 2016 Copyright <a style="color:white" href="http://www.loreal.com/">L'oreal Indonesia</a>
+              © 2018 Copyright <a style="color:white" href="http://www.loreal.com/">L'Oreal Indonesia</a>
             </p>
           </div>
           <!--<div class="col-sm-5 col-xs-12">
