@@ -34,7 +34,7 @@
                           </xsl:choose>
                         </xsl:attribute>
                         <div class="box-header with-border">
-                          <button id="btnAdvancedFilter" type="button" class="btn btn-box-tool" data-widget="collapse">
+                          <button id="btnAdvancedFilter" type="button" class="btn btn-box-tool" data-widget="collapse" style="font-family:'Oxygen', sans-serif">
                             <ix aria-hidden="true">
                               <xsl:attribute name="class">
                                 <xsl:choose>
