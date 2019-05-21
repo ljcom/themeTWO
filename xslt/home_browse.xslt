@@ -50,7 +50,7 @@
   <!--slider1-->
   <xsl:template match="sqroot/header/menus/menu[@code='slider']/submenus/submenu">
    <li data-transition="slidehorizontal" data-slotamount="5" data-masterspeed="700"  data-title="Slide 3" class="homeslider" style="display:none;">
-      <img src="OPHContent/documents/{/sqroot/header/info/account/.}/{pageURL/.}" onerror="this.src='ophcontent/themes/themeTWO/images/white.png'" alt="slidebg1" data-bgfit="cover" data-bgposition="center center" data-bgrepeat="no-repeat" />
+      <img src="ophcore/api/msg_download.aspx?imageName=OPHContent/documents/{/sqroot/header/info/account/.}/{pageURL/.}&amp;size=900" onerror="this.src='ophcore/api/msg_download.aspx?imageName=ophcontent/themes/themeTWO/images/white.png'" alt="slidebg1" data-bgfit="cover" data-bgposition="center center" data-bgrepeat="no-repeat" />
       <div class="slider-caption slider-captionV4">
          <xsl:if test="link/. != ''">
             <div class="tp-caption rs-caption-4 sft"
@@ -83,7 +83,7 @@
       <div style=" background:#F1E39A; padding:10px" class="banner2">
         <div class="row">
           <div class="col-sm-6" style="text-align:center;">
-            <img src="OPHContent/documents/{/sqroot/header/info/account/.}/{pageURL/.}" onerror="this.src='ophcontent/themes/themeTWO/images/white.png'" alt="image" />
+            <img src="ophcore/api/msg_download.aspx?imageName=OPHContent/documents/{/sqroot/header/info/account/.}/{pageURL/.}&amp;size=900" onerror="this.src='ophcore/api/msg_download.aspx?imageName=ophcontent/themes/themeTWO/images/white.png'" alt="image" />
           </div>
           <div class="col-sm-6 col-xs-12" >
             <h3>
@@ -108,37 +108,7 @@
         </div>
 
       </div>
-      <!--<div class="slide" style="background:#F1E39A; margin-bottom:20px; padding:10px;">
-        <div class="row">
-          <div class="col-sm-6 col-xs-12">
-            <div class="productImage" style="background:#F1E39A">
-              <div class="banner2">
-                <img src="{pageURL/.}" />
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-6 col-xs-12" >
-            <h3>
-              <a href="{icon_url/.}" style="color:black; font-weight:bold;">
-                <xsl:value-of select="caption/." />
-              </a>
-            </h3>
-            <p>
-              <xsl:choose>
-                <xsl:when test="string-length(MenuDescription/.) &gt; 100">
-                  <xsl:value-of select="concat(substring($oriDesc, 1, 100), '...')" />
-                </xsl:when>
-                <xsl:otherwise>
-                  <xsl:value-of select="$oriDesc" />
-                </xsl:otherwise>
-              </xsl:choose>
-            </p>
-            <xsl:if test="link/. != ''">
-              <a href="index.aspx?code=maprodfron&amp;{link/.}" class="btn btn-border">Shop Now</a>
-            </xsl:if>
-          </div>
-        </div>
-      </div>-->
+     
     </div>
   </xsl:template>
 </xsl:stylesheet>

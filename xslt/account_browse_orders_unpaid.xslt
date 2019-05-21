@@ -10,17 +10,26 @@
   <xsl:variable name="uppercase" select="'ABCDEFGHIJKLMNOPQRSTUVWXYZ'" />
 
   <xsl:template match="/">
-      <h4>Unpaid Orders</h4>
+      <h4>Order Status</h4>
       <div class="table-responsive">
         <table class="table">
           <thead>
             <tr>
                 <xsl:apply-templates select="sqroot/body/bodyContent/browse/header/column" />
-              <th>Action</th>
+              <th>ACTION</th>
             </tr>
           </thead>
           <tbody>
-            <xsl:apply-templates select="sqroot/body/bodyContent/browse/content/row" />
+            <xsl:choose>
+              <xsl:when test="count(sqroot/body/bodyContent/browse/content/row)=0">
+                <tr>
+                  <td colspan="10">No pending orders.</td>
+                </tr>
+              </xsl:when>
+              <xsl:otherwise>
+                <xsl:apply-templates select="sqroot/body/bodyContent/browse/content/row" />
+              </xsl:otherwise>
+            </xsl:choose>
           </tbody>
         </table>
       </div>
@@ -37,8 +46,8 @@
     <tr>
       <xsl:apply-templates select="fields/field" />
       <td>
-        <a href="#" class="btn btn-default" onclick="location.href='index.aspx?env=front&amp;code=tapcs1&amp;GUID={@GUID}';">View</a>
-        <a href="#" class="btn btn-default"  onclick="deleteRow('tapcso', '{@GUID}');">Delete</a>
+        <a href="index.aspx?env=front&amp;code=tapcs2&amp;GUID={@GUID}" class="btn btn-default">View</a>
+        <!--a href="#" class="btn btn-default"  onclick="deleteRow('tapcso', '{@GUID}');">Delete</a-->
       </td>
     </tr>
                  

@@ -10,18 +10,15 @@
   <xsl:variable name="uppercase" select="'ABCDEFGHIJKLMNOPQRSTUVWXYZ'" />
 
   <xsl:template match="/">
+  
     <section class="mainContent clearfix cartListWrapper" >
       <div class="container">
         <div class="row">
           <div class="col-xs-12">
             <div class="cartListInner">
               <div class="table-responsive" id="contentcart">
-                <script>
-                  
-                  var GUIDs = '<xsl:value-of select="sqroot/body/bodyContent/form/info/GUID/." />'
-                  //var GUIDs = getCookie("CartID");
-                  LoadNewPart('cart_browse_child', 'contentcart', 'tapcs1deta', "PCSOGUID = '"+GUIDs+"'", '', 1, 200);
-                </script>
+                Loading
+              
               </div>
               <div class="updateArea">
                 <!--<div class="input-group">
@@ -47,20 +44,24 @@
                 </div>
               </div>
               <div class="checkBtnArea" id="checkoutbutton">
-                <script>
-                  if (getCookie("isLogin") == 0){
-                    document.getElementById("checkoutbutton").innerHTML = '<a data-toggle="modal" href=".login-modal" class="btn btn-primary btn-block"><span>checkout</span><ix class="fa fa-arrow-circle-right" aria-hidden="true"></ix></a>'
-                  }else{
-                      document.getElementById("checkoutbutton").innerHTML = '<a data-toggle="modal" href="index.aspx?env=front&amp;code=tapcs2&amp;GUID={sqroot/body/bodyContent/form/info/GUID/.}" class="btn btn-primary btn-block"><span>checkout </span> <ix class="fa fa-arrow-circle-right" aria-hidden="true"></ix></a> <a href="index.aspx?env=front&amp;code=MaPRODFRON&amp;event=%276A293D44-E76E-4979-BAD6-A598988FB61B%27&amp;eventcode=online" class="btn btn-primary " style="position:absolute;left:50px; width:250px;"><ix class="fa fa-arrow-circle-left" aria-hidden="true">&#xA0;</ix><span> CONTINUE SHOPPING</span></a>'
-                  }
-                </script>
+                <a data-toggle="modal" href="index.aspx?env=front&amp;code=tapcs2&amp;GUID={sqroot/body/bodyContent/form/info/GUID/.}" class="btn btn-primary btn-block">
+                  <span>checkout </span>
+                  <ix class="fa fa-arrow-circle-right" aria-hidden="true"></ix>
+                </a>
+                <a href="index.aspx?env=front&amp;code=MaPRODFRON&amp;event=%276A293D44-E76E-4979-BAD6-A598988FB61B%27&amp;eventcode=online" class="btn btn-primary " style="position:absolute;left:50px; width:250px;">
+                  <ix class="fa fa-arrow-circle-left" aria-hidden="true">&#xA0;</ix>
+                  <span> CONTINUE SHOPPING</span>
+                </a>
               </div>
             </div>
           </div>
         </div>
       </div>
     </section>
-   
+    <script>
+      var GUIDs = '<xsl:value-of select="/sqroot/body/bodyContent/form/info/GUID/." />'
+      LoadNewPart('cart_browse_child', 'contentcart', 'tapcs1deta', "PCSOGUID = '"+GUIDs+"'", '', 1, 200);
+    </script>
 
   </xsl:template>
   

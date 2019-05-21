@@ -16,9 +16,9 @@
       loadScript('OPHContent/themes/themeTWO/scripts/countdown/jquery.syotimer.js');
       loadScript('OPHContent/themes/themeTWO/scripts/custom-me.js');-->
 
-      loadScript('OPHContent/cdn/bootstrap/js/bootstrap.min.js');
-      loadScript('OPHContent/cdn/owl-carousel/owl.carousel.js');
-      loadScript('OPHContent/cdn/bigbag-theme/js/custom.js');
+      loadScript('OPHContent/themes/themeTWO/scripts/bootstrap/js/bootstrap.min.js');
+      loadScript('OPHContent/themes/themeTWO/scripts/owl-carousel/owl.carousel.js');
+      loadScript('OPHContent/themes/themeTWO/scripts/js/custom.js');
 
       $('.homeslider').css('display', 'block');
       $('#loadingslider').remove();
@@ -45,13 +45,13 @@
           <div class="category-Slider" id="prod-feature_{@GUID}">
             <div class="owl-carousel categorySlider" >
               <div class="item" style="height:400px;">
-                <img style="max-height:300px;  width:auto;  margin:0 auto; " src="OPHContent/themes/themeTWO/images/product/1_{fields/field[@caption = 'Name']/.}.jpg" onerror="this.src='ophcontent/themes/themeTWO/images/white.png'" alt="Image" />
+                <img style="max-height:300px;  width:auto;  margin:0 auto; " src="ophcore/api/msg_download.aspx?imageName=OPHContent/themes/themeTWO/images/product/1_{fields/field[@caption = 'Name']/.}.jpg" onerror="this.src='ophcore/api/msg_download.aspx?imageName=ophcontent/themes/themeTWO/images/white.png'" alt="Image" />
               </div>
               <div class="item" style="height:400px;">
-                <img style="max-height:300px; width:auto;  margin:0 auto;" src="OPHContent/themes/themeTWO/images/product/2_{fields/field[@caption = 'Name']/.}.jpg" onerror="this.src='ophcontent/themes/themeTWO/images/white.png'" alt="Image" />
+                <img style="max-height:300px; width:auto;  margin:0 auto;" src="ophcore/api/msg_download.aspx?imageName=OPHContent/themes/themeTWO/images/product/2_{fields/field[@caption = 'Name']/.}.jpg" onerror="this.src='ophcore/api/msg_download.aspx?imageName=ophcontent/themes/themeTWO/images/white.png'" alt="Image" />
               </div>
               <div class="item" style="height:400px;">
-                <img style="max-height:300px; width:auto; margin:0 auto;" src="OPHContent/themes/themeTWO/images/product/3_{fields/field[@caption = 'Name']/.}.jpg" onerror="this.src='ophcontent/themes/themeTWO/images/white.png'" alt="Image" />
+                <img style="max-height:300px; width:auto; margin:0 auto;" src="ophcore/api/msg_download.aspx?imageName=OPHContent/themes/themeTWO/images/product/3_{fields/field[@caption = 'Name']/.}.jpg" onerror="this.src='ophcore/api/msg_download.aspx?imageName=ophcontent/themes/themeTWO/images/white.png'" alt="Image" />
               </div>
             </div>
           </div>

@@ -77,6 +77,11 @@
           </span>
         </td>
       </xsl:when>
+      <xsl:when test="(@caption)='Qty' or (@caption)='QtyConfirm' or (@caption)='QtyReject' or (@caption)='QtyReturn' or (@caption)='TotalPrice'">
+        <td style="text-align:center">
+          <xsl:value-of select="$tbContent" />
+        </td>
+      </xsl:when>
       <xsl:otherwise>
         <td>
           <xsl:value-of select="$tbContent" />

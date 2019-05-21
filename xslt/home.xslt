@@ -8,33 +8,14 @@
 
   <xsl:template match="/">
     <script>
-      <!--loadStyle('OPHContent/themes/themeTWO/scripts/jquery-ui/jquery-ui.css');
-      loadStyle('OPHContent/themes/themeTWO/scripts/bootstrap/css/bootstrap.min.css');
-      loadStyle('OPHContent/themes/themeTWO/scripts/font-awesome/css/font-awesome.min.css');
-      loadStyle('OPHContent/themes/themeTWO/scripts/selectbox/select_option1.css');
-      loadStyle('OPHContent/themes/themeTWO/scripts/rs-plugin/css/settings.css');
-      loadStyle('OPHContent/themes/themeTWO/scripts/rs-plugin/css/settings.css');
-      loadStyle('OPHContent/themes/themeTWO/scripts/owl-carousel/owl.carousel.css');
-      loadStyle('OPHContent/themes/themeTWO/styles/font-oxygen.css');
-      loadStyle('OPHContent/themes/themeTWO/styles/icon-font.min.css');
-      loadStyle('OPHContent/themes/themeTWO/styles/style.css');
-      loadStyle('OPHContent/themes/themeTWO/styles/default.css');-->
+      
 
-      <!--loadScript('OPHContent/themes/themeTWO/scripts/jquery.1.11.3.jquery.min.js');
-      loadScript('OPHContent/themes/themeTWO/scripts/jquery-ui/jquery-ui.js');
-      loadScript('OPHContent/themes/themeTWO/scripts/rs-plugin/js/jquery.themepunch.tools.min.js');
-      loadScript('OPHContent/themes/themeTWO/scripts/rs-plugin/js/jquery.themepunch.revolution.min.js');
-      loadScript('OPHContent/themes/themeTWO/scripts/selectbox/jquery.selectbox-0.1.3.min.js');
-      loadScript('OPHContent/themes/themeTWO/scripts/countdown/jquery.syotimer.js');
-      loadScript('OPHContent/themes/themeTWO/scripts/bootstrap/js/bootstrap.min.js');
-
-      //ada di home_browse_feature
-      loadScript('OPHContent/themes/themeTWO/scripts/owl-carousel/owl.carousel.js');
-      loadScript('OPHContent/themes/themeTWO/scripts/js/custom.js');
-      loadScript('OPHContent/themes/themeTWO/scripts/custom-me.js');-->
+      //loadScript('OPHContent/themes/themeTWO/scripts/rs-plugin/js/jquery.themepunch.tools.min.js');
+      //loadScript('OPHContent/themes/themeTWO/scripts/rs-plugin/js/jquery.themepunch.revolution.min.js');
 
       LoadNewPart('home_browse', 'contentWrapper', 'home', '','');
       changeColorMenuFront();
+      endLoading();
     </script>
     <!-- Page script -->
     
@@ -148,7 +129,7 @@
         <div class="container">
           <div class="navbar-header">
             <a class="navbar-brand" href="javascript:void(0)">
-              <img src="OPHContent/themes/themeTWO/images/logo2.png" style="width:200px;" alt="logo" />
+              <img src="ophcore/api/msg_download.aspx?imageName=OPHContent/themes/themeTWO/images/logo2.png" style="width:200px;" alt="logo" />
             </a>
           </div>
           <div class="navTop-middle" >

@@ -45,16 +45,16 @@
       LoadNewPartView('account_form_orders', 'contentAccount', 'tapcs3');
       }
       else{
-      var filterkey = "carolGUID = '<xsl:value-of select="sqroot/header/info/user/userGUID/." />' and status != '0'";
-          LoadNewPart('account_browse_orders', 'contentAccount', 'tapcs3', filterkey, '');
-        }
+      var filterkey = "carolGUID = '<xsl:value-of select="sqroot/header/info/user/userGUID/." />'";
+      LoadNewPart('account_browse_orders', 'contentAccount', 'tapcs3', filterkey, '');
+      }
       }else if (getQueryVariable("code")=='wish'){
       ChangePages('_wishlist', 'contentAccount');
       }else{
       ChangePages('', 'contentAccount')
       }
       changeColorMenuFront();
-      
+      endLoading();
 
     </script>
     <!-- Page script -->
@@ -164,7 +164,7 @@
 
             <!-- CONTENT-->
             <div class="row" id="contentAccount">
-              a
+              
             </div>
           </div>
         </div>

@@ -11,7 +11,7 @@
 
   <xsl:template match="/">
     <div class="media-left">
-      <img class="media-object" src="img/products/quick-view/quick-view-01.jpg" alt="Image" />
+      <img class="media-object" src="ophcore/api/msg_download.aspx?imageName=img/products/quick-view/quick-view-01.jpg" alt="Image" />
     </div>
     <div class="media-body">
       

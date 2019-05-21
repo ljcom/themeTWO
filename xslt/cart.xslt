@@ -9,39 +9,22 @@
   <xsl:template match="/">
     <script>
 
-      <!--loadStyle('OPHContent/themes/themeTWO/scripts/jquery-ui/jquery-ui.css');
-      loadStyle('OPHContent/themes/themeTWO/scripts/bootstrap/css/bootstrap.min.css');
-      loadStyle('OPHContent/themes/themeTWO/scripts/font-awesome/css/font-awesome.min.css');
-      loadStyle('OPHContent/themes/themeTWO/scripts/selectbox/select_option1.css');
-      loadStyle('OPHContent/themes/themeTWO/scripts/rs-plugin/css/settings.css');
-      loadStyle('OPHContent/themes/themeTWO/scripts/rs-plugin/css/settings.css');
-      loadStyle('OPHContent/themes/themeTWO/scripts/owl-carousel/owl.carousel.css');
-      loadStyle('OPHContent/themes/themeTWO/styles/font-oxygen.css');
-      loadStyle('OPHContent/themes/themeTWO/styles/icon-font.min.css');
-      loadStyle('OPHContent/themes/themeTWO/styles/style.css');
-      loadStyle('OPHContent/themes/themeTWO/styles/default.css')
-
-      loadScript('OPHContent/themes/themeTWO/scripts/jquery.1.11.3.jquery.min.js');
-      loadScript('OPHContent/themes/themeTWO/scripts/jquery-ui/jquery-ui.js');
-      loadScript('OPHContent/themes/themeTWO/scripts/rs-plugin/js/jquery.themepunch.tools.min.js');
-      loadScript('OPHContent/themes/themeTWO/scripts/rs-plugin/js/jquery.themepunch.revolution.min.js');
-      loadScript('OPHContent/themes/themeTWO/scripts/selectbox/jquery.selectbox-0.1.3.min.js');
-      loadScript('OPHContent/themes/themeTWO/scripts/countdown/jquery.syotimer.js');
-      loadScript('OPHContent/themes/themeTWO/scripts/custom-me.js');-->
-
       loadScript('OPHContent/themes/themeTWO/scripts/bootstrap/js/bootstrap.min.js');
       loadScript('OPHContent/themes/themeTWO/scripts/owl-carousel/owl.carousel.js');
       loadScript('OPHContent/themes/themeTWO/scripts/js/custom.js');
 
       if (getQueryVariable("GUID") != undefined &amp;&amp; getQueryVariable("GUID")){
-        if(getQueryVariable("code").toLowerCase() == "tapcs1"){
-          LoadNewPartView('cart_form', 'contentWrapper', 'tapcs1');
-        }else if(getQueryVariable("code").toLowerCase()== "tapcs2"){
-          LoadNewPartView('cart_form2', 'contentWrapper', 'tapcs2');
-        }
+      if(getQueryVariable("code").toLowerCase() == "tapcs1"){
+      LoadNewPartView('cart_form', 'contentWrapper', 'tapcs1');
+      }else if(getQueryVariable("code").toLowerCase()== "tapcs2"){
+      LoadNewPartView('cart_form2', 'contentWrapper', 'tapcs2');
+      }//else if(getQueryVariable("code").toLowerCase()== "tapcs4"){
+      //LoadNewPartView('cart_form3', 'contentWrapper', 'tapcs4');
+      //}
       }else{
-        loadContent2('contentWrapper');
+      loadContent2('contentWrapper');
       }
+      //endLoading();
     </script>
     <!-- Page script -->
 

@@ -23,7 +23,9 @@
           <div class="panel-group">
             <a id="{@GUID}_a" data-toggle="collapse" href="#{@GUID}_menu" class="top-envi-lv2"  onclick="LoadNewPart('catagory', '{@GUID}_menus', '{$code}', '', '{@GUID}', '1', '200');  changePlusMinus(this); findParent(2, '{@GUID}');">
               <!--<span style="margin-right:10px; font-size:9px; ">➤</span>-->
-              <span style="width:70%; display:inline-table; line-height:14px;" onclick="goToAnotherPage('index.aspx?code=maprodfron&amp;bSearchText={@GUID}'); clearCookies();">
+              <span style="width:70%; display:inline-table; line-height:14px;"  onclick="loadProduct('{@GUID}');">
+              <!--span style="width:70%; display:inline-table; line-height:14px;" 
+                    onclick="goToAnotherPage('index.aspx?code=maprodfron&amp;bSearchText={@GUID}'); clearCookies();"-->
                 <xsl:value-of select="fields/field[@caption = 'Name']/." />
               </span>
               <xsl:apply-templates select="fields/field[@caption = 'isParent']" />
@@ -105,7 +107,9 @@
       </xsl:when>
       <xsl:when test="((fields/field[@caption = 'PARNCTGRGUID']/.) !='' or (fields/field[@caption = 'PARNBRANGUID']/.) !='') and (fields/field[@caption = 'isParent']/.) ='0' ">
         <li>
-          <a id="{@GUID}_a" data-toggle="collapse" href="#{@GUID}_menu" class="top-envi-lv2" onclick="goToAnotherPage('index.aspx?code=maprodfron&amp;bSearchText={@GUID}');  clearCookies(); changePlusMinus(this); findParent(3, '{@GUID}')">
+          <a id="{@GUID}_a" data-toggle="collapse" href="#{@GUID}_menu" class="top-envi-lv2" onclick="loadProduct('{@GUID}'); changePlusMinus(this); findParent(3, '{@GUID}')">
+            <!--a id="{@GUID}_a" data-toggle="collapse" href="#{@GUID}_menu" class="top-envi-lv2" 
+             onclick="goToAnotherPage('index.aspx?code=maprodfron&amp;bSearchText={@GUID}');  clearCookies(); changePlusMinus(this); findParent(3, '{@GUID}')"-->
             <!--<span style="margin-right:10px; font-size:9px;">➤</span>--> 
             <xsl:value-of select="fields/field[@caption = 'Name']/." />
           </a>
@@ -135,8 +139,8 @@
         <div class="panel-group">
           <div class="panel panel-default top-menu-onphone" style="border-radius:0; margin-top:0;" >
             <a id="{@GUID}_a" class="top-envi" data-toggle="collapse" href="#{@GUID}_menu" data-parent="#accordion2"  onclick="LoadNewPart('catagory', '{@GUID}_menus', '{$code}', '', '{@GUID}', '1', '200');  changePlusMinus(this);">
-
-              <span onclick="goToAnotherPage('index.aspx?env=front&amp;code=maprodfron&amp;bSearchText={@GUID}'); clearCookies();">
+              <span onclick="loadProduct('{@GUID}');">
+                <!--span onclick="goToAnotherPage('index.aspx?env=front&amp;code=maprodfron&amp;bSearchText={@GUID}'); clearCookies();"-->
                 <xsl:value-of select="fields/field[@caption = 'Name']/." />
               </span>
               <xsl:apply-templates select="fields/field[@caption = 'isParent']" />

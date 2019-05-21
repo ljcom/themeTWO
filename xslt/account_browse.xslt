@@ -25,23 +25,48 @@
             </span> <br/> Profile</a></li>
           <li><a href="?code=tapcs3" class="btn btn-default btn-lg">
             <span><ix class="fa fa-list" aria-hidden="true"></ix>
-            </span> <br/>All Orders</a></li>
+            </span> <br/>Orders History</a></li>
         </ul>
         
-        
-        <div class="orderBox" id="orderBoxs">
-          <h4>Unpaid Orders</h4>
+        <!--div class="orderBox" id="orderBoxs2">
+          <h4>Stock Confirmation</h4>
           <script>
             var cartID = getCookie("cartID");
             if(cartID != '' || cartID != undefined) {
             cartID = " and PCSOGUID != '" +cartID+ "'"
             }
             var GUIDhidden = document.getElementById("hiddenUsrGUID").value;
-            var filterkey = "carolGUID = '"+ GUIDhidden +"' and status = '0' " + cartID;
-            LoadNewPart('account_browse_orders_unpaid', 'orderBoxs', 'tapcs3', filterkey, '', 1, 200);
+            var filterkey = "carolGUID='"+ GUIDhidden +"'";// and status = '98' ";// + cartID;
+            LoadNewPart('account_browse_orders_confirm', 'orderBoxs2', 'tapcs4', filterkey, '', 1, 200, null, 98);
+          </script>
+        </div-->
+		
+        <div class="orderBox" id="orderBoxs">
+          <h4>Order Status</h4>
+          <script>
+            var cartID = getCookie("cartID");
+            if(cartID != '' || cartID != undefined) {
+            cartID = " and PCSOGUID != '" +cartID+ "'"
+            }
+            var GUIDhidden = document.getElementById("hiddenUsrGUID").value;
+            var filterkey = "carolGUID='"+ GUIDhidden +"'";// and status = '99' "; //+ cartID;
+            LoadNewPart('account_browse_orders_unpaid', 'orderBoxs', 'tapcs4', filterkey, '', 1, 200, null, '0');
+			//LoadNewPartView('account_browse_orders_unpaid', 'orderBoxs', 'tapcs4');
           </script>
         </div>
         
+		<!--div class="orderBox" id="orderBoxs3">
+          <h4>Delivering Orders</h4>
+          <script>
+            var cartID = getCookie("cartID");
+            if(cartID != '' || cartID != undefined) {
+            cartID = " and PCSOGUID != '" +cartID+ "'"
+            }
+            var GUIDhidden = document.getElementById("hiddenUsrGUID").value;
+            var filterkey = "carolGUID='"+ GUIDhidden +"' and status = '100' ";// + cartID;
+            LoadNewPart('account_browse_orders_deliver', 'orderBoxs3', 'tapcs3', filterkey, '', 1, 200);
+          </script>
+        </div-->
       </div>
     </div>
 

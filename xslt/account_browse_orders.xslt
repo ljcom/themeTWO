@@ -13,7 +13,7 @@
     <div class="col-xs-12">
       <div class="innerWrapper">
         <div class="orderBox">
-          <h4>All Orders</h4>
+          <h4>Orders History</h4>
           <div class="table-responsive">
             <table class="table">
               <thead>
@@ -82,7 +82,7 @@
     <tr>
       <xsl:apply-templates select="fields/field" />
       <td>
-        <a href="#" class="btn btn-default" onclick="location.href='index.aspx?env=front&amp;code=tapcs3&amp;GUID={@GUID}';">View</a>
+        <a href="index.aspx?env=front&amp;code=tapcs3&amp;GUID={@GUID}" class="btn btn-default">View</a>
       </td>
     </tr>
                  
