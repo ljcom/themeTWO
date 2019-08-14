@@ -50,7 +50,7 @@
 
       if (getQueryVariable("GUID") != undefined &amp;&amp; getQueryVariable("GUID")){
         //loadContent2('contentWrapper');
-        LoadNewPart('product_browse_detail', 'contentWrapper', 'maprodfron', "EVENPSKUGUID = '"+getQueryVariable("GUID")+"'", '', '', '', '');
+        LoadNewPart('product_browse_detail', 'contentWrapper', getCode(), "EVENPSKUGUID = '"+getQueryVariable("GUID")+"'", '', '', '', '');
       }else{
         //added 06 june 2017
         var sqlfilter = ''
@@ -59,10 +59,11 @@
         }
         
         if (getQueryVariable("type") == 'list'){
-          LoadNewPart('product_browse_list', 'contentBrowse', 'maprodfron', sqlfilter, bSearchText, bpageno, showpage, sortOrder);
+          LoadNewPart('product_browse_list', 'contentBrowse', getCode(), sqlfilter, bSearchText, bpageno, showpage, sortOrder);
         }else{
-         LoadNewPart('product_browse', 'contentBrowse', 'maprodfron', sqlfilter, bSearchText, bpageno, showpage, sortOrder);
+         LoadNewPart('product_browse', 'contentBrowse', getCode(), sqlfilter, bSearchText, bpageno, showpage, sortOrder);
         }
+		LoadNewPart('product_category', 'browseFilter', getCode(), sqlfilter, bSearchText, bpageno, showpage, sortOrder);
       }
 
       <!--setCookie("bpageno", "1", 0, 1, 0);
@@ -270,9 +271,8 @@
       <section class="mainContent clearfix productsContent" >
         <div class="container">
           <div class="row">
-            <div class="col-md-3 col-sm-4 col-xs-12 sideBar">
-              <xsl:apply-templates select="sqroot/header/filters/filter" />
-             
+            <div class="col-md-3 col-sm-4 col-xs-12 sideBar" id="browseFilter">
+				Loading. Please wait...	
             </div>
             <div class="col-md-9 col-sm-8 col-xs-12">
               <div class="row filterArea">
@@ -296,7 +296,7 @@
                 </div>
               </div>
               <div id="contentBrowse">
-                Loading Please wait...
+                Loading. Please wait...
               </div>      
             </div>
           </div>
@@ -444,28 +444,6 @@
     </li>
   </xsl:template>
 
-  <!--filters-->
-  <xsl:template match="sqroot/header/filters/filter">
-    <div class="panel panel-default">
-      <div class="panel-heading"><xsl:value-of select="caption/." /></div>
-      <div class="accordian-body collapse in top-menu-div product-menu" id="demo5">
-        <div class="panel-group" id="accordion2">
-          <!-- SIDEBAR -->
-          <!--<xsl:apply-templates select="sqroot/header/menus/menu[@code='catagory']/submenus/submenu" />-->
-          <div id="{caption/.}Menu">
-            <script>
-              if (getQueryVariable("GUID") == undefined){
-                var xslfile = '<xsl:value-of select="caption/." />';
-                var id = '<xsl:value-of select="caption/." />'+'Menu';
-                var code = '<xsl:value-of select="code/." />';
-                var prnt = '<xsl:value-of select="@Parent" /> is null';
-                LoadNewPart('catagory', id, code, prnt, '', '1', '200', 'id asc');
-              }
-            </script>       
-          </div>
-        </div>
-      </div>
-    </div>
-  </xsl:template>
+  
 
 </xsl:stylesheet>

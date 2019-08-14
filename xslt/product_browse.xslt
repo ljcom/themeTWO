@@ -64,12 +64,12 @@
                
               </li>
               <!--<li><a class="btn btn-default" data-toggle="modal" href=".quick-view" onclick="LoadNewPartView('product_form_quick_view', 'quickViewProd', 'maPRODFRON', '{@GUID}');" ><ix class="fa fa-eye"></ix></a></li>-->
-              <li><a class="btn btn-default"  href="#" onclick="goToProductDetails('index.aspx?env=front&amp;code=maprodfron&amp;GUID={@GUID}')"><ix class="fa fa-eye"></ix></a></li>
+              <li><a class="btn btn-default"  href="#" onclick="goToProductDetails('index.aspx?env=front&amp;code={/sqroot/header/info/code/id}&amp;GUID={@GUID}')"><ix class="fa fa-eye"></ix></a></li>
             </ul>
           </div>
         </div>
         <div class="productCaption clearfix">
-          <a  href="#" onclick="goToProductDetails('index.aspx?env=front&amp;code=maprodfron&amp;GUID={@GUID}')">
+          <a  href="#" onclick="goToProductDetails('index.aspx?env=front&amp;code={/sqroot/header/info/code/id}&amp;GUID={@GUID}')">
             <h5 style="height:30px;">
               <xsl:value-of select="fields/field[@caption = 'ID']/." /> - <xsl:value-of select="fields/field[@caption = 'Name']/." /><br />
             </h5>

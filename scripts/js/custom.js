@@ -95,7 +95,8 @@ jQuery(document).ready(function() {
 jQuery(document).ready(function() {
 	"use strict";
 	var owl = $('.owl-carousel.featuredProductsSlider');
-	  owl.owlCarousel({
+	try{
+		owl.owlCarousel({
 		  loop:true,
 		  margin:28,
 		  autoplay:true,
@@ -116,8 +117,12 @@ jQuery(document).ready(function() {
 			  }
 		  }
 	  });
+	}
+	catch(e) {}
+	  
 	var owl = $('.owl-carousel.partnersLogoSlider');
-	  owl.owlCarousel({
+	try {
+		owl.owlCarousel({
 		  loop:true,
 		  margin:28,
 		  autoplay:true,
@@ -140,9 +145,13 @@ jQuery(document).ready(function() {
 			  }
 		  }
 	  });
+	}
+	catch(e) {}
+	  
 
 	var owl = $('.owl-carousel.featuredCollectionSlider');
-	  owl.owlCarousel({
+	try {
+		owl.owlCarousel({
 		  loop:true,
 		  margin:28,
 		  autoplay:false,
@@ -164,9 +173,13 @@ jQuery(document).ready(function() {
 			  }
 		  }
 	  });
+	}
+	catch(e) {}
+	  
 
 	  var owl = $('.owl-carousel.dealSlider');
-	  owl.owlCarousel({
+	  try {
+		  owl.owlCarousel({
 		  loop:true,
 		  margin:28,
 		  autoplay:false,
@@ -188,9 +201,13 @@ jQuery(document).ready(function() {
 			  }
 		  }
 	  });
+	  }
+	  catch(e) {}
+	  
 
 	  var owl = $('.owl-carousel.testimonialSlider');
-	  owl.owlCarousel({
+	  try {
+		  owl.owlCarousel({
 		  loop:true,
 		  margin:28,
 		  autoplay:true,
@@ -212,9 +229,13 @@ jQuery(document).ready(function() {
 			  }
 		  }
 	  });
+	  }
+	  catch(e) {}
+	  
 
 	  var owl = $('.owl-carousel.categorySlider');
-	  owl.owlCarousel({
+	  try {
+		  owl.owlCarousel({
 		  loop:true,
 		  margin:28,
 		  autoplay:false,
@@ -234,9 +255,13 @@ jQuery(document).ready(function() {
 			  }
 		  }
 	  });
+	  }
+	  catch(e) {}
+	  
 
 	var owl = $('.owl-carousel.bannerV3');
-	  owl.owlCarousel({
+	try {
+		owl.owlCarousel({
 		  loop:true,
 		  autoplay:true,
 		  autoplayTimeout:4000,
@@ -263,6 +288,9 @@ jQuery(document).ready(function() {
 			  }
 		  }
 	  });
+	}
+	catch(e) {}
+	  
 
 });
 //============================== SELECT BOX =========================
@@ -299,25 +327,27 @@ jQuery(document).ready(function() {
 //============================== PRODUCT SINGLE SLIDER =========================
 jQuery(document).ready(function() {
 	(function($){
-	  $('#thumbcarousel').carousel(0);
-	  var $thumbItems = $('#thumbcarousel .item');
-	    $('#carousel').on('slide.bs.carousel', function (event) {
-	     var $slide = $(event.relatedTarget);
-	     var thumbIndex = $slide.data('thumb');
-	     var curThumbIndex = $thumbItems.index($thumbItems.filter('.active').get(0));
-	    if (curThumbIndex>thumbIndex) {
-	      $('#thumbcarousel').one('slid.bs.carousel', function (event) {
-	        $('#thumbcarousel').carousel(thumbIndex);
-	      });
-	      if (curThumbIndex === ($thumbItems.length-1)) {
-	        $('#thumbcarousel').carousel('next');
-	      } else {
-	        $('#thumbcarousel').carousel(numThumbItems-1);
-	      }
-	    } else {
-	      $('#thumbcarousel').carousel(thumbIndex);
-	    }
-	  });
+		if ($('#thumbcarousel').carousel!=undefined) {					
+			$('#thumbcarousel').carousel(0);
+			var $thumbItems = $('#thumbcarousel .item');
+				$('#carousel').on('slide.bs.carousel', function (event) {
+					var $slide = $(event.relatedTarget);
+				var thumbIndex = $slide.data('thumb');
+				var curThumbIndex = $thumbItems.index($thumbItems.filter('.active').get(0));
+				if (curThumbIndex>thumbIndex) {
+					$('#thumbcarousel').one('slid.bs.carousel', function (event) {
+						$('#thumbcarousel').carousel(thumbIndex);
+					});
+					if (curThumbIndex === ($thumbItems.length-1)) {
+						$('#thumbcarousel').carousel('next');
+					} else {
+						$('#thumbcarousel').carousel(numThumbItems-1);
+					}
+				} else {
+					$('#thumbcarousel').carousel(thumbIndex);
+				}
+			});
+		}
 	})(jQuery);
 });
 

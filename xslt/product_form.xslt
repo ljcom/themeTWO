@@ -37,7 +37,7 @@
    
               var searchtext = document.getElementById('CTGRGUIDs').innerHTML;
               var filter = "PRODGUID != " + "'" + document.getElementById('PRODGUID').value + "'";
-              LoadNewPart('product_form_related', 'relatedProduct', 'maprodfron', filter, searchtext, '1', '4');
+              LoadNewPart('product_form_related', 'relatedProduct', getCode(), filter, searchtext, '1', '4');
             </script>
           </div>
         
@@ -59,7 +59,7 @@
   <xsl:template match="formCols/formCol">
     <ul class="list-inline">
       <li>
-        <a href="?code=maprodfron" style="color:black;">
+        <a href="?code={/sqroot/header/info/state/code/}" style="color:black;">
           <span><ix class="fa fa-reply" aria-hidden="true"></ix>
           </span> Continue Shopping
         </a>
@@ -152,7 +152,7 @@
   <xsl:template match="sqroot/body/bodyContent/form/children">
      <script>
       var filter = "<xsl:value-of select="child/parentkey/." /> = '"+  document.getElementById("PRODGUID").value +"'" ;
-       LoadNewPart('product_browse_child', 'productsliders', 'maprodfronfoto', filter, '');
+       LoadNewPart('product_browse_child', 'productsliders', '<xsl:value-of select="/sqroot/header/info/state/code/" />', filter, '');
       <!--alert(filter);-->
     </script>
   </xsl:template>

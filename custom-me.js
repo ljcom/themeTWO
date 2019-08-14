@@ -151,6 +151,7 @@ function searchFront() {
 
     setCookie("bpageno", "1", 0, 1, 0);
     searchText = document.getElementById("searchText").value;
+    setCookie("browseSearch", searchText, 0, 1, 0);
     window.location.href = 'index.aspx?env=front&code=maprodfron' + type + event + eventcode + '&bSearchText=' + searchText;
 }
 function searchkeypressFront(e) {
@@ -162,6 +163,7 @@ function searchkeypressFront(e) {
 
         setCookie("bpageno", "1", 0, 1, 0);
         searchText = document.getElementById("searchText").value;
+        setCookie("browseSearch", searchText, 0, 1, 0);
         window.location.href = 'index.aspx?env=front&code=maprodfron' + type + event + eventcode + '&bSearchText=' + searchText;
     }
 }
@@ -174,13 +176,15 @@ function goToRef(name, url) {
     window.open(url, '_blank');
 }
 
-function createPaging(totalrows, filename, id) {
+function createPaging(totalrows, filename, id, curpage) {
     var rowperpages = 21;
     var totalpages = Math.ceil(totalrows / rowperpages);
     var i, len, text, lenpage;
     filename = "'" + filename + "'";
     id = "'" + id + "'";
-    var pagenow = getCookie("bpageno");
+    var pagenow = curpage;
+    if (pagenow == undefined) pagenow = getQueryVariable('bpageno');
+    if (pagenow==undefined) pagenow = getCookie("bpageno");
 
     if (pagenow == undefined || pagenow == '') pagenow = 1;
 
@@ -234,7 +238,7 @@ function AddToCart(code, formid) {
                 document.getElementById("popupMsgContent").innerHTML = result;
                 $("#popupMsg").show("slow"); 
             } else {
-                window.location.reload();
+                goToProductBrowse();
             }
             stopLoadingScreen();
         }
@@ -251,6 +255,8 @@ function loadProduct(bSearchText) {
     if (getQueryVariable("event") != '' && getQueryVariable("event") != undefined) {
         sqlfilter = "evenGUID = " + getQueryVariable("event")
     }
+    setCookie('bpageno', '1', 0, 1, 0);
+    bpageno = 1;
 
     if (getCookie('browseType') == 'browse_list')
     {
@@ -300,8 +306,13 @@ function GoNextPage(filename, id, bpageno, showpage) {
     var url
     var code = getQueryVariable("code");
     var type = getQueryVariable("type");
-    var searchText = getQueryVariable("bSearchText");
-    var sqlfilter = getQueryVariable("sqlfilter");
+    if (type == undefined) type = '';
+    //var searchText = getQueryVariable("bSearchText");
+    var bSearchText = getCookie('browseSearch');
+    if (bSearchText == undefined) bSearchText = getQueryVariable("bSearchText");
+    if (bSearchText == undefined) bSearchText = '';
+    var sqlfilter = ''; //getCookie("sqlfilter");
+    if (sqlfilter == undefined) sqlfilter = getQueryVariable("sqlfilter");
     var sortorder = getCookie("sortorder");
 
     if (getQueryVariable("event") != '' && getQueryVariable("event") != undefined) {
@@ -311,19 +322,21 @@ function GoNextPage(filename, id, bpageno, showpage) {
     setCookie("bpageno", bpageno, 0, 1, 0);
     setCookie("showpage", showpage, 0, 1, 0);
 
-    if (filename == 'product') {
-        filename = filename + '_' + getCookie('browsetype');
-    }
-    if (searchText == undefined) { searchText = "" }
-    if (sqlfilter == undefined) { sqlfilter = "" }
-    if (sortorder == undefined) { sortorder = "" }
+    //if (searchText == undefined) { searchText = "" }
+    //if (sqlfilter == undefined) { sqlfilter = "" }
+    //if (sortorder == undefined) { sortorder = "" }
 
-    //url = 'index.aspx?env=front&code=' + code + '&bpageno=' + bpageno + '&showpage=' + showpage + type + sqlfilter + searchText
-    //window.location.href = url;
     $("#content-loader").css("display", "block");
 
-    LoadNewPart(filename, id, code, sqlfilter, bSearchText, bpageno, showpage, sortorder);
+    if (filename == 'product') {
+        filename = filename + '_' + getCookie('browsetype');
+        LoadNewPart(filename, id, code, sqlfilter, bSearchText, bpageno, showpage, sortorder);
+    }
+    else {
+        url = 'index.aspx?env=front&code=' + code + '&bpageno=' + bpageno + '&showpage=' + showpage + type + sqlfilter + bSearchText
+        window.location.href = url;
 
+    }
     $(document).ajaxStop(function () {
         $("#content-loader").delay(1000).fadeOut().css("display", "none");
     });
@@ -651,9 +664,9 @@ function saveThemeTWO(code, guid, location, formId) {
             document.getElementById("popupMsgContent").innerHTML = result;
             $("#popupMsg").show("slow");
         } else {
-            window.location.reload();
+            goToProductBrowse();
         }
-        stopLoadingScreen();
+        //stopLoadingScreen();
 
     });
 }
@@ -679,10 +692,16 @@ function goToProductDetails(url) {
     newurl = url + searchtext + event + eventcode;
     window.location.replace(newurl);
 }
-function goToProductBrowse(){
+function goToProductBrowse(search){
     var code = 'maprodfron';
-    var url = 'index.aspx?code='+ code 
-    var searchtext = getQueryVariable("bSearchText"), event = getQueryVariable("event"), eventcode = getQueryVariable("eventcode");
+    var url = 'index.aspx?code='+ code
+    var searchtext = getQueryVariable("bSearchText") 
+	
+    var searchtext = getCookie('browseSearch');
+	if (search!=undefined) searchtext=search;
+	
+    var pageno = '&bpageno=' + getCookie('bpageno');  
+    var event = getQueryVariable("event"), eventcode = getQueryVariable("eventcode");
 
     if (searchtext != undefined && searchtext != '') searchtext = '&bSearchText=' + searchtext;
     else searchtext = '';
@@ -692,7 +711,7 @@ function goToProductBrowse(){
     else eventcode = '';
 
     var newurl
-    newurl = url + searchtext + event + eventcode;
+    newurl = url + searchtext + pageno + event + eventcode;
     window.location.replace(newurl);
 }
 function colapsingMenu() {
