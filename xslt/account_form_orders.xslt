@@ -10,6 +10,9 @@
 	<xsl:variable name="uppercase" select="'ABCDEFGHIJKLMNOPQRSTUVWXYZ'" />
 
 	<xsl:template match="/">
+		<script>
+			LoadNewPart('account_form_orders_child', 'orders', 'tapcs3deta', "parentdocguid='"+getGUID()+"'", '', 1, 200, 'productname asc');
+		</script>
 		<div class="col-xs-12">
 			<div class="innerWrapper singleOrder">
 				<div class="orderBox">
@@ -93,11 +96,6 @@
 						<div class="cartListInner">
 							<div class="table-responsive" id="orders">
 								Loading Please Wait...
-								<script>
-									var GUIDs = getQueryVariable("GUID");
-									//var GUIDs = getCookie("cartID");
-									LoadNewPart('account_form_orders_child', 'orders', 'tapcs3deta', "PCSOGUID = '"+GUIDs+"'", '', 1, 200, 'productname asc');
-								</script>
 							</div>
 							<div class="totalAmountArea">
 								<div class="col-sm-4 col-sm-offset-8 col-xs-12">
@@ -131,7 +129,7 @@
 											<xsl:when test="sqroot/body/bodyContent/form/info/state/status=120">
 												<strong>WAITING FOR PAYMENT</strong> - Your order stock has been confirmed. Please proceed for payment.
 											</xsl:when>
-											<xsl:when test="sqroot/body/bodyContent/form/info/state/status=399">
+											<xsl:when test="sqroot/body/bodyContent/form/info/state/status=410">
 												<strong>WAITING FOR DELIVERY</strong> - Your order is proccesing. Please wait.
 											</xsl:when>
                       <xsl:when test="sqroot/body/bodyContent/form/info/state/status=140">
@@ -140,8 +138,8 @@
                       <xsl:when test="sqroot/body/bodyContent/form/info/state/status=300">
 												<strong>ORDER EXPIRED</strong> - Your order is expired.
 											</xsl:when>
-											<xsl:when test="sqroot/body/bodyContent/form/info/state/status=400">
-												<strong>WAITING FOR PICKUP</strong> - Your order is ready. Please pick up immediately.
+											<xsl:when test="sqroot/body/bodyContent/form/info/state/status=420">
+												<strong>GOODS ARRIVED</strong> - Your order is ready. Please pick up immediately.
 											</xsl:when>
 											<xsl:when test="sqroot/body/bodyContent/form/info/state/status=500">
 												<strong>ORDER COMPLETED</strong> - Your order is completed. Thank you.

@@ -27,26 +27,23 @@
           var hostGUIDcek = '<xsl:value-of select="sqroot/header/info/user/hostGUID/." />';
           var hostGUID = "hostGUID = '<xsl:value-of select="sqroot/header/info/user/hostGUID/." />'";
           if (hostGUIDcek != ''){
-          function runloadnewpart() {
-          LoadNewPart('cart_top_limit', 'limitmodalbody', 'causerlimt', hostGUID, '', '', '');
+			  function showLimit() {
+				$('#limitmodalbody').html('Loading...');
+				LoadNewPart('cart_top_limit', 'limitmodalbody', 'causerlimt', hostGUID, '', '', '');
+				$('#limitmodal').modal('show');
+			  }
           }
-          }
+		var totalrows=0;
+
         </script>
         <xsl:if test="sqroot/header/info/user/hostGUID/. != ''">
-          <a href=".limit-modal" data-toggle="modal" style=" font-size:12px; padding:0; margin:0;" onclick="runloadnewpart()">
+          <a style=" font-size:12px; padding:0; margin:0;" href="javascript:showLimit()">
             Check Your Remaining Limit Here >>
           </a>
         </xsl:if>
         <br/>
         Item(s) in your carts
       </li>
-      <script>
-        var hostGUIDcek = '<xsl:value-of select="sqroot/header/info/user/hostGUID/." />';
-        var hostGUID = "hostGUID = '<xsl:value-of select="sqroot/header/info/user/hostGUID/." />'";
-        if (hostGUIDcek != ''){
-        LoadNewPart('cart_top_limit', 'LimitUser', 'causerlimt', hostGUID, '', '', '');
-        }
-      </script>
       <xsl:apply-templates select="sqroot/body/bodyContent/browse/content/row"/>
       <li style="display:block;">
         <div class="font-arial" style="color:white; text-align:right; display:block; width:300px; padding-right:30px" id="cartTotalSales2">Total in Cart : Rp. 0 </div>
@@ -56,34 +53,33 @@
           <xsl:choose>
             <xsl:when test="(sqroot/body/bodyContent/browse/info/TotalRows/.) &gt; 3">
               <div style=" margin: 0px auto; text-align: center; display: block;">
-                <a href="" id="carttop_Shopping" style="text-align:center; margin:0 auto; background:#f4f4f4; width:80px; padding:5px; color:black; text-align:center; font-size:12px; margin-bottom:10px;">View More</a>
+                <a href="" id="carttop_Shopping1" style="text-align:center; margin:0 auto; background:#f4f4f4; width:80px; padding:5px; color:black; text-align:center; font-size:12px; margin-bottom:10px;">View More</a>
               </div>
             </xsl:when>
+		    <xsl:otherwise>
+		    </xsl:otherwise>
           </xsl:choose>
         <div style=" margin: 0px auto; text-align: center; display: block;">
-          <a href="" id="carttop_Shopping" style="background:#f4f4f4; width:115px; padding:5px; color:black; text-align:center; font-size:12px;">Shopping Cart</a>
-          <a href="" id="carttop_Checkout" class="needlogin" data-toggle="modal" style="background:#f4f4f4; width:115px; padding:5px; color:black; text-align:center; font-size:12px;">Checkout</a>
+          <a href="" id="carttop_Shopping2" style="background:#f4f4f4; width:115px; padding:5px; color:black; text-align:center; font-size:12px;">Shopping Cart</a>
+          <a href="" id="carttop_Checkout" class="needlogin" style="background:#f4f4f4; width:115px; padding:5px; color:black; text-align:center; font-size:12px;">Checkout</a>
         </div>
           <script>
             var cartID = getCookie("cartID");
-            document.getElementById("carttop_Shopping").href = 'index.aspx?env=front&amp;code=tapcs1&amp;GUID='+cartID;
-            document.getElementById("carttop_Checkout").href = 'index.aspx?env=front&amp;code=tapcs2&amp;GUID='+cartID;
-            var TotalSales = '<xsl:value-of select="sqroot/body/bodyContent/browse/content/row/fields/field[@caption = 'TotalSales']" />';
-            var FTotalSales = '<xsl:value-of select="format-number(sqroot/body/bodyContent/browse/content/row/fields/field[@caption = 'TotalSales'], '#,##0', 'dot-dec')" />';
-            if(TotalSales != ''){
-            document.getElementById("cartTotalSales").innerHTML = 'Rp. '+FTotalSales;
-            document.getElementById("cartTotalSales2").innerHTML = 'Total in Cart : Rp. '+FTotalSales;
-            }
+            if (document.getElementById("carttop_Shopping1")) 
+				document.getElementById("carttop_Shopping1").href = 'index.aspx?env=front&amp;code=tapcs1&amp;GUID='+cartID+'&amp;unique='+getUnique();
 
-            if (getCookie("isLogin") == "0"){
-            $('.needlogin').attr('href','.login-modal')
-            }
-            var totalrows = '<xsl:value-of select="sqroot/body/bodyContent/browse/info/TotalRows/." />';
-            if (totalrows != '0') {
-            $('#totalcart').css('display', 'block');
-            document.getElementById("totalcart").innerHTML = totalrows;
-            }
-            else {$('#totalcart').css('display', 'none');}
+			if (document.getElementById("carttop_Shopping2")) document.getElementById("carttop_Shopping2").href = 'index.aspx?env=front&amp;code=tapcs1&amp;GUID='+cartID+'&amp;unique='+getUnique();
+				document.getElementById("carttop_Checkout").href = 'index.aspx?env=front&amp;code=tapcsd&amp;GUID='+cartID+'&amp;unique='+getUnique();
+				var TotalSales = '<xsl:value-of select="sqroot/body/bodyContent/browse/content/row/fields/field[@caption = 'TotalSales']" />';
+				var FTotalSales = '<xsl:value-of select="format-number(sqroot/body/bodyContent/browse/content/row/fields/field[@caption = 'TotalSales'], '#,##0', 'dot-dec')" />';
+				if(TotalSales != ''){
+				document.getElementById("cartTotalSales").innerHTML = 'Rp. '+FTotalSales;
+				document.getElementById("cartTotalSales2").innerHTML = 'Total in Cart : Rp. '+FTotalSales;
+			}
+
+			if (getCookie("isLogin") == "0"){
+				$('.needlogin').attr('href','.login-modal')
+			}
           </script>
           <!--<button type="button" class="btn btn-default" onclick="location.href='index.aspx?env=front&amp;code=pcs1=GUID={sqroot/body/bodyContent/browse/content/row[@GUID]}';">Shopping Cart</button>
         <button type="button" class="btn btn-default" onclick="location.href='checkout-step-1.html';">Checkout</button>-->
@@ -97,7 +93,10 @@
       <a href="index.aspx?env=front&amp;code=maprodfron&amp;GUID={fields/field[@caption = 'EVENPSKUGUID']/.}">
         <div class="media">
           <div style="height:50px; width:50px; float:left; margin-right:10px; overflow:hidden; text-align:center; background:white; border:2px solid #37acb2; ">
-            <img style="max-height:35px; margin-top:5px; width:auto;" src="OPHContent/documents/{/sqroot/header/info/account/.}/{fields/field[@caption = 'productphotos']}" alt="products-img" />
+            <img style="max-height:35px; margin-top:5px; width:auto;" 
+				src="ophcore/api/msg_download.aspx?imageName=OPHContent/documents/{/sqroot/header/info/account/.}/{fields/field[@caption = 'productphotos']}&amp;size=130" 
+				onerror="this.src='ophcontent/themes/themeTWO/images/white.jpg'"
+				alt="products-img" />
           </div>
           <div class="media-body">
             <h5 class="media-heading itemincart" style="width:200px; overflow-wrap: break-word;">
@@ -106,9 +105,20 @@
               Rp. <span><xsl:value-of select="format-number(fields/field[@caption = 'TotalPrice']/., '#,##0', 'dot-dec')" /></span>
             </span>
             </h5>
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close" onclick="deleteRow('tapcsodeta', '{@GUID}', 20)">
+              <span aria-hidden="true" >x</span>
+            </button>
           </div>
-        </div>
+		</div>
       </a>
     </li>
+<script>
+			totalrows = '<xsl:value-of select="fields/field[@caption = 'TotalQty']" />';
+			if (totalrows != 0) {
+				$('#totalcart').css('display', 'block');
+				document.getElementById("totalcart").innerHTML = totalrows;
+			}
+			else {$('#totalcart').css('display', 'none');}
+</script>
   </xsl:template>
 </xsl:stylesheet>

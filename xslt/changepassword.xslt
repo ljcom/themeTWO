@@ -8,29 +8,6 @@
 
   <xsl:template match="/">
     <script>
-      <!--loadStyle('OPHContent/themes/themeTWO/scripts/jquery-ui/jquery-ui.css');
-      loadStyle('OPHContent/themes/themeTWO/scripts/bootstrap/css/bootstrap.min.css');
-      loadStyle('OPHContent/themes/themeTWO/scripts/font-awesome/css/font-awesome.min.css');
-      loadStyle('OPHContent/themes/themeTWO/scripts/selectbox/select_option1.css');
-      loadStyle('OPHContent/themes/themeTWO/scripts/rs-plugin/css/settings.css');
-      loadStyle('OPHContent/themes/themeTWO/scripts/rs-plugin/css/settings.css');
-      loadStyle('OPHContent/themes/themeTWO/scripts/owl-carousel/owl.carousel.css');
-      loadStyle('OPHContent/themes/themeTWO/styles/font-oxygen.css');
-      loadStyle('OPHContent/themes/themeTWO/styles/icon-font.min.css');
-      loadStyle('OPHContent/themes/themeTWO/styles/style.css');
-      loadStyle('OPHContent/themes/themeTWO/styles/default.css')
-
-      loadScript('OPHContent/themes/themeTWO/scripts/jquery.1.11.3.jquery.min.js');
-      loadScript('OPHContent/themes/themeTWO/scripts/jquery-ui/jquery-ui.js');
-      loadScript('OPHContent/themes/themeTWO/scripts/rs-plugin/js/jquery.themepunch.tools.min.js');
-      loadScript('OPHContent/themes/themeTWO/scripts/rs-plugin/js/jquery.themepunch.revolution.min.js');
-      loadScript('OPHContent/themes/themeTWO/scripts/selectbox/jquery.selectbox-0.1.3.min.js');
-      loadScript('OPHContent/themes/themeTWO/scripts/countdown/jquery.syotimer.js');
-      loadScript('OPHContent/themes/themeTWO/scripts/custom-me.js');-->
-
-      //loadScript('OPHContent/themes/themeTWO/scripts/bootstrap/js/bootstrap.min.js');
-      //loadScript('OPHContent/themes/themeTWO/scripts/owl-carousel/owl.carousel.js');
-      //loadScript('OPHContent/themes/themeTWO/scripts/js/custom.js');
 
       endLoading();
 
@@ -47,7 +24,7 @@
               &#xA0;
             </div>
             <div class="col-md-6 col-xs-12">
-              <ul class="list-inline pull-right top-right">
+              <!--ul class="list-inline pull-right top-right"-->
                 <!--<li class="account-login" id="loginbuttons">
                   Loading Please Wait...
                   <script>
@@ -55,7 +32,7 @@
                     topbutton(username);
                   </script>
                 </li>-->
-                <li class="searchBox">
+                <!--li class="searchBox">
                   <a href="#">
                     <ix class="fa fa-search"></ix>
                   </a>
@@ -71,11 +48,11 @@
                 <li class="dropdown cart-dropdown" id="carttop">
                   Loading Please Wait...
                   <script>
-                    var filterkey = "pcsoGUID = '" +  getCookie("cartID") + "'";
+                    var filterkey = "parentdocguid='" +  getCookie("cartID") + "'";
                     LoadNewPart('cart_top', 'carttop', 'tapcs1deta', filterkey, '');
                   </script>
                 </li>
-              </ul>
+              </ul-->
             </div>
           </div>
         </div>
@@ -93,7 +70,7 @@
               <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="javascript:goHome()">
-              <img src="OPHContent/themes/themeTWO/images/logo2.png" style="width:200px;" alt="logo" />
+              <img src="OPHContent/themes/themeTWO/images/logo2.jpg" style="width:200px;" alt="logo" />
             </a>
           </div>
 
@@ -148,7 +125,7 @@
                     <label for="">Confirm Password</label>
                     <input type="password" class="form-control" id="confirmpwd" />
                   </div>
-                  <a onclick="changePwd()" class="btn btn-primary btn-block">Submit</a>
+                  <a onclick="changePwd('{/sqroot/header/info/account}')" class="btn btn-primary btn-block">Submit</a>
                 </form>
               </div>
             </div>
@@ -165,7 +142,7 @@
         <div class="row">
           <div class="col-sm-7 col-xs-12">
             <p>
-              © 2016 Copyright <a style="color:white" href="http://www.loreal.com/">L'oreal Indonesia</a>
+              © 2019 Copyright <a style="color:white" href="http://www.loreal.com/">L'oreal Indonesia</a>
             </p>
           </div>
           <!--<div class="col-sm-5 col-xs-12">

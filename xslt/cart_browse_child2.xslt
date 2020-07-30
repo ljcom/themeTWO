@@ -27,18 +27,21 @@
 
     <script>
       if (document.getElementById('BASKETTOTAL').value != '0') {
-      var amount = parseInt(document.getElementById('AMOUNT').value)
-      var baskettotal = parseInt(document.getElementById('BASKETTOTAL').value)
-      var basket = document.getElementById('BASKET').value
-      var ppn = amount - baskettotal
-      document.getElementById('BASKET').value = basket + 'PPN 10%,'+ppn+'.00'+',1,'+ppn+'.00;'
+		  var amount = parseInt(document.getElementById('AMOUNT').value)
+		  var baskettotal = parseInt(document.getElementById('BASKETTOTAL').value)
+		  var basket = document.getElementById('BASKET').value
+		  var dfee= parseInt($('#DeliveryFee').val());
+		  var ppn = parseInt(amount - baskettotal-dfee);
+		  
+		  
+		  document.getElementById('BASKET').value = basket + 'Delivery,1,'+dfee+','+dfee+';PPN 10%,1,'+ppn+''+','+ppn+';'
 
-      basket = document.getElementById('BASKET').value
-      document.getElementById('BASKET').value = basket.replace(/;,/g , ';');
+		  basket = document.getElementById('BASKET').value
+		  document.getElementById('BASKET').value = basket.replace(/;,/g , ';');
 
-      basket = document.getElementById('BASKET').value
-      document.getElementById('BASKET').value = basket.substring(1, basket.length)
-      getWords()
+		  basket = document.getElementById('BASKET').value
+		  document.getElementById('BASKET').value = basket.substring(1, basket.length)
+		  getWords();
       }
     </script>
 
@@ -52,6 +55,9 @@
           <xsl:value-of select="translate(titleCaption/., $smallcase, $uppercase)" />
         </th>
       </xsl:when>
+	  <xsl:otherwise>
+	  </xsl:otherwise>
+
     </xsl:choose>
 
 
@@ -60,82 +66,48 @@
   <!--Data Content-->
 
   <xsl:template match="sqroot/body/bodyContent/browse/content/row">
-
     <tr>
-
-      <xsl:apply-templates select="fields/field" />
-
+      <xsl:apply-templates select="fields" />
     </tr>
 
   </xsl:template>
 
-  <xsl:template match="fields/field">
-    <xsl:variable name="tbContent">
-      <xsl:choose>
-        <xsl:when test="@digit = 0 and .!=''">
-          <xsl:value-of select="format-number(., '#,##0', 'dot-dec')"/>
-        </xsl:when>
-        <xsl:when test="@digit  = 1 and .!=''">
-          <xsl:value-of select="format-number(., '#,##0.0', 'dot-dec')"/>
-        </xsl:when>
-        <xsl:when test="@digit  = 2 and .!=''">
-          <xsl:value-of select="format-number(., '#,##0.00', 'dot-dec')"/>
-        </xsl:when>
-        <xsl:when test="@digit  = 3 and .!=''">
-          <xsl:value-of select="format-number(., '#,##0.000', 'dot-dec')"/>
-        </xsl:when>
-        <xsl:when test="@digit  = 4 and .!=''">
-          <xsl:value-of select="format-number(., '#,##0.0000', 'dot-dec')"/>
-        </xsl:when>
-        <xsl:otherwise>
-          <xsl:value-of select="."/>
-        </xsl:otherwise>
-      </xsl:choose>
-    </xsl:variable>
-
-    <xsl:choose>
-      <xsl:when test="(@caption)='productphotos'">
+  <xsl:template match="fields">
         <td class="col-xs-2">
           <span class="cartImage" style="height:70px;" >
-            <img src="OPHContent/documents/{/sqroot/header/info/account/.}/{.}" alt="image" style="height:100%; width:auto; margin:0 auto;" />
+            <img src="ophcore/api/msg_download.aspx?imageName=OPHContent/documents/{/sqroot/header/info/account/.}/{field[@caption = 'productphotos']/.}&amp;size=130" 
+				onerror="this.src='ophcontent/themes/themeTWO/images/white.jpg'"
+				alt="image" style="height:100%; width:auto; margin:0 auto;" />
           </span>
         </td>
-      </xsl:when>
-      <xsl:when test="(@caption)='Qty'">
-        <td class="col-xs-2" style="text-align:center" id="{@caption}">
-          <xsl:value-of select="$tbContent" />
-        </td>
-      </xsl:when>
-      <xsl:when test="(@caption)='TotalSales' or (@caption)='TotalQty' or (@caption) ='EVENPSKUGUID'">
-        <!--kosong-->
-      </xsl:when>
-      <xsl:when test="(@caption)='TotalPrice' or (@caption)='QtyConfirm' or (@caption)='Price'">
+		<td id="{field[@caption = 'productname']/@caption}">
+          <xsl:value-of select="field[@caption = 'productname']/." />
+		</td>
         <td style="text-align:center">
-          <xsl:value-of select="$tbContent" />
+          <xsl:value-of select="format-number(field[@caption = 'Price']/., '#,##0', 'dot-dec')" />
         </td>
-      </xsl:when>
-      <xsl:otherwise>
-        <td id="{@caption}">
-          <xsl:value-of select="$tbContent" />
+        <td class="col-xs-2" style="text-align:center" id="{field[@caption = 'Qty']/@caption}">
+          <xsl:value-of select="format-number(field[@caption = 'Qty']/., '#,##0', 'dot-dec')" />
         </td>
-      </xsl:otherwise>
-    </xsl:choose>
+        <td style="text-align:center">
+			<xsl:choose>
+				<xsl:when test="(field[@caption = 'QtyConfirm']/.)!=''">
+					<xsl:value-of select="format-number((field[@caption = 'QtyConfirm']/.), '#,##0', 'dot-dec')" />
+				</xsl:when>
+			</xsl:choose>
+        </td>
+        <td style="text-align:center">
+          <xsl:value-of select="format-number(field[@caption = 'TotalPrice']/., '#,##0', 'dot-dec')" />
+        </td>
     <script>
-      var basket = document.getElementById('BASKET').value
-      var caption = '<xsl:value-of select="(@caption)" />'
-
-      if (caption == 'Price')
-        document.getElementById('BASKET').value = basket + ',<xsl:value-of select="format-number(., '#.00')" />';
-      else if (caption == 'productname'){
-        document.getElementById('BASKET').value = basket + ',<xsl:value-of select="." />'
-      }
-      else if (caption == 'QtyConfirm'){
-      document.getElementById('BASKET').value = basket + ',' + parseInt('<xsl:value-of select="." />');
-      }
-      else if (caption == 'TotalPrice') {
-      document.getElementById('BASKET').value = basket + ',<xsl:value-of select="format-number(., '#.00')" />;';
-        document.getElementById('BASKETTOTAL').value = parseInt(document.getElementById('BASKETTOTAL').value) + <xsl:value-of select="format-number(., '0')"/>;
-      }
+		var basket = document.getElementById('BASKET').value
+		document.getElementById('BASKET').value = basket + '<xsl:value-of select="field[@caption = 'productname']/." />'
+			+ ','+'<xsl:value-of select="field[@caption = 'Qty']/." />'
+			+ ','+<xsl:value-of select="format-number(field[@caption = 'Price']/., '#.00')" />
+			+ ','+<xsl:value-of select="format-number(field[@caption = 'TotalPrice']/., '#.00')" />+';';
+		document.getElementById('BASKETTOTAL').value = parseInt(document.getElementById('BASKETTOTAL').value) 
+			+ <xsl:value-of select="format-number(field[@caption = 'TotalPrice']/., '0')"/>;
+      
     </script>
 
   </xsl:template>

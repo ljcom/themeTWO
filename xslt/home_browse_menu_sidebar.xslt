@@ -20,7 +20,7 @@
         <li style="border-bottom:none;">
           <a data-toggle="collapse" href="#{@GUID}_menu" class="top-envi-lv2"  onclick="LoadNewPart('home_browse_menu_sidebar', '{@GUID}_menus', '{$code}', '', '{@GUID}', '1' , '200'); changePlusMinus(this); findParent(2, '{@GUID}')">
             <!--<span style="margin-right:10px; font-size:9px; ">➤</span>-->
-            <span style="width:70%; display:inline-table; line-height:14px;" onclick="goToAnotherPage('index.aspx?env=front&amp;code=maprodfron&amp;bSearchText={@GUID}')">
+            <span style="width:70%; display:inline-table; line-height:14px;" onclick="goToProductBrowse('{@GUID}');">
               <xsl:value-of select="fields/field[@caption = 'Name']/." />
             </span>
             <xsl:apply-templates select="fields/field[@caption = 'isParent']" />
@@ -47,7 +47,7 @@
       </xsl:when>
       <xsl:when test="((fields/field[@caption = 'PARNCTGRGUID']/.) !='' or (fields/field[@caption = 'PARNBRANGUID']/.) !='') and (fields/field[@caption = 'isParent']/.) ='0' ">
         <li>
-          <a data-toggle="collapse" href="#{@GUID}_menu" class="top-envi-lv2" style="padding-left:45px !important;" onclick="goToAnotherPage('index.aspx?env=front&amp;code=maprodfron&amp;bSearchText={@GUID}'); changePlusMinus(this); findParent(3, '{@GUID}')">
+          <a data-toggle="collapse" href="#{@GUID}_menu" class="top-envi-lv2" style="padding-left:45px !important;" onclick="goToProductBrowse('{@GUID}'); changePlusMinus(this); findParent(3, '{@GUID}')">
             <!--<span style="margin-right:10px; font-size:9px;">➤</span>-->
             <xsl:value-of select="fields/field[@caption = 'Name']/." />
           </a>
@@ -71,7 +71,7 @@
               <img src="{icon/img/.}" style="width:15px; margin-right:8px;" />
             </ix>-->
             <!--<span style="margin-right:10px; font-size:9px;">➤</span>-->
-            <span onclick="goToAnotherPage('index.aspx?env=front&amp;code=maprodfron&amp;bSearchText={@GUID}')">
+            <span onclick="goToProductBrowse('{@GUID}');">
               <xsl:value-of select="fields/field[@caption = 'Name']/." />
             </span>
             <xsl:apply-templates select="fields/field[@caption = 'isParent']" />

@@ -10,28 +10,27 @@
   <xsl:variable name="uppercase" select="'ABCDEFGHIJKLMNOPQRSTUVWXYZ'" />
 
   <xsl:template match="/">
-    <script>
-      setCookie("browsetype", "browse", 0, 1, 0);
-      endLoading();
-    </script>
-    <div class="row">
+	<script>
+	var nbPages='<xsl:value-of select="sqroot/body/bodyContent/browse/info/nbPages" />';
+	var curPg = parseInt('<xsl:value-of select ="sqroot/body/bodyContent/browse/info/pageNo"/>');
+
+	setCookie('nbPages', nbPages, 0, 1, 0);
+	nbPages=parseInt(nbPages);
+	if (nbPages==0 || nbPages==curPg) {
+		if (!$('#loadingnextpage').hasClass('hide')) $('#loadingnextpage').addClass('hide');
+	}
+	else {
+		if ($('#loadingnextpage').hasClass('hide')) $('#loadingnextpage').removeClass('hide');
+	}
+	var nbRows=parseInt('<xsl:value-of select="sqroot/body/bodyContent/browse/info/nbRows/." />');
+	var tRows=parseInt('<xsl:value-of select="sqroot/body/bodyContent/browse/info/TotalRows/." />');
+	var cRows=parseInt($('#nbProd').html());
+	if (curPg==1) cRows=0;
+	if (isBigger(cRows+nbRows, tRows)) nbRows=tRows-cRows;
+	$('#nbProd').html(cRows+nbRows);
+	$('#ttlProd').html(tRows);
+	</script>
       <xsl:apply-templates select="sqroot/body/bodyContent/browse/content/row" />
-    </div>
-
-    <div  class="row">
-      <div class="col-xs-12">
-        <ul class="pagination pagination-sm" id="paginationprod">
-          <script>
-            createPaging('<xsl:value-of select="sqroot/body/bodyContent/browse/info/TotalRows/." />', 'product', 'contentBrowse');
-          </script>
-        </ul>
-      </div>
-    </div>
-
-    <script>
-      var cartid = getCookie('cartID');
-      $(".cartidclass" ).val(cartid);
-    </script>
   </xsl:template>
   
   <!--Data Content-->
@@ -39,11 +38,11 @@
     <!--image src-->
     <xsl:variable name="imageprod">OPHContent/documents/<xsl:value-of select="/sqroot/header/info/account/."/>/<xsl:value-of select="fields/field[@caption = 'productphotos']/." /></xsl:variable>
     
-    <div class="col-sm-4 col-xs-12">
+    <div class="col-sm-6 col-md-4 col-xs-12">
       <div class="productBox">
         <div class="productImage clearfix">
           <div style="height:250px; text-align:center">
-            <img style="max-height:200px;  width: auto;" src="ophcore/api/msg_download.aspx?imageName={$imageprod}" onerror="this.src='ophcore/api/msg_download.aspx?imageName=ophcore/api/msg_download.aspx?imageName=ophcontent/themes/themeTWO/images/white.png'" alt="products-img" class="productgridimage"/>
+            <img style="max-height:200px;  width: auto;" src="{$imageprod}" onerror="this.src='ophcontent/themes/themeTWO/images/white.jpg'" alt="products-img" class="productgridimage"/>
           </div>
           <div class="productMasking">
             <ul class="list-inline btn-group" role="group" style="text-align:center">
@@ -57,29 +56,29 @@
                   <input type="hidden" value="{fields/field[@caption = 'PRODGUID']/.}" name="PRODGUID"/>
                   <input type="hidden" name="price" value="{fields/field[@caption = 'price']/.}" />
                   <!--btn_function('{sqroot/body/bodyContent/form/info/code/.}','{sqroot/body/bodyContent/form/info/GUID/.}', 'save');-->
-                  <a onclick="saveThemeTWO('{../../info/code/.}', '', '', 'productform_{@GUID}');" class="btn btn-default" >
+                  <a onclick="saveThemeTWO('{../../info/code/.}', '{@GUID}', '', 'productform_{@GUID}');" class="btn btn-default" >
                     <ix class="fa fa-shopping-cart"></ix>
                   </a>
                 </form>
                
               </li>
               <!--<li><a class="btn btn-default" data-toggle="modal" href=".quick-view" onclick="LoadNewPartView('product_form_quick_view', 'quickViewProd', 'maPRODFRON', '{@GUID}');" ><ix class="fa fa-eye"></ix></a></li>-->
-              <li><a class="btn btn-default"  href="#" onclick="goToProductDetails('index.aspx?env=front&amp;code={/sqroot/header/info/code/id}&amp;GUID={@GUID}')"><ix class="fa fa-eye"></ix></a></li>
+              <li><a class="btn btn-default" onclick="showProduct('{@GUID}')"><ix class="fa fa-eye"></ix></a></li>
             </ul>
           </div>
         </div>
         <div class="productCaption clearfix">
-          <a  href="#" onclick="goToProductDetails('index.aspx?env=front&amp;code={/sqroot/header/info/code/id}&amp;GUID={@GUID}')">
+          <a  href="#" onclick="showProduct('{@GUID}')">
             <h5 style="height:30px;">
-              <xsl:value-of select="fields/field[@caption = 'ID']/." /> - <xsl:value-of select="fields/field[@caption = 'Name']/." /><br />
+              <xsl:value-of select="fields/field[@caption = 'id']/." /> - <xsl:value-of select="fields/field[@caption = 'Name']/." /><br />
             </h5>
           </a>
           <!--<p style="margin:0; padding:0;">
             Code : <xsl:value-of select="fields/field[@caption = 'ID']/." />
           </p>-->
-          <p style="margin:0; padding:0;">
+          <p style="margin:5px 0 5px 0; padding:0;">
             <!--Division : <xsl:value-of select="fields/field[@caption = 'divisionName']/." />-->
-            Sign : <xsl:value-of select="fields/field[@caption = 'SignatureName']/." />
+            Signature : <xsl:value-of select="fields/field[@caption = 'SignatureName']/." />
           </p>
           <xsl:choose>
             <xsl:when test="(fields/field[@caption = 'evenname']/.)!='Website online'">

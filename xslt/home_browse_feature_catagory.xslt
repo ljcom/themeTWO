@@ -32,7 +32,7 @@
           <div class="productImage clearfix">
             <a href="single-product.html">
               <div style="height:150px; text-align:center;">
-                <img style="max-height:130px; width:auto; margin:0 auto;" src="ophcore/api/msg_download.aspx?imageName=OPHContent/documents/{/sqroot/header/info/account/.}/{fields/field[@caption = 'productphotos']/.}" onerror="this.src='ophcore/api/msg_download.aspx?imageName=ophcontent/themes/themeTWO/images/white.png'" alt="Image" />
+                <img style="max-height:130px; width:auto; margin:0 auto;" src="ophcore/api/msg_download.aspx?imageName=OPHContent/documents/{/sqroot/header/info/account/.}/{fields/field[@caption = 'productphotos']/.}" onerror="this.src='ophcontent/themes/themeTWO/images/white.jpg'" alt="Image" />
               </div>
             </a>
             <div class="productMasking">
@@ -41,7 +41,7 @@
                 <li>
                   <form method="post" id="productform_{@GUID}">
                     <!--untuk insert dipaksa ada input-->
-                    <input type="hidden" id="cartID" class="cartidclass" name="cartID" value="" />
+                    <!--input type="hidden" id="cartID" class="cartidclass" name="cartID" value="" /-->
                     <input type="hidden" name="Availaible" value="1" />
                     <input type="hidden" name="EVENPSKUGUID" value="{@GUID}" />
                     <input type="hidden" value="{fields/field[@caption = 'PRODGUID']/.}" name="PRODGUID"/>

@@ -37,7 +37,15 @@
 
   </xsl:template>
    <xsl:template match="sqroot/body/bodyContent/browse/header/column">
-    <th style="width:{@width}px">
+    <xsl:variable name="align">
+		<xsl:choose>
+			<xsl:when test="@align=1">center</xsl:when>
+			<xsl:when test="@align=2">right</xsl:when>
+			<xsl:otherwise>left</xsl:otherwise>
+		</xsl:choose>
+    </xsl:variable>
+
+    <th style="width:{@width}px;text-align:{$align}">
       <xsl:value-of select="translate(., $smallcase, $uppercase)" />
     </th>
   </xsl:template>
@@ -75,7 +83,22 @@
         </xsl:otherwise>
       </xsl:choose>
     </xsl:variable>
-    <td>
+
+    <xsl:variable name="align">
+		<xsl:choose>
+			<xsl:when test="@align=1">
+			center
+			</xsl:when>
+			<xsl:when test="@align=2">
+			right
+			</xsl:when>
+			<xsl:otherwise>
+			left
+			</xsl:otherwise>
+		</xsl:choose>
+    </xsl:variable>
+	
+	<td align="{$align}">
        <xsl:choose>
         <xsl:when test="(@caption)='customstat' and (.) = 'Pending'">
          <span class="label label-warning"><xsl:value-of select="." /></span>

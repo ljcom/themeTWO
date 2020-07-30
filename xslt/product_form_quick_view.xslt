@@ -11,7 +11,7 @@
 
   <xsl:template match="/">
     <div class="media-left">
-      <img class="media-object" src="ophcore/api/msg_download.aspx?imageName=img/products/quick-view/quick-view-01.jpg" alt="Image" />
+      <img class="media-object" src="img/products/quick-view/quick-view-01.jpg" alt="Image" />
     </div>
     <div class="media-body">
       
@@ -37,8 +37,8 @@
   <xsl:template match="formCols/formCol">
     <ul class="list-inline">
       <li>
-        <a href="?code=maprodfron" style="color:black;">
-          <span><ix class="fa fa-reply" aria-hidden="true"></ix>
+        <a onclick="goToProductBrowse()" href="#" style="color:black;" >
+            <span><ix class="fa fa-reply" aria-hidden="true"></ix>
           </span> Continue Shopping
         </a>
       </li>

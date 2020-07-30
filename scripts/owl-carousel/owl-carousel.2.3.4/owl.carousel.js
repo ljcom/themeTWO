@@ -335,12 +335,16 @@
 			while (repeat > 0) {
 				// Switch to only using appended clones
 				clones.push(this.normalize(clones.length / 2, true));
-				$(items[clones[clones.length - 1]][0]).clone(true).addClass('cloned').appendTo(this.$stage);
+				append = append + items[clones[clones.length - 1]][0].outerHTML;
 				clones.push(this.normalize(items.length - 1 - (clones.length - 1) / 2, true));
-				$(items[clones[clones.length - 1]][0]).clone(true).addClass('cloned').prependTo(this.$stage);
+				prepend = items[clones[clones.length - 1]][0].outerHTML + prepend;
 				repeat -= 1;
 			}
+
 			this._clones = clones;
+
+			$(append).addClass('cloned').appendTo(this.$stage);
+			$(prepend).addClass('cloned').prependTo(this.$stage);
 		}
 	}, {
 		filter: [ 'width', 'items', 'settings' ],
@@ -655,9 +659,7 @@
 	 * Refreshes the carousel primarily for adaptive purposes.
 	 * @public
 	 */
-	Owl.prototype.refresh = function(resizing) {
-		resizing = resizing || false;
-
+	Owl.prototype.refresh = function() {
 		this.enter('refreshing');
 		this.trigger('refresh');
 
@@ -668,10 +670,6 @@
 		this.$element.addClass(this.options.refreshClass);
 
 		this.update();
-
-		if (!resizing) {
-			this.onResize();
-		}
 
 		this.$element.removeClass(this.options.refreshClass);
 
@@ -693,8 +691,6 @@
 	 * @protected
 	 */
 	Owl.prototype.onResize = function() {
-		var resizing = true;
-
 		if (!this._items.length) {
 			return false;
 		}
@@ -716,7 +712,7 @@
 
 		this.invalidate('width');
 
-		this.refresh(resizing);
+		this.refresh();
 
 		this.leave('resizing');
 		this.trigger('resized');
@@ -895,9 +891,7 @@
 	Owl.prototype.closest = function(coordinate, direction) {
 		var position = -1,
 			pull = 30,
-			width = this.width(), // visible carousel width
-			count = this.settings.items,
-			itemWidth = Math.round(width / count),
+			width = this.width(),
 			coordinates = this.coordinates();
 
 		if (!this.settings.freeDrag) {
@@ -908,7 +902,7 @@
 					position = index;
 				// on a right pull, check on previous index
 				// to do so, subtract width from value and set position = index + 1
-				} else if (direction === 'right' && coordinate > value - itemWidth - pull && coordinate < value - itemWidth + pull) {
+				} else if (direction === 'right' && coordinate > value - width - pull && coordinate < value - width + pull) {
 					position = index + 1;
 				} else if (this.op(coordinate, '<', value)
 					&& this.op(coordinate, '>', coordinates[index + 1] !== undefined ? coordinates[index + 1] : value - width)) {
@@ -1444,7 +1438,7 @@
 				element.css('opacity', 1);
 				this.leave('pre-loading');
 				!this.is('pre-loading') && !this.is('initializing') && this.refresh();
-			}, this)).attr('src', (window.devicePixelRatio > 1) ? element.attr('data-src-retina') : element.attr('data-src') || element.attr('src'));
+			}, this)).attr('src', element.attr('src') || element.attr('data-src') || element.attr('data-src-retina'));
 		}, this));
 	};
 

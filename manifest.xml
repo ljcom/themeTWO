@@ -1,5 +1,9 @@
 <sqroot>
   <manifest>
+    <jsFile>OPHContent/themes/themeTWO/custom-me.js?v=52</jsFile>
+    <jsFile>OPHContent/themes/themeTWO/scripts/rs-plugin/js/jquery.themepunch.tools.js</jsFile>
+    <jsFile>OPHContent/themes/themeTWO/scripts/rs-plugin/js/jquery.themepunch.revolution.js</jsFile>
+    <jsFile>OPHContent/themes/themeTWO/scripts/owl-carousel/owl.carousel.js</jsFile>
     <cssFile>OPHContent/themes/themeTWO/scripts/jquery-ui/jquery-ui.css</cssFile>
     <cssFile>OPHContent/themes/themeTWO/scripts/bootstrap/css/bootstrap.min.css</cssFile>
     <cssFile>OPHContent/themes/themeTWO/scripts/font-awesome/css/font-awesome.min.css</cssFile>
@@ -11,14 +15,11 @@
     <cssFile>OPHContent/themes/themeTWO/styles/style.css</cssFile>
     <cssFile>OPHContent/themes/themeTWO/styles/default.css</cssFile>
     <cssFile>OPHContent/cdn/select2/select2.min.css</cssFile>
-    <jsFile>OPHContent/themes/themeTWO/scripts/jquery-ui/jquery-ui.js</jsFile>
-    <jsFile>OPHContent/themes/themeTWO/scripts/rs-plugin/js/jquery.themepunch.tools.min.js</jsFile>
-    <jsFile>OPHContent/themes/themeTWO/scripts/rs-plugin/js/jquery.themepunch.revolution.min.js</jsFile>
     <jsFile>OPHContent/themes/themeTWO/scripts/selectbox/jquery.selectbox-0.1.3.min.js</jsFile>
-    <jsFile>OPHContent/themes/themeTWO/scripts/countdown/jquery.syotimer.js</jsFile>
+    <jsFile async="true">OPHContent/themes/themeTWO/scripts/countdown/jquery.syotimer.js</jsFile>
     <jsFile>OPHContent/themes/themeTWO/scripts/lazyload/lazyload.js</jsFile>
-    <jsFile>OPHContent/themes/themeTWO/custom-me.js</jsFile>
-    <cssFile>OPHContent/themes/themeTWO/custom-me.css</cssFile>
+    <jsFile async="true">OPHContent/themes/themeTWO/scripts/jquery-ui/jquery-ui-min.js</jsFile>
+    <cssFile>OPHContent/themes/themeTWO/custom-me.css?v=4</cssFile>
     <jsFile>https://staging.doku.com/dateformat.js</jsFile>
     <jsFile>https://staging.doku.com/sha-1.js</jsFile>
    

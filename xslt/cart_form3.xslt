@@ -40,13 +40,15 @@
 			  Are you sure to continue?
 			  </div>
               <div class="checkBtnArea" id="checkoutbutton">
-				<a data-toggle="modal" href="#" onclick="SaveData('taPCS1', 'cartForm', 'index.aspx?code=tapcs3', '', '1', 'tapcso')" 
+				<a data-toggle="modal" href="#" onclick="SaveData('taPCSd', 'formpayment', 'index.aspx?code=tapcsd', '', '1', 'tapcso')" 
 					class="btn btn-primary btn-block">
                   <span>CONFIRM</span>
                   <ix class="fa fa-arrow-circle-right" aria-hidden="true"></ix>
                 </a>
-                <a href="index.aspx?env=front&amp;code=MaPRODFRON&amp;event=%276A293D44-E76E-4979-BAD6-A598988FB61B%27&amp;eventcode=online" class="btn btn-primary " style="position:absolute;left:50px; width:250px;">
-                  <ix class="fa fa-arrow-circle-left" aria-hidden="true">&#xA0;</ix>
+                <a href="#" 
+                   onclick="goToProductBrowse()"
+                   class="btn btn-primary " style="position:absolute;left:50px; width:250px;">
+                    <ix class="fa fa-arrow-circle-left" aria-hidden="true">&#xA0;</ix>
                   <span> CONTINUE SHOPPING</span>
                 </a>
               </div>
@@ -57,7 +59,7 @@
     </section>
     <script>
       var GUIDs = '<xsl:value-of select="/sqroot/body/bodyContent/form/info/GUID/." />'
-      LoadNewPart('cart_browse_child', 'contentcart', 'tapcs1deta', "PCSOGUID = '"+GUIDs+"'", '', 1, 200);
+      LoadNewPart('cart_browse_child', 'contentcart', 'tapcs1deta', "parentdocguid='"+GUIDs+"'", '', 1, 200);
     </script>
 
   </xsl:template>

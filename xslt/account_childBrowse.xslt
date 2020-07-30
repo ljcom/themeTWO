@@ -6,13 +6,6 @@
 	<xsl:variable name="smallcase" select="'abcdefghijklmnopqrstuvwxyz'"/>
 	<xsl:variable name="uppercase" select="'ABCDEFGHIJKLMNOPQRSTUVWXYZ'"/>
 	<xsl:template match="/">
-	<script>
-	function viewDetail(code, guid) {
-	if (code.toLowerCase()=='tapcs4') code='tapcs2';
-		window.location='index.aspx?env=front&amp;code='+code+'&amp;GUID='+guid;
-	}
-	</script>
-	
 		<div class="col-xs-12">
 			<div class="innerWrapper">
 				<div class="orderBox">
@@ -76,9 +69,9 @@
 		<tr>
 			<xsl:apply-templates select="fields/field"/>
 			<td>
-				<a onclick="javascript:viewDetail('{/sqroot/body/bodyContent/browse/info/code/.}', '{@GUID}')" class="btn btn-default">View</a>
+				<a onclick="showReferral('{@GUID}')" class="btn btn-default">View</a>
 				<xsl:if test="/sqroot/body/bodyContent/browse/info/permission/allowDelete/.=1">
-				<a href="index.aspx?env=front&amp;code={/sqroot/body/bodyContent/browse/info/code/.}&amp;GUID={@GUID}" class="btn btn-default">Delete</a>
+				<a onclick="deleteRow('{/sqroot/body/bodyContent/browse/info/code/.}', '{@GUID}',20);" class="btn btn-default">Delete</a>
 				</xsl:if>
 			</td>
 		</tr>

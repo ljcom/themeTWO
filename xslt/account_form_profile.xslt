@@ -15,7 +15,7 @@
         <div class="row">
           <div class="col-md-2 col-sm-3 col-xs-12">
             <div class="thumbnail">
-              <img src="OPHCOntent/themes/themeTWO/images/doc-talk-icon2.png" alt="profile-image" />
+              <img src="OPHCOntent/themes/themeTWO/images/doc-talk-icon2.jpg" alt="profile-image" />
               <div class="caption">
                 <a href="#" class="btn btn-primary btn-block" role="button">Change Avatar</a>
               </div>
@@ -33,7 +33,7 @@
               </div>-->
               <div class="form-group">
                 <div class="col-md-offset-10 col-md-2 col-sm-offset-9 col-sm-3">
-                  <a class="btn btn-primary btn-block" onClick="SaveData('user', 'userform', '', '{/sqroot/body/bodyContent/form/info/GUID/.}')">SAVE INFO</a>
+                  <a class="btn btn-primary btn-block" onClick="SaveData('user', 'userform', '', getCookie('cartID'))">SAVE INFO</a>
                 </div>
               </div>
             </form>

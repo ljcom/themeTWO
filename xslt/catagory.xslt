@@ -21,7 +21,8 @@
       <xsl:when test="((fields/field[@caption = 'PARNCTGRGUID']/.) !='' or (fields/field[@caption = 'PARNBRANGUID']/.) !='') and (fields/field[@caption = 'isParent']/.) ='1' ">
         <li>
           <div class="panel-group">
-            <a id="{@GUID}_a" data-toggle="collapse" href="#{@GUID}_menu" class="top-envi-lv2"  onclick="LoadNewPart('catagory', '{@GUID}_menus', '{$code}', '', '{@GUID}', '1', '200');  changePlusMinus(this); findParent(2, '{@GUID}');">
+            <a id="{@GUID}_a" data-toggle="collapse" href="#{@GUID}_menu" class="top-envi-lv2"  
+               onclick="LoadNewPart('catagory', '{@GUID}_menus', '{$code}', '', '{@GUID}', '1', '200');  changePlusMinus(this); findParent(2, '{@GUID}');">
               <!--<span style="margin-right:10px; font-size:9px; ">➤</span>-->
               <span style="width:70%; display:inline-table; line-height:14px;"  onclick="loadProduct('{@GUID}');">
               <!--span style="width:70%; display:inline-table; line-height:14px;" 
@@ -128,7 +129,7 @@
                 var code = '<xsl:value-of select="$code"/>';
                 var id =  GUID+'_menu'
                 if (ctgrGUID != undefined &amp;&amp; ctgrGUID != ''){
-                  document.getElementById(ctgrGUID+'_a').style.background = '#f9f9f9';
+                  document.getElementById(GUID+'_a').style.background = '#f9f9f9';
                 }
               </script>
             </ul>
@@ -171,7 +172,7 @@
                         var plusbtn = document.getElementById('plus-button-<xsl:value-of select="@GUID"/>');
                         if (plusbtn.className == 'fa fa-plus plus-button') {plusbtn.className = 'fa fa-minus plus-button'}
                         else {plusbtn.className = 'fa fa-plus plus-button'}
-                        document.getElementById(ctgrGUID+'_a').style.background = '#f9f9f9';
+                        document.getElementById(GUID+'_a').style.background = '#f9f9f9';
                        
                     }
                   }

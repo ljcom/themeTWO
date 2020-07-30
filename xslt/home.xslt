@@ -8,14 +8,28 @@
 
   <xsl:template match="/">
     <script>
-      
+		<!-- Tell the browser to be responsive to screen width -->
+		var meta = document.createElement('meta');
+		meta.name = "viewport";
+		meta.content = "width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no";
+		loadMeta(meta);
 
-      //loadScript('OPHContent/themes/themeTWO/scripts/rs-plugin/js/jquery.themepunch.tools.min.js');
-      //loadScript('OPHContent/themes/themeTWO/scripts/rs-plugin/js/jquery.themepunch.revolution.min.js');
+		setCookie('<xsl:value-of select="/sqroot/header/info/account"/>_accountid', '<xsl:value-of select="/sqroot/header/info/account"/>', 1, 1, 0);
 
-      LoadNewPart('home_browse', 'contentWrapper', 'home', '','');
-      changeColorMenuFront();
-      endLoading();
+		//loadScript('OPHContent/themes/themeTWO/custom-me.js');
+		$('body').css('background-color', 'white');
+		
+		LoadNewPart('home_browse', 'contentWrapper', 'home', '','');
+		changeColorMenuFront();
+		
+		var n=new Date(Date.now());
+		$('#cp').html($('#cp').html().split('#year#').join(n.getFullYear()));
+
+		if (getCookie("isLogin") == '1' &amp;&amp; username != '') {
+			var filterkey = "parentdocguid='" +  getCookie("cartID") + "'";
+			LoadNewPart('home_browse_cart_top', 'carttop', 'tapcs1deta', filterkey, '');
+		 }
+		//endLoading();
     </script>
     <!-- Page script -->
     
@@ -61,7 +75,7 @@
                   <input type="checkbox" id="rememberme"/> Remember Me
                 </label>
               </div>
-              <a class="btn btn-primary btn-block" onclick ="signInFrontEnd()">log in</a>
+              <a class="btn btn-primary btn-block" onclick ="signInFrontEnd('{/sqroot/header/info/account}')">log in</a>
               <a href="index.aspx?code=login2" class="btn btn-link btn-block">Get New Password ?</a>
             </form>
           </div>
@@ -112,7 +126,6 @@
             <div class="col-md-6 col-xs-12">
               <ul class="list-inline pull-right top-right">
                 <li class="account-login" id="loginbuttons">
-                  Loading Please Wait...
                   <script>
                     var username = '<xsl:value-of select="sqroot/header/info/user/userName/." />';
                     topbutton(username);
@@ -125,11 +138,11 @@
       </div>
 
       <!-- NAV TOP -->
-      <div class="navTop text-center">
+      <div class="navTop text-center" style="padding-bottom: 10px">
         <div class="container">
           <div class="navbar-header">
             <a class="navbar-brand" href="javascript:void(0)">
-              <img src="ophcore/api/msg_download.aspx?imageName=OPHContent/themes/themeTWO/images/logo2.png" style="width:200px;" alt="logo" />
+              <img src="OPHContent/themes/themeTWO/images/logo2.jpg" style="width:200px;" alt="logo" />
             </a>
           </div>
           <div class="navTop-middle" >
@@ -142,13 +155,7 @@
               </span>
             </div>
           </div>
-          <div class="dropdown cart-dropdown" id="carttop" style="margin-left:5px">
-            Loading Please Wait...
-            <script>
-              var filterkey = "pcsoGUID = '" +  getCookie("cartID") + "'";
-              LoadNewPart('home_browse_cart_top', 'carttop', 'tapcs1deta', filterkey, '');
-            </script>
-          </div>
+          <div class="dropdown cart-dropdown" id="carttop" style="margin-left:5px">&#160;</div>
         </div>
       </div>
 
@@ -164,7 +171,54 @@
               </button>
             </a>
             <div class="" id="demo5" style="color:white; position:absolute; background:#white; z-index:100; width:100%; right:0px; top:50px; overflow:hidden !important; overflow-y:scroll !important; max-height:520px !important;">
-              <xsl:apply-templates select="sqroot/header/filters/filter" />
+                <div class="panel-group">
+					<p class="resize-font-10px" style="color:white; background:#37acb2;  display:block; font-size:15px; padding:5px 10px;  margin-bottom:0px;">
+					Choose By Category
+					</p>
+					<div class="panel panel-default">
+					<div class="accordian-body collapse in top-menu-div product-menu" id="demo6" style="">
+					  <div class="panel-group" id="accordion2">
+						<!-- SIDEBAR -->
+						<!--<xsl:apply-templates select="sqroot/header/menus/menu[@code='catagory']/submenus/submenu" />-->
+						<div id="CategoryMenu">
+						  <script>
+							//if (getGUID() == undefined){
+							var xslfile = 'Category';
+							var id = 'CategoryMenu';
+							var code = 'MaCTGRFRON';
+							var prnt = 'PARNCTGRGUID is null ';
+							LoadNewPart('home_browse_menu_sidebar', id, code, prnt, '', '1', '5', 'name asc');
+							//}
+						  </script>
+						</div>
+					  </div>
+					</div>
+					</div>
+				</div>
+				<div class="panel-group">
+					<p class="resize-font-10px" style="color:white; background:#37acb2;  display:block; font-size:15px; padding:5px 10px;  margin-bottom:0px;">
+					Choose By Division
+					</p>
+					<div class="panel panel-default">
+					<div class="accordian-body collapse in top-menu-div product-menu" id="demo6" style="">
+					  <div class="panel-group" id="accordion2">
+						<!-- SIDEBAR -->
+						<!--<xsl:apply-templates select="sqroot/header/menus/menu[@code='catagory']/submenus/submenu" />-->
+						<div id="DivisionMenu">
+						  <script>
+							//if (getGUID() == undefined){
+							var xslfile = 'Category';
+							var id = 'DivisionMenu';
+							var code = 'MaBRANFRON';
+							var prnt = 'PARNBRANGUID is null ';
+							LoadNewPart('home_browse_menu_sidebar', id, code, prnt, '', '1', '5', 'name asc');
+							//}
+						  </script>
+						</div>
+					  </div>
+					</div>
+					</div>
+				</div>				
             </div>
               
             
@@ -195,6 +249,24 @@
 
     </div>
     
+    <!-- BANNER -->
+    <div class="container">
+      <div class="bannercontainer bannerV4">
+        <div class="fullscreenbanner-container">
+          <div class="fullscreenbanner">
+            <ul id="sliderloc">
+              <span id="loadingslider">Loading Please Wait...</span>
+              <xsl:apply-templates select="sqroot/header/menus/menu[@code='slider']/submenus/submenu" />
+              <!--<script>
+                LoadNewPart('home_browse_slider', 'sliderloc', 'maSLDRIMGE', "SLDRGUID ='5F5A7C4F-17F8-48CA-A179-AEF41DFA099F'", '', '', '', 'imgCaption asc');
+              </script>-->
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+	
     <div  id="contentWrapper" class="content-wrapper">
       a
     </div>
@@ -204,8 +276,8 @@
       <div class="container">
         <div class="row">
           <div class="col-sm-7 col-xs-12">
-            <p>
-              © 2016 Copyright <a style="color:white" href="http://www.loreal.com/">L'oreal Indonesia</a>
+            <p id="cp">
+              © #year# Copyright <a style="color:white" href="http://www.loreal.com/">L'oreal Indonesia</a>
             </p>
           </div>
           <!--<div class="col-sm-5 col-xs-12">
@@ -248,32 +320,33 @@
     </li>
   </xsl:template>
 
-  <!--filters-->
-  <xsl:template match="sqroot/header/filters/filter">
-    <div class="panel-group">
-      <p class="resize-font-10px" style="color:white; background:#37acb2;  display:block; font-size:15px; padding:5px 10px;  margin-bottom:0px;">
-        Choose By <xsl:value-of select="caption/." />
-      </p>
-      <div class="panel panel-default">
-        <div class="accordian-body collapse in top-menu-div product-menu" id="demo6" style="">
-          <div class="panel-group" id="accordion2">
-            <!-- SIDEBAR -->
-            <!--<xsl:apply-templates select="sqroot/header/menus/menu[@code='catagory']/submenus/submenu" />-->
-            <div id="{caption/.}Menu">
-              <script>
-                if (getQueryVariable("GUID") == undefined){
-                var xslfile = '<xsl:value-of select="caption/." />';
-                var id = '<xsl:value-of select="caption/." />'+'Menu';
-                var code = '<xsl:value-of select="code/." />';
-                var prnt = '<xsl:value-of select="@Parent" /> is null';
-                LoadNewPart('home_browse_menu_sidebar', id, code, prnt, '', '1', '200', 'id asc');
-                }
-              </script>
-            </div>
-          </div>
-        </div>
-      </div>
 
-    </div>
+  
+    <!--slider1-->
+  <xsl:template match="sqroot/header/menus/menu[@code='slider']/submenus/submenu">
+   <li data-transition="slidehorizontal" data-slotamount="5" data-masterspeed="700"  data-title="Slide 3" class="homeslider" style="display:none;">
+      <img src="OPHContent/documents/{/sqroot/header/info/account/.}/{pageURL/.}" onerror="this.src='ophcontent/themes/themeTWO/images/white.jpg'" alt="slidebg1" data-bgfit="cover" data-bgposition="center center" data-bgrepeat="no-repeat" />
+      <div class="slider-caption slider-captionV4">
+         <xsl:if test="link/. != ''">
+            <div class="tp-caption rs-caption-4 sft"
+              data-hoffset="0"
+              data-x="550"
+              data-y="400"
+              data-speed="800"
+              data-start="3500"
+              data-easing="Power4.easeOut"
+              data-endspeed="300"
+              data-endeasing="Power1.easeIn"
+              data-captionhidden="off">
+              <span class="page-scroll">
+                <a href="{link/.}" class="btn primary-btn">
+                  Klik Disini<ix class="glyphicon glyphicon-chevron-right"></ix>
+                </a>
+              </span>
+            </div>
+          </xsl:if>
+        
+      </div>
+    </li>
   </xsl:template>
 </xsl:stylesheet>

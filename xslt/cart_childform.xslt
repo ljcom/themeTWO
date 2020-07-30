@@ -94,7 +94,7 @@
         <xsl:when test="(@caption)='Qty'">
           <td class="col-xs-2">
             <form method="post" id="pcs2form_{../../@GUID}">
-              <input type="hidden" value="{../../@GUID}" name="PCSODETAGUID"/>
+              <input type="hidden" value="{../../@GUID}" name="guid"/>
               <input type="number" placeholder="1" value="{.}" name="{@caption}"/>
               <script>
                 if (document.getElementById("cfunctionlist").value == ''){

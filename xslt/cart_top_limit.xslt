@@ -87,20 +87,11 @@
       </xsl:choose>
     </xsl:variable>
 
-    <xsl:choose>
-      <xsl:when test="(/sqroot/header/custompermissions/custompermission/allowchangepayment/.) = 0">
-        <xsl:if test="(@caption)!='limitPointBalance'">
-          <td>
-            <xsl:value-of select="$tbContent" />
-          </td>
-        </xsl:if>
-      </xsl:when>
-      <xsl:otherwise>
+     
         <td>
           <xsl:value-of select="$tbContent" />
         </td>
-      </xsl:otherwise>
-    </xsl:choose>
+      
 
   </xsl:template>
 

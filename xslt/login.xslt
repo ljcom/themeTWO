@@ -9,13 +9,14 @@
   <xsl:template match="/">
     <script>
      
+	//var filterkey = "parentdocguid='" +  getCookie("cartID") + "'";
+	//LoadNewPart('cart_top', 'carttop', 'tapcs1deta', filterkey, '');
 
-      //loadScript('OPHContent/themes/themeTWO/scripts/bootstrap/js/bootstrap.min.js');
-      //loadScript('OPHContent/themes/themeTWO/scripts/owl-carousel/owl.carousel.js');
-      //loadScript('OPHContent/themes/themeTWO/scripts/js/custom.js');
-
-      //if (getCookie("isLogin")==1) window.location='?';
-      endLoading();
+     //endLoading();
+	
+	var n=new Date(Date.now());
+	$('#cp').html($('#cp').html().split('#year#').join(n.getFullYear()));	 
+	
     </script>
     <!-- Page script -->
 
@@ -37,26 +38,6 @@
                     topbutton(username);
                   </script>
                 </li>-->
-                <li class="searchBox">
-                  <a href="#">
-                    <ix class="fa fa-search"></ix>
-                  </a>
-                  <ul class="dropdown-menu dropdown-menu-right">
-                    <li>
-                      <span class="input-group">
-                        <input type="text" id="searchText" class="form-control" placeholder="Search…" aria-describedby="basic-addon2" onkeypress="searchkeypressFront(event)" />
-                        <button type="submit" class="input-group-addon" onclick="searchFront()">Submit</button>
-                      </span>
-                    </li>
-                  </ul>
-                </li>
-                <li class="dropdown cart-dropdown" id="carttop">
-                  Loading Please Wait...
-                  <script>
-                    var filterkey = "pcsoGUID = '" +  getCookie("cartID") + "'";
-                    LoadNewPart('cart_top', 'carttop', 'tapcs1deta', filterkey, '');
-                  </script>
-                </li>
               </ul>
             </div>
           </div>
@@ -75,7 +56,7 @@
               <span class="icon-bar"></span>
             </button>
             <a class="navbar-brand" href="javascript:goHome()">
-              <img src="OPHContent/themes/themeTWO/images/logo2.png" style="width:200px;" alt="logo" />
+              <img src="OPHContent/themes/themeTWO/images/logo2.jpg" style="width:200px;" alt="logo" />
             </a>
           </div>
 
@@ -111,7 +92,7 @@
       </div>
     </section>
 
-    <section class="mainContent clearfix logIn">
+    <section class="mainContent clearfix logIn" style="padding:50px 0 0 0">
       <div class="container">
         <div class="row">
           <div class="col-md-6">
@@ -140,7 +121,7 @@
                     </label>
                   </div>
                   <div style="text-align:center">
-                    <a class="btn btn-primary btn-block" onclick ="signInFrontEnd()">log in</a>
+                    <a class="btn btn-primary btn-block" onclick ="signInFrontEnd('{/sqroot/header/info/account}')">log in</a>
                   </div>
                 </form>
 
@@ -159,7 +140,7 @@
                     <label for="">Enter Email</label>
                     <input type="email" class="form-control" id="personalemail" name="personalemail" />
                     </div>
-                  <a onclick="ForgotPwdMail('sendemail')" class="btn btn-primary btn-block">Submit</a>
+                  <a onclick="ForgotPwdMail('{/sqroot/header/info/account}', 'sendemail')" class="btn btn-primary btn-block">Submit</a>
                 </form>
               </div>
             </div>
@@ -176,7 +157,7 @@
         <div class="row">
           <div class="col-sm-7 col-xs-12">
             <p>
-              © 2016 Copyright <a style="color:white" href="http://www.loreal.com/">L'oreal Indonesia</a>
+              © 2019 Copyright <a style="color:white" href="http://www.loreal.com/">L'oreal Indonesia</a>
             </p>
           </div>
           <!--<div class="col-sm-5 col-xs-12">

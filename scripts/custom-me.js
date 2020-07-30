@@ -43,7 +43,7 @@ function loadContent2(id, f) {
     //    //if (isAdhoc) setCursorDefault();
     //});
 
-} function LoadNewPart(filename, id, code, sqlfilter, searchText, bpageno, showpage, sortOrder, stateid) {
+} function LoadNewPart(filename, id, code, sqlfilter, searchText, bpageno, showpage, sortOrder) {
     if (filename == 'product') {
         filename = filename + '_' + getCookie('browsetype');
         bpageno = getCookie("bpageno");
@@ -54,8 +54,7 @@ function loadContent2(id, f) {
     if (bpageno == '' || bpageno == undefined) { bpageno = 1 }
     if (showpage == '' || showpage == undefined) { showpage = 21 }
     if (sortOrder == '' || sortOrder == undefined) { sortOrder = '' }
-    if (stateid == '' || stateid == undefined) { stateid = '' }
-    var xmldoc = 'OPHCore/api/default.aspx?mode=browse' + '&code=' + code + '&sqlfilter=' + sqlfilter + '&bSearchText=' + searchText + '&bpageno=' + bpageno + '&showpage=' + showpage + '&sortOrder=' + sortOrder + '&stateid=' + stateid + '&date=' + getUnique();
+    var xmldoc = 'OPHCore/api/default.aspx?mode=browse' + '&code=' + code + '&sqlfilter=' + sqlfilter + '&bSearchText=' + searchText + '&bpageno=' + bpageno + '&showpage=' + showpage + '&sortOrder=' + sortOrder + '&date=' + getUnique();
 
     var divname = [id];
     var xsldoc = ['OPHContent/themes/themeTwo/xslt/' + filename + '.xslt'];
@@ -105,10 +104,9 @@ function signInFrontEnd() {
             var result = $(data).find("hostGUID").text();
             if (result) {
                 if (remember.checked == true) { setCookie("userID", uid, 30, 0, 0); }
-
                 setCookie("cartID", "", 0, 1, 0);
                 var landingPage = (getCookie('lastPar') == null || getCookie('lastPar') == '') ? '?' : getCookie('lastPar');
-                window.location=landingPage;
+                window.location = landingPage;                
             } else {
                 //alert('Invalid User or password!');
                 document.getElementById("loginNotifMsg").innerHTML = 'Invalid User ID or password!';
@@ -721,99 +719,6 @@ function generatePayment(code, tablename, formid, locations, GUID, delcookie) {
     });
 }
 
-function getTransactionDetails(tablename, GUID) {
-    var path = 'OPHCore/api/midtrans.aspx?mode=gettransaction&code=' + tablename + '&GUID=' + GUID
-    var formid = 'cartForm'
-    var id = "#" + formid
-    var dataForm = $(id).serialize()
-
-    var dfLength = dataForm.length;
-    dataForm = dataForm.split('%3C').join('%26lt%3B');
-
-    $.ajax({
-        url: path,
-        data: dataForm,
-        crossdomain: true,
-        type: 'POST',
-        dataType: "xml",
-        timeout: 80000,
-        beforeSend: function () {
-            //setCursorWait(this);
-        },
-        success: function (data) {
-            var result = $(data).find("message").text();
-            var transaction = $(data).find("transaction").text();
-            if (transaction) {
-                var transactionData = transaction
-                snap.show();
-                ajaxGetToken(transactionData, function (error, snapToken) {
-                    if (error) {
-                        snap.hide();
-                    } else {
-                        snap.pay(snapToken);
-                    }
-                });
-            }
-            else {
-
-                if (result == '') { result = 'something wrong !'; }
-                document.getElementById("popupMsgContent").innerHTML = result;
-                $("#popupMsg").show("slow")
-            }
-        }
-    });
-
-}
-function ajaxGetToken(transactionData, callback) {
-    var snapToken;
-    // Request get token to your server & save result to snapToken variable
-    var path = 'OPHCore/api/midtrans.aspx?mode=checkdatatest&code=TaPCSO&GUID=' + getGUID()
-    var formid = 'cartForm'
-    var id = "#" + formid
-    var dataForm = $(id).serialize() //.split('_').join('');
-
-    var dfLength = dataForm.length;
-    dataForm = dataForm.split('%3C').join('%26lt%3B');
-
-    $.ajax({
-        url: path,
-        data: dataForm,
-        crossdomain: true,
-        type: 'POST',
-        dataType: "xml",
-        timeout: 80000,
-        beforeSend: function () {
-            //setCursorWait(this);
-        },
-        success: function (data) {
-            var result = $(data).find("message").text();
-            var newUrl = $(data).find("newurl").text();
-            var token = $(data).find("token").text();
-            if (token) {
-                snapToken = token
-                if (snapToken) {
-                    callback(null, snapToken);
-                } else {
-                    callback(new Error('Failed to fetch snap token'), null);
-                }
-            }
-        }
-    });
-
-//    if (snapToken) {
-//        callback(null, snapToken);
-//    } else {
-//        callback(new Error('Failed to fetch snap token'), null);
-//    }
-}
-
-//function timeIsUpfront() {
-//    //lastPar = window.location;
-//    //setCookie('lastPar', lastPar);
-//    //setCookie("userId", "", 0, 0, 0);
-//    window.location = 'index.aspx?env=acct&code=home';
-//}
-//setTimeout(function () { timeIsUpfront(); }, 1000 * 2 * 60);
 
 //for doku
 function getRequestDateTime() {
@@ -889,76 +794,5 @@ function genPaymentChannel() {
     } else {
         document.getElementById('PAYMENTCHANNEL').value = ''
     }
-
-}
-
-function SaveData(code, formid, locations, GUID, delcookie, tablename, reloadpage) {
-if(reloadpage == '' || reloadpage == undefined) {reloadpage = '1'}
-    if (delcookie == '') {delcookie = '0'}
-
-    if (GUID != undefined && GUID != '') { GUID = '&cfunctionlist=' + GUID; }
-    else { GUID = '' }
-    var path = 'OPHCore/api/default.aspx?mode=save&code=' + code + GUID
-    var id = "#" + formid
-    //$.post(path, $(id).serialize());
-    var dataForm = $(id).serialize() //.split('_').join('');
-
-    var dfLength = dataForm.length;
-    dataForm = dataForm.split('%3C').join('%26lt%3B');
-
-    $.ajax({
-        url: path,
-        data: dataForm,
-        type: 'POST',
-        dataType: "xml",
-        timeout: 80000,
-        beforeSend: function () {
-            //setCursorWait(this);
-        },
-        success: function (data) {
-            var result = $(data).find("message").text();
-            if (result) {
-				if (result == 'gotopending') {
-					if  (delcookie == '1') {
-                        setCookie("cartID", "", 0, 0, 0);
-                    }
-					window.location='index.aspx?code=account';
-				}
-                if (result == 'gotomidtrans') {
-                    if (GUID == '') { GUID = getGUID() }
-                    
-                    generatePayment(code, tablename, formid, locations, GUID, delcookie)   //vtweb
-                    //getTransactionDetails(tablename, GUID)      //snap
-                } 
-                else if(result == 'gotodoku') {
-                    document.getElementById('submit').click()
-                } 
-                else {
-                    document.getElementById("popupMsgContent").innerHTML = result;
-                    $("#popupMsg").show("slow")
-                }
-            } else {
-                if (getCode().toLowerCase() == 'tapcs2' && locations == '') {
-                    //alert("test");
-                    if  (delcookie == '1') {
-                        setCookie("cartID", "", 0, 0, 0);
-                    }
-                    location.replace("index.aspx?env=front&code=tapcs3");
-                } 
-                else if (location != ''){
-                     if  (delcookie == '1') {
-                        setCookie("cartID", "", 0, 0, 0);
-                     }
-                     if (reloadpage == 1){
-                        window.location = locations
-                     }
-                } else {
-                     if (reloadpage == 1){
-                        window.location.reload();
-                    }
-                }
-            }
-        }
-    });
 
 }

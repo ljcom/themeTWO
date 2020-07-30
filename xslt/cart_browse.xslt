@@ -30,7 +30,7 @@
                     <tbody>
                       <tr>
                         <td class="col-xs-2">
-                          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                          <button type="button" class="close" data-dismiss="alert" aria-label="Close" onclick="deleteRow('tapcsodeta', '{../../@GUID}')">
                             <span aria-hidden="true">x</span>
                           </button>
                           <span class="cartImage">

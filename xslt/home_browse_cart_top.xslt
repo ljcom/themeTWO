@@ -13,7 +13,7 @@
     <xsl:if test="sqroot/header/info/user/hostGUID/. != ''">
       <div id="LimitUsers" class="hidden-xs" style="margin-top:-18px;">
       
-          <a href=".limit-modal" data-toggle="modal" style=" font-size:12px; padding:0; margin:0; color:black; background:white;" onclick="runloadnewpart()">
+          <a style=" font-size:12px; padding:0; margin:0; color:black; background:white;" href="javascript:showLimit()">
             Check Your Remaining Limit Here >>
           </a>
      
@@ -37,9 +37,11 @@
           var hostGUIDcek = '<xsl:value-of select="sqroot/header/info/user/hostGUID/." />';
           var hostGUID = "hostGUID = '<xsl:value-of select="sqroot/header/info/user/hostGUID/." />'";
           if (hostGUIDcek != ''){
-          function runloadnewpart() {
-          LoadNewPart('cart_top_limit', 'limitmodalbody', 'causerlimt', hostGUID, '', '', '');
-          }
+			  function showLimit() {
+				$('#limitmodalbody').html('Loading...');
+				LoadNewPart('cart_top_limit', 'limitmodalbody', 'causerlimt', hostGUID, '', '', '');
+				$('#limitmodal').modal('show');
+			  }
           }
         </script>
         <xsl:if test="sqroot/header/info/user/hostGUID/. != ''">
@@ -53,29 +55,26 @@
       <xsl:apply-templates select="sqroot/body/bodyContent/browse/content/row"/>
       <li>
         <div class="btn-group" role="group" aria-label="..." id="buttoncarttop" >
-          <a href="" id="carttop_Shopping" style="background:#f4f4f4; width:125px; padding:5px; color:black; text-align:center; font-size:14px;">Shopping Cart</a>
-          <a href="" id="carttop_Checkout"  class="needlogin" data-toggle="modal" style="background:#f4f4f4; width:125px; padding:5px; color:black; text-align:center; font-size:14px;">Checkout</a>
-          <script>
-            var cartID = getCookie("cartID");
-            document.getElementById("carttop_Shopping").href = 'index.aspx?env=front&amp;code=tapcs1&amp;GUID='+cartID;
-            document.getElementById("carttop_Checkout").href = 'index.aspx?env=front&amp;code=tapcs2&amp;GUID='+cartID;
-            var TotalSales = '<xsl:value-of select="sqroot/body/bodyContent/browse/content/row/fields/field[@caption = 'TotalSales']" />';
-            var FTotalSales = '<xsl:value-of select="format-number(sqroot/body/bodyContent/browse/content/row/fields/field[@caption = 'TotalSales'], '#,##0', 'dot-dec')" />';
-            var TotalQty = '<xsl:value-of select="sqroot/body/bodyContent/browse/content/row/fields/field[@caption = 'TotalQty']" />';
-            var FTotalQty = '<xsl:value-of select="format-number(sqroot/body/bodyContent/browse/content/row/fields/field[@caption = 'TotalQty'], '#,##0', 'dot-dec')" />';
+			<a href="" id="carttop_Shopping" style="background:#f4f4f4; width:125px; padding:5px; color:black; text-align:center; font-size:14px;">Shopping Cart</a>
+			<a href="" id="carttop_Checkout"  class="needlogin" data-toggle="modal" style="background:#f4f4f4; width:125px; padding:5px; color:black; text-align:center; font-size:14px;">Checkout</a>
+			<script>
+				var cartID = getCookie("cartID");
+				document.getElementById("carttop_Shopping").href = 'index.aspx?env=front&amp;code=tapcs1&amp;GUID='+cartID+'&amp;unique='+getUnique();
+				document.getElementById("carttop_Checkout").href = 'index.aspx?env=front&amp;code=tapcsd&amp;GUID='+cartID+'&amp;unique='+getUnique();
+				var TotalSales = '<xsl:value-of select="sqroot/body/bodyContent/browse/content/row/fields/field[@caption = 'TotalSales']" />';
+				var FTotalSales = '<xsl:value-of select="format-number(sqroot/body/bodyContent/browse/content/row/fields/field[@caption = 'TotalSales'], '#,##0', 'dot-dec')" />';
+				var TotalQty = '<xsl:value-of select="sqroot/body/bodyContent/browse/content/row/fields/field[@caption = 'TotalQty']" />';
+				var FTotalQty = '<xsl:value-of select="format-number(sqroot/body/bodyContent/browse/content/row/fields/field[@caption = 'TotalQty'], '#,##0', 'dot-dec')" />';
 
-            if(TotalSales != '' &amp;&amp; TotalQty != ''){
-            document.getElementById("cartTotalSales").innerHTML = 'Rp. '+FTotalSales;
-            document.getElementById("cartTotalQty").innerHTML = 'Your Cart ('+FTotalQty+')';
+				if(TotalSales != '' &amp;&amp; TotalQty != ''){
+					document.getElementById("cartTotalSales").innerHTML = 'Rp. '+FTotalSales;
+					document.getElementById("cartTotalQty").innerHTML = 'Your Cart ('+FTotalQty+')';
 
-            if (getCookie("isLogin") == "0"){
-            $('.needlogin').attr('href','.login-modal')
-            }
-            document.getElementById("totalcart").innerHTML = $('.itemincart').length;
-
-
-
-            }
+				if (getCookie("isLogin") == "0"){
+					$('.needlogin').attr('href','.login-modal')
+				}
+				//document.getElementById("totalcart").innerHTML = $('.itemincart').length;
+			}
 
           </script>
           <!--<button type="button" class="btn btn-default" onclick="location.href='?code=pcs1=GUID={sqroot/body/bodyContent/browse/content/row[@GUID]}';">Shopping Cart</button>
@@ -90,7 +89,7 @@
       <a href="?code=maprodfron&amp;GUID={fields/field[@caption = 'EVENPSKUGUID']/.}">
         <div class="media">
           <div style="height:50px; width:50px; float:left; margin-right:10px; overflow:hidden; text-align:center; background:white; border:2px solid #37acb2; ">
-            <img style="max-height:35px; margin-top:5px; width: auto;" src="ophcore/api/msg_download.aspx?imageName=OPHContent/documents/{/sqroot/header/info/account/.}/{fields/field[@caption = 'productphotos']}" onerror="this.src='ophcore/api/msg_download.aspx?imageName=ophcontent/themes/themeTWO/images/white.png'" alt="products-img" />
+            <img style="max-height:35px; margin-top:5px; width: auto;" src="ophcore/api/msg_download.aspx?imageName=OPHContent/documents/{/sqroot/header/info/account/.}/{fields/field[@caption = 'productphotos']}&amp;size=130" onerror="this.src='ophcontent/themes/themeTWO/images/white.jpg'" alt="products-img" />
           </div>
           <div class="media-body">
             <h5 class="media-heading itemincart" style="width:200px; overflow-wrap: break-word;">

@@ -11,27 +11,7 @@
   <xsl:variable name="uppercase" select="'ABCDEFGHIJKLMNOPQRSTUVWXYZ'" />
 
   <xsl:template match="/">
-    <script>
-      setCookie("browsetype", "browse_list", 0, 1, 0);
-    </script>
-    <div class="row productListSingle">
       <xsl:apply-templates select="sqroot/body/bodyContent/browse/content/row" />
-    </div>
-
-    <div  class="row">
-      <div class="col-xs-12">
-        <ul class="pagination pagination-sm" id="paginationprod">
-          <script>
-          createPaging('<xsl:value-of select="sqroot/body/bodyContent/browse/info/TotalRows/." />', 'product', 'contentBrowse');
-          </script>
-        </ul>
-      </div>
-    </div>
-    
-    <script>
-      var cartid = getCookie('cartID');
-      $(".cartidclass" ).val(cartid);
-    </script>
   </xsl:template>
 
   <!--SIDEBAR CATAGORY-->
@@ -137,7 +117,7 @@
       <div class="media">
         <div class="media-left">
           <div style="height:200px; text-align:center">
-            <img style="height:90%;  width: auto; margin:0 auto;" class="media-object" src="ophcore/api/msg_download.aspx?imageName={$imageprod}" alt="Image" onerror="this.src='ophcore/api/msg_download.aspx?imageName=ophcontent/themes/themeTWO/images/white.png'" />
+            <img style="height:90%;  width: auto; margin:0 auto;" class="media-object" src="{$imageprod}" alt="Image" onerror="this.src='ophcontent/themes/themeTWO/images/white.jpg'" />
           </div>
           <span class="maskingImage"><a href="index.aspx?env=front&amp;code=maprodfron&amp;GUID={@GUID}" class="btn viewBtn">View</a></span>
         </div>
@@ -196,7 +176,7 @@
               <input type="hidden" name="EVENPSKUGUID" value="{@GUID}" />
               <input type="hidden" value="{fields/field[@caption = 'PRODGUID']/.}" name="PRODGUID"/>
               <input type="hidden" name="price" value="{fields/field[@caption = 'price']/.}" />
-              <a onclick="AddToCart('{../../info/code/.}', 'productform_{@GUID}')" class="btn btn-default">
+              <a onclick="AddToCart('{../../info/code/.}', 'productform_{@GUID}')" class="btn btn-default" style="width:108px">
                 <span style="font-size:20px;"><ix class="fa fa-shopping-cart"></ix></span>
               </a>
             </form>

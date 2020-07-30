@@ -133,7 +133,7 @@
                               <div style="margin-top:30px;">
                                 &#xA0;
                               </div>
-                              <!--<a style="cursor:pointer; background:#47BAC1; color:white; padding:7px 15px; margin-top:15px; display:inline-block;" onclick="SaveData('taPCS2','formpayment', 'index.aspx?code=tapcs2&amp;GUID={sqroot/body/bodyContent/form/info/GUID/.}', '', '0')">Change Payment Type</a>-->
+                              <!--<a style="cursor:pointer; background:#47BAC1; color:white; padding:7px 15px; margin-top:15px; display:inline-block;" onclick="SaveData('taPCSd','formpayment', 'index.aspx?code=tapcsd&amp;GUID={sqroot/body/bodyContent/form/info/GUID/.}', '', '0')">Change Payment Type</a>-->
 
                             </address>
 
@@ -179,7 +179,7 @@
                           <script>
                             var GUIDs = '<xsl:value-of select="sqroot/body/bodyContent/form/info/GUID/." />';
                             //var GUIDs = getCookie("cartID");
-                            LoadNewPart('cart_browse_child2', 'contentcart', 'tapcs1deta', "PCSOGUID = '"+GUIDs+"'", '', 1, 200);
+                            LoadNewPart('cart_browse_child2', 'contentcart', 'tapcs1deta', "parentdocguid='"+GUIDs+"'", '', 1, 200);
                           </script>
                         </div>
                         <div class="totalAmountArea">
@@ -220,9 +220,11 @@
                                   <xsl:when test="sqroot/body/bodyContent/form/info/state/status=120">
                                     WAITING FOR PAYMENT - Your order stock has been confirmed. Please proceed for payment.
                                   </xsl:when>
-                                  <xsl:when test="sqroot/body/bodyContent/form/info/state/status=399">
+                                  <xsl:when test="sqroot/body/bodyContent/form/info/state/status=410">
                                     WAITING FOR DELIVERY - Your order is on delivery. Please wait.
                                   </xsl:when>
+								  <xsl:otherwise>
+								  </xsl:otherwise>
                                 </xsl:choose>
                               </p>
                             </div>
@@ -254,6 +256,8 @@
                                   <a style="cursor:pointer;" onclick="SaveData('taPCS1', 'cartForm', 'index.aspx?code=tapcs3', '', '1', 'tapcso')">Payment</a>
                                 </li>
                               </xsl:when>
+							  <xsl:otherwise>
+							  </xsl:otherwise>
                             </xsl:choose>
                           </form>
                         </ul>
@@ -468,7 +472,7 @@
         </xsl:if>
         <xsl:if test="../@isEditable=0 or /sqroot/header/custompermissions/custompermission/allowchangepayment/.=1">
           <xsl:attribute name="onchange">
-            autosuggest_onchange(this, '<xsl:value-of select="preview/."/>', getCode(), '<xsl:value-of select="/sqroot/body/bodyContent/form/info/GUID/."/>', 'formheader'); SaveData('taPCS2','formpayment', 'index.aspx?code=tapcs2&amp;GUID=<xsl:value-of select="/sqroot/body/bodyContent/form/info/GUID/."/>', '', '0', '', '0');genPaymentChannel()
+            autosuggest_onchange(this, '<xsl:value-of select="preview/."/>', getCode(), '<xsl:value-of select="/sqroot/body/bodyContent/form/info/GUID/."/>', 'formheader'); SaveData('taPCSd','formpayment', 'index.aspx?code=tapcsd&amp;GUID=<xsl:value-of select="/sqroot/body/bodyContent/form/info/GUID/."/>', '', '0', '', '0');genPaymentChannel()
           </xsl:attribute>
         </xsl:if>
         <option></option>

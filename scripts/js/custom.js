@@ -1,7 +1,7 @@
 //============================== header =========================
 jQuery(document).ready(function(){
 	"use strict";
-	$(window).load(function(){
+	$(window).ready(function(){
 		$('.body-wrapper').each(function(){
 			var header_area = $('.header');
 			var main_area = header_area.children('.navbar');
@@ -56,7 +56,7 @@ jQuery(document).ready(function(){
 });
 //============================== SEARCH =========================
 jQuery(document).ready(function(){
-	$('.searchBox a').on("click",function() {
+	$('.searchBox a.searchIcon').on("click",function() {
 	    $(".searchBox .dropdown-menu").toggleClass('display-block');
 	    $(".searchBox a i").toggleClass('fa-close').toggleClass("fa-search");
 	});
@@ -95,8 +95,7 @@ jQuery(document).ready(function() {
 jQuery(document).ready(function() {
 	"use strict";
 	var owl = $('.owl-carousel.featuredProductsSlider');
-	try{
-		owl.owlCarousel({
+	  owl.owlCarousel({
 		  loop:true,
 		  margin:28,
 		  autoplay:true,
@@ -117,12 +116,8 @@ jQuery(document).ready(function() {
 			  }
 		  }
 	  });
-	}
-	catch(e) {}
-	  
 	var owl = $('.owl-carousel.partnersLogoSlider');
-	try {
-		owl.owlCarousel({
+	  owl.owlCarousel({
 		  loop:true,
 		  margin:28,
 		  autoplay:true,
@@ -145,13 +140,9 @@ jQuery(document).ready(function() {
 			  }
 		  }
 	  });
-	}
-	catch(e) {}
-	  
 
 	var owl = $('.owl-carousel.featuredCollectionSlider');
-	try {
-		owl.owlCarousel({
+	  owl.owlCarousel({
 		  loop:true,
 		  margin:28,
 		  autoplay:false,
@@ -173,13 +164,9 @@ jQuery(document).ready(function() {
 			  }
 		  }
 	  });
-	}
-	catch(e) {}
-	  
 
 	  var owl = $('.owl-carousel.dealSlider');
-	  try {
-		  owl.owlCarousel({
+	  owl.owlCarousel({
 		  loop:true,
 		  margin:28,
 		  autoplay:false,
@@ -201,13 +188,9 @@ jQuery(document).ready(function() {
 			  }
 		  }
 	  });
-	  }
-	  catch(e) {}
-	  
 
 	  var owl = $('.owl-carousel.testimonialSlider');
-	  try {
-		  owl.owlCarousel({
+	  owl.owlCarousel({
 		  loop:true,
 		  margin:28,
 		  autoplay:true,
@@ -229,13 +212,9 @@ jQuery(document).ready(function() {
 			  }
 		  }
 	  });
-	  }
-	  catch(e) {}
-	  
 
 	  var owl = $('.owl-carousel.categorySlider');
-	  try {
-		  owl.owlCarousel({
+	  owl.owlCarousel({
 		  loop:true,
 		  margin:28,
 		  autoplay:false,
@@ -255,13 +234,9 @@ jQuery(document).ready(function() {
 			  }
 		  }
 	  });
-	  }
-	  catch(e) {}
-	  
 
 	var owl = $('.owl-carousel.bannerV3');
-	try {
-		owl.owlCarousel({
+	  owl.owlCarousel({
 		  loop:true,
 		  autoplay:true,
 		  autoplayTimeout:4000,
@@ -288,9 +263,6 @@ jQuery(document).ready(function() {
 			  }
 		  }
 	  });
-	}
-	catch(e) {}
-	  
 
 });
 //============================== SELECT BOX =========================
@@ -306,6 +278,7 @@ jQuery(document).ready(function() {
 });
 
 //============================== PRICE SLIDER RANGER =========================
+/*
 jQuery(document).ready(function() {
 	var minimum = 20;
 	var maximum = 300;
@@ -323,32 +296,33 @@ jQuery(document).ready(function() {
 
 	$( "#price-amount-1" ).val( "$" + $( "#price-range" ).slider( "values", 0 ));
 	$( "#price-amount-2" ).val( "$" + $( "#price-range" ).slider( "values", 1 ));
-});
+});*/
 //============================== PRODUCT SINGLE SLIDER =========================
 jQuery(document).ready(function() {
 	(function($){
-		if ($('#thumbcarousel').carousel!=undefined) {					
-			$('#thumbcarousel').carousel(0);
-			var $thumbItems = $('#thumbcarousel .item');
-				$('#carousel').on('slide.bs.carousel', function (event) {
-					var $slide = $(event.relatedTarget);
-				var thumbIndex = $slide.data('thumb');
-				var curThumbIndex = $thumbItems.index($thumbItems.filter('.active').get(0));
-				if (curThumbIndex>thumbIndex) {
-					$('#thumbcarousel').one('slid.bs.carousel', function (event) {
-						$('#thumbcarousel').carousel(thumbIndex);
-					});
-					if (curThumbIndex === ($thumbItems.length-1)) {
-						$('#thumbcarousel').carousel('next');
-					} else {
-						$('#thumbcarousel').carousel(numThumbItems-1);
-					}
-				} else {
-					$('#thumbcarousel').carousel(thumbIndex);
-				}
-			});
-		}
+	  if ($('#thumbcarousel').length>0) {
+		  $('#thumbcarousel').carousel(0);
+		  var $thumbItems = $('#thumbcarousel .item');
+			$('#carousel').on('slide.bs.carousel', function (event) {
+			 var $slide = $(event.relatedTarget);
+			 var thumbIndex = $slide.data('thumb');
+			 var curThumbIndex = $thumbItems.index($thumbItems.filter('.active').get(0));
+			if (curThumbIndex>thumbIndex) {
+			  $('#thumbcarousel').one('slid.bs.carousel', function (event) {
+				$('#thumbcarousel').carousel(thumbIndex);
+			  });
+			  if (curThumbIndex === ($thumbItems.length-1)) {
+				$('#thumbcarousel').carousel('next');
+			  } else {
+				$('#thumbcarousel').carousel(numThumbItems-1);
+			  }
+			} else {
+			  $('#thumbcarousel').carousel(thumbIndex);
+			}
+		  });
+	  }
 	})(jQuery);
+	
 });
 
 jQuery(document).ready(function() {

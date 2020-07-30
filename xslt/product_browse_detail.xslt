@@ -134,9 +134,9 @@
       <!--x.innerHTML = '<xsl:apply-templates select="/sqroot/body/bodyContent/form/formPages/formPage[pageNo='1']/formSections/formSection[sectionNo='1']/formCols/formCol[colNo='1']/formRows/formRow[rowNo='1']/fields/field/textBox/value/." />';-->
               
    
-      var searchtext = document.getElementById('CTGRGUIDs').innerHTML;
-      var filter = "PRODGUID != " + "'" + document.getElementById('PRODGUID').value + "'";
-      LoadNewPart('product_form_related', 'relatedProduct', 'maprodfron', filter, searchtext, '1', '4');
+      //var searchtext = document.getElementById('CTGRGUIDs').innerHTML;
+      //var filter = "PRODGUID != " + "'" + document.getElementById('PRODGUID').value + "'";
+      //LoadNewPart('product_form_related', 'relatedProduct', 'maprodfron', filter, searchtext, '1', '4');
     </script>
   </xsl:template>
 </xsl:stylesheet>
