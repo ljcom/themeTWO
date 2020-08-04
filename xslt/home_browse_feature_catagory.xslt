@@ -81,7 +81,7 @@
                   <br />
                   <span class="resize-font-8px"  style="font-size:1.375em; ">
                     Rp. <xsl:value-of select="format-number(fields/field[@caption = 'priceDiscount']/., '#,##0', 'dot-dec')" />
-                    <span class="resize-font-7px"  style="font-size:12px; color:white; padding:5px; margin-top:-30px !important; margin-left:10%; background:#47bac1;">
+                    <span class="resize-font-7px bgThemeColor"  style="font-size:12px; color:white; padding:5px; margin-top:-30px !important; margin-left:10%;">
                       <xsl:value-of select="fields/field[@caption = 'discount']/." />%
                     </span><br />
                   </span>

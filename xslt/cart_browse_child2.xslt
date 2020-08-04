@@ -25,25 +25,7 @@
       </tbody>
     </table>
 
-    <script>
-      if (document.getElementById('BASKETTOTAL').value != '0') {
-		  var amount = parseInt(document.getElementById('AMOUNT').value)
-		  var baskettotal = parseInt(document.getElementById('BASKETTOTAL').value)
-		  var basket = document.getElementById('BASKET').value
-		  var dfee= parseInt($('#DeliveryFee').val());
-		  var ppn = parseInt(amount - baskettotal-dfee);
-		  
-		  
-		  document.getElementById('BASKET').value = basket + 'Delivery,1,'+dfee+','+dfee+';PPN 10%,1,'+ppn+''+','+ppn+';'
-
-		  basket = document.getElementById('BASKET').value
-		  document.getElementById('BASKET').value = basket.replace(/;,/g , ';');
-
-		  basket = document.getElementById('BASKET').value
-		  document.getElementById('BASKET').value = basket.substring(1, basket.length)
-		  getWords();
-      }
-    </script>
+    
 
   </xsl:template>
 

@@ -202,7 +202,7 @@
     </div>
     
     <!-- Message -->
-    <div id="popupMsg" class="alert alert-warning" style="background:#47BAC1; color:white; position:fixed; z-index:1000; top:5%;  right:3%; width:350px; margin:0 auto; display:none">
+    <div id="popupMsg" class="alert alert-warning bgThemeColor" style="color:white; position:fixed; z-index:1000; top:5%;  right:3%; width:350px; margin:0 auto; display:none">
       <button type="button" class="close" onclick="hidePopUp('popupMsg')" aria-hidden="true" style="color:white; opacity:1;">
         x
       </button>

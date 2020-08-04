@@ -20,7 +20,7 @@
       </div>
     </xsl:if>
     <a href="#" class="dropdown-toggle shop-cart" data-toggle="dropdown" style="">
-      <ix class="fa fa-shopping-cart" style="border-left:white solid 5px; z-index:-1px">&#xA0;
+      <ix class="fa fa-shopping-cart bgThemeColor" style="border-left:white solid 5px; z-index:-1px">&#xA0;
         <!--<span id="totalcart" style="position:absolute; top:2px; background:red; left:30px; font-size:10px; width:10px; text-align:center; padding:2px;">0</span>-->
       </ix>
       <span class="hidden-xs">

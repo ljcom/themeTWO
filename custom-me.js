@@ -707,7 +707,7 @@ function changePwd(accountid) {
 }
 function topbutton(username) {
     if (getCookie("isLogin") == '1' && username != '') {
-        document.getElementById("loginbuttons").innerHTML = '<span><a class="resize-font480-10px" href="#">Welcome, <span class="resize-font480-10px" style="color:#47BAC1; font-weight:bold; font-size:14px;">' + username + '</a> </span> <span> | <a class="resize-font480-10px" data-toggle="modal" href="#" onClick="signOut(\'login2\')"><ix class="fa fa-sign-out"></ix><span class="hidden-xs"> Log Out</a></span>';
+        document.getElementById("loginbuttons").innerHTML = '<span><a class="resize-font480-10px" href="#">Welcome, <span class="resize-font480-10px frThemeColor" style="font-weight:bold; font-size:14px;">' + username + '</a> </span> <span> | <a class="resize-font480-10px" data-toggle="modal" href="#" onClick="signOut(\'login2\')"><ix class="fa fa-sign-out"></ix><span class="hidden-xs"> Log Out</a></span>';
     } else {
         document.getElementById("loginbuttons").innerHTML = '<a data-toggle="modal" onclick="javascript:showLogin()"><ix class="fa fa-sign-in"></ix><span class="hidden-xs"> Log In</span></a></span>';
     }
@@ -974,63 +974,6 @@ function randomString(STRlen) {
 
 }
 
-function genInvoice() {
-    document.MerchatPaymentPage.TRANSIDMERCHANT.value = randomString(12);
-}
-
-function genSessionID() {
-    document.MerchatPaymentPage.SESSIONID.value = randomString(20);
-}
-
-function genBookingCode() {
-    document.MerchatPaymentPage.BOOKINGCODE.value = randomString(6);
-}
-
-function getWords() {
-
-    var msg = document.MerchatPaymentPage.AMOUNT.value + document.MerchatPaymentPage.MALLID.value + "ENHp2f42yJ2p" + document.MerchatPaymentPage.TRANSIDMERCHANT.value;
-
-    document.MerchatPaymentPage.WORDS.value = SHA1(msg);
-}
-function genDokuValues() {
-    var amount = '', email = '', cusname = '', address = '', docno = ''
-    if (document.getElementById('TotalAmount') != null) {
-        amount = document.getElementById('TotalAmount').value + '.00'
-        amount = amount.replace(/,/g, '')
-        document.getElementById('AMOUNT').value = amount
-        document.getElementById('PURCHASEAMOUNT').value = amount
-    }
-    if (document.getElementById('Email') != null) {
-        email = document.getElementById('Email').value
-        document.getElementById('EMAIL').value = email
-    }
-    if (document.getElementById('customerName') != null) {
-        cusname = document.getElementById('customerName').value
-        document.getElementById('NAME').value = cusname
-    }
-    if (document.getElementById('Address') != null) {
-        address = document.getElementById('Address').value
-        document.getElementById('ADDRESS').value = address
-    }
-    docno = document.getElementById('documentnumber').innerHTML
-    document.getElementById('TRANSIDMERCHANT').value = docno
-}
-
-function genPaymentChannel() {
-    var paymguid = document.getElementById("PAYMGUID");
-    var value = document.getElementById("PAYMGUID").value
-    var name = paymguid.options[paymguid.selectedIndex].innerHTML;
-
-    if (value == '041C201B-DB46-4E4A-828E-B4C856009990' || name == '3 - Credit Card') {
-        document.getElementById('PAYMENTCHANNEL').value = '15'
-    } else if (value == '65D4EC5A-1B14-4A26-9EC2-4D31877779B2' || name == '4 - Bank Transfer') {
-        document.getElementById('PAYMENTCHANNEL').value = '36'
-    } else {
-        document.getElementById('PAYMENTCHANNEL').value = ''
-    }
-
-}
-
 function SaveData(code, formid, locations, GUID, delcookie, tablename, reloadpage, afterSuccess) {
     if (reloadpage == '' || reloadpage == undefined) { reloadpage = '1' }
     if (delcookie == '') { delcookie = '0' }
@@ -1070,8 +1013,9 @@ function SaveData(code, formid, locations, GUID, delcookie, tablename, reloadpag
                 }
                 else if (result == 'gotodoku') {
                     //remove flag sam 20191015   
-                    if (delcookie == '1') setCookie("cartID", "", 0, 0, 0);
-                    document.getElementById('submit').click()
+                    //if (delcookie == '1') setCookie("cartID", "", 0, 0, 0);
+                    //document.getElementById('submit').click()
+					window.location ='ophcore/api/doku.aspx?mode=payment&code=tapcs2&guid='+getGUID();
                 }
                 else {
                     //document.getElementById("popupMsgContent").innerHTML = result;

@@ -35,7 +35,7 @@
     
     <!--before loadpage-->
      <!-- Message -->
-    <div id="popupMsg" class="alert alert-warning" style="background:#47BAC1; color:white; position:fixed; z-index:1000; top:5%;  right:3%; width:350px; margin:0 auto; display:none">
+    <div id="popupMsg" class="alert alert-warning bgThemeColor" style="color:white; position:fixed; z-index:1000; top:5%;  right:3%; width:350px; margin:0 auto; display:none">
       <button type="button" class="close" onclick="hidePopUp('popupMsg')" aria-hidden="true" style="color:white; opacity:1;">
         x
       </button>
@@ -172,7 +172,7 @@
             </a>
             <div class="" id="demo5" style="color:white; position:absolute; background:#white; z-index:100; width:100%; right:0px; top:50px; overflow:hidden !important; overflow-y:scroll !important; max-height:520px !important;">
                 <div class="panel-group">
-					<p class="resize-font-10px" style="color:white; background:#37acb2;  display:block; font-size:15px; padding:5px 10px;  margin-bottom:0px;">
+					<p class="resize-font-10px bgThemeColor" style="color:white; display:block; font-size:15px; padding:5px 10px;  margin-bottom:0px;">
 					Choose By Category
 					</p>
 					<div class="panel panel-default">
@@ -196,7 +196,7 @@
 					</div>
 				</div>
 				<div class="panel-group">
-					<p class="resize-font-10px" style="color:white; background:#37acb2;  display:block; font-size:15px; padding:5px 10px;  margin-bottom:0px;">
+					<p class="resize-font-10px bgThemeColor" style="color:white; display:block; font-size:15px; padding:5px 10px;  margin-bottom:0px;">
 					Choose By Division
 					</p>
 					<div class="panel panel-default">

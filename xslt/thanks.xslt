@@ -12,7 +12,7 @@
     
     <!--before loadpage-->
     <!-- Message -->
-    <div id="popupMsg" class="alert alert-warning" style="background:#47BAC1; color:white; position:fixed; z-index:1000; top:5%;  right:3%; width:350px; margin:0 auto; display:none">
+    <div id="popupMsg" class="alert alert-warning bgThemeColor" style="color:white; position:fixed; z-index:1000; top:5%;  right:3%; width:350px; margin:0 auto; display:none">
       <button type="button" class="close" onclick="hidePopUp('popupMsg')" aria-hidden="true" style="color:white; opacity:1;">
         x
       </button>
@@ -196,7 +196,7 @@
                   Thank You For Your Order <small>You will receive an email of your order details</small>
                 </h2>
                 <h2 style="position:relative">
-                  <p style="background:#47BAC1; padding:20px 50px; color:white; display:inline-block">
+                  <p class="bgThemeColor" style="padding:20px 50px; color:white; display:inline-block">
                     <span style="font-size:14px">ORDER ID</span>
                     <br/>
                     <br/>

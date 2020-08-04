@@ -40,13 +40,13 @@
     <xsl:choose>
       <xsl:when test="(/sqroot/header/custompermissions/custompermission/allowchangepayment/.) = 0">
         <xsl:if test="(@fieldName)!='limitPointBalance'">
-          <th style="width:{@width}px;  background:#47BAC1; color:white;">
+          <th class="bgThemeColor" style="width:{@width}px; color:white;">
             <xsl:value-of select="translate(titleCaption/., $smallcase, $uppercase)" />
           </th>
         </xsl:if>
       </xsl:when>
       <xsl:otherwise>
-        <th style="width:{@width}px;  background:#47BAC1; color:white;">
+        <th class="bgThemeColor" style="width:{@width}px;  color:white;">
           <xsl:value-of select="translate(titleCaption/., $smallcase, $uppercase)" />
         </th>
       </xsl:otherwise>

@@ -86,7 +86,7 @@
         <xsl:when test="(fields/field[@caption = 'discount']/.)!= '0'">
           <span class="font-arial" style="font-size:20px; ">
             Rp. <xsl:value-of select="format-number(fields/field[@caption = 'priceDiscount']/., '#,##0', 'dot-dec')" />
-            <span style="font-size:12px; color:white; padding:5px; margin-left:10px; background:#47bac1;">
+            <span class="bgThemeColor" style="font-size:12px; color:white; padding:5px; margin-left:10px;">
               <xsl:value-of select="fields/field[@caption = 'discount']/." />%
             </span>
           </span>
