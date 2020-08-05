@@ -299,6 +299,7 @@
 
   <xsl:template match="sqroot/header/menus/menu[@code='primaryfront']/submenus/submenu">
     <li class="dropdown">
+		
       <xsl:choose>
         <xsl:when test="(@type)='treeroot'">
           <a href="{pageURL/.}" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" id="prim-{caption/.}">

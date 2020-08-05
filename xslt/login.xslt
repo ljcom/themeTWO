@@ -120,6 +120,7 @@
                       <input type="checkbox" id="rememberme"/> Remember Me
                     </label>
                   </div>
+
                   <div style="text-align:center">
                     <a class="btn btn-primary btn-block" onclick ="signInFrontEnd('{/sqroot/header/info/account}')">log in</a>
                   </div>

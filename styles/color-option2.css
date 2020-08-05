@@ -267,3 +267,10 @@
 }
 
 /*# sourceMappingURL=color-option2.css.map */
+
+.frThemeColor {
+	color: #ffb548; !important;
+}
+.bgThemeColor {
+	background-color: #ffb548; !important;
+}

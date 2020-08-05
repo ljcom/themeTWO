@@ -9,48 +9,42 @@
 		<script>
 			loadScript('OPHContent/cdn/select2/select2.full.min.js');
 			var deferreds = [];
-			
 			var code=getCode();
 			if (code.toLowerCase()=='tapcsd') {
-				gostep1();
+			gostep1();
 			}
 			else {
-				$('#bar1').removeClass('active').addClass('complete').addClass('fullBar');
-				$('#bar2').removeClass('disabled').addClass('active');
-				$('#tab4default').addClass('active').addClass('in');
-				$('#tab1default').removeClass('active').removeClass('in');
-				$('.select2-selection').css('height', '50px').css('border-radius', '0').css('background-color', '#f0f0f0').css('border-color', '#f0f0f0');
-				$('.select2-selection__arrow').css('height', '50px').css('width', '40px');
-				$('.select2-selection__rendered').css('padding-top', '10px');
+			$('#bar1').removeClass('active').addClass('complete').addClass('fullBar');
+			$('#bar2').removeClass('disabled').addClass('active');
+			$('#tab4default').addClass('active').addClass('in');
+			$('#tab1default').removeClass('active').removeClass('in');
+			$('.select2-selection').css('height', '50px').css('border-radius', '0').css('background-color', '#f0f0f0').css('border-color', '#f0f0f0');
+			$('.select2-selection__arrow').css('height', '50px').css('width', '40px');
+			$('.select2-selection__rendered').css('padding-top', '10px');
 			}
-			
 			function gostep2() {
 			if ($('#DeliveryFee').val()!='' &amp;&amp; $('#Address').val()!=''
-				&amp;&amp; $('#CustomerName').val()!=''
-				&amp;&amp; $('#PostalCode').val()!=''
-				&amp;&amp; $('#Phone').val()!=''
-				&amp;&amp; $('#provGUID').val()!=''
-				&amp;&amp; $('#cityGUID').val()!=''
-				&amp;&amp; $('#districtGUID').val()!=''
-				&amp;&amp; $('#feeGUID').val()!='')
-				
-				{
-					SaveData('taPCSd','formpayment', 'index.aspx?code=tapcsd&amp;GUID=<xsl:value-of select="/sqroot/body/bodyContent/form/info/GUID/."/>', '<xsl:value-of select="/sqroot/body/bodyContent/form/info/GUID/."/>', '0', '', '0', function() {
-						window.location='index.aspx?code=taPCS2&amp;guid=<xsl:value-of select="/sqroot/body/bodyContent/form/info/GUID/."/>';
-					});
-					
-					
-				}
-				else {
-					showMessage('Please complete all the blank fields');
-				}
+			&amp;&amp; $('#CustomerName').val()!=''
+			&amp;&amp; $('#PostalCode').val()!=''
+			&amp;&amp; $('#Phone').val()!=''
+			&amp;&amp; $('#provGUID').val()!=''
+			&amp;&amp; $('#cityGUID').val()!=''
+			&amp;&amp; $('#districtGUID').val()!=''
+			&amp;&amp; $('#feeGUID').val()!='')
+			{
+			SaveData('taPCSd','formpayment', 'index.aspx?code=tapcsd&amp;GUID=<xsl:value-of select="/sqroot/body/bodyContent/form/info/GUID/."/>', '<xsl:value-of select="/sqroot/body/bodyContent/form/info/GUID/."/>', '0', '', '0', function() {
+			window.location='index.aspx?code=taPCS2&amp;guid=<xsl:value-of select="/sqroot/body/bodyContent/form/info/GUID/."/>';
+			});
 			}
-			
+			else {
+			showMessage('Please complete all the blank fields');
+			}
+			}
 			function gostep1() {
-				$('#bar2').removeClass('active').addClass('disabled');
-				$('#bar1').addClass('active').removeClass('complete').removeClass('fullBar');
-				$('#tab1default').addClass('active').addClass('in');
-				$('#tab4default').removeClass('active').removeClass('in');
+			$('#bar2').removeClass('active').addClass('disabled');
+			$('#bar1').addClass('active').removeClass('complete').removeClass('fullBar');
+			$('#tab1default').addClass('active').addClass('in');
+			$('#tab4default').removeClass('active').removeClass('in');
 			}
 		</script>
 		<section class="mainContent clearfix stepsWrapper">
@@ -137,7 +131,8 @@
 															<br/>
 															<span id="PCSO_CustomerAddress_browse">
 																<xsl:value-of select="sqroot/body/bodyContent/form/formPages/formPage/formSections/formSection/formCols/formCol/formRows/formRow/fields/field[@fieldName='customerName']/textBox/value/."/>&#160;
-																<xsl:value-of select="sqroot/body/bodyContent/form/formPages/formPage/formSections/formSection/formCols/formCol/formRows/formRow/fields/field[@fieldName='Phone']/textBox/value/."/><br/>
+																<xsl:value-of select="sqroot/body/bodyContent/form/formPages/formPage/formSections/formSection/formCols/formCol/formRows/formRow/fields/field[@fieldName='Phone']/textBox/value/."/>
+																<br/>
 																<xsl:value-of select="sqroot/body/bodyContent/form/formPages/formPage/formSections/formSection/formCols/formCol/formRows/formRow/fields/field[@fieldName='Address']/textBox/value/."/>
 															</span>
 															<br/>
@@ -149,9 +144,8 @@
 															<span id="PCSO_City_browse">
 																<xsl:value-of select="sqroot/body/bodyContent/form/formPages/formPage/formSections/formSection/formCols/formCol/formRows/formRow/fields/field[@fieldName='provGUID']/autoSuggestBox/combovalue/."/>&#160;
 																<xsl:value-of select="sqroot/body/bodyContent/form/formPages/formPage/formSections/formSection/formCols/formCol/formRows/formRow/fields/field[@fieldName='PostalCode']/textBox/value/."/>
-																
 															</span>
-															<br/>															
+															<br/>
 															<span id="PCSO_Country_browse">
 																<xsl:value-of select="sqroot/body/bodyContent/form/formPages/formPage/formSections/formSection/formCols/formCol/formRows/formRow/fields/field[@fieldName='Country']/textBox/value/."/>
 															</span>
@@ -228,18 +222,15 @@
 															<ul class="list-unstyled">
 																<li>
 																	Subtotal Rp.
-																	<input id="Subtotal" value="{format-number(sqroot/body/bodyContent/form/formPages/formPage/formSections/formSection/formCols/formCol/formRows/formRow/fields/field[@fieldName='Subtotal']/textBox/value/., '#,##0', 'dot-dec')}" readonly="" style="border-width:0;text-align:right" />
-																	
+																	<input id="Subtotal" value="{format-number(sqroot/body/bodyContent/form/formPages/formPage/formSections/formSection/formCols/formCol/formRows/formRow/fields/field[@fieldName='Subtotal']/textBox/value/., '#,##0', 'dot-dec')}" readonly="" style="border-width:0;text-align:right"/>
 																</li>
 																<li>
 																	Delivery Rp.
-																	<input id="DeliveryFee" value="{format-number(sqroot/body/bodyContent/form/formPages/formPage/formSections/formSection/formCols/formCol/formRows/formRow/fields/field[@fieldName='DeliveryFee']/textBox/value/., '#,##0', 'dot-dec')}" readonly="" style="border-width:0;text-align:right" />
-																	
+																	<input id="DeliveryFee" value="{format-number(sqroot/body/bodyContent/form/formPages/formPage/formSections/formSection/formCols/formCol/formRows/formRow/fields/field[@fieldName='DeliveryFee']/textBox/value/., '#,##0', 'dot-dec')}" readonly="" style="border-width:0;text-align:right"/>
 																</li>
 																<li>
 																	Total (Include PPN) Rp.
-																	<input id="TotalAmount" value="{format-number(sqroot/body/bodyContent/form/formPages/formPage/formSections/formSection/formCols/formCol/formRows/formRow/fields/field[@fieldName='TotalSales']/textBox/value/., '#,##0', 'dot-dec')}" readonly="" style="border-width:0;text-align:right" />
-																	
+																	<input id="TotalAmount" value="{format-number(sqroot/body/bodyContent/form/formPages/formPage/formSections/formSection/formCols/formCol/formRows/formRow/fields/field[@fieldName='TotalSales']/textBox/value/., '#,##0', 'dot-dec')}" readonly="" style="border-width:0;text-align:right"/>
 																</li>
 															</ul>
 														</div>
@@ -289,6 +280,16 @@
 													<div class="panel-body">
 														<div class="row">
 															<div class="col-sm-12 col-xs-12">
+																<div class="checkbox">
+																	<label>
+																		<input type="checkbox" id="policy"/> By check this box, I agree to our <a href="?code=termofuse" target="term">terms and privacy policy</a>.
+																	</label>
+																</div>
+																<div class="checkbox">
+																	<label>
+																		<input type="checkbox" id="promotion"/> By check this box, I agree to recieve our update and promotion.
+																	</label>
+																</div>
 																<!--xsl:value-of select="comments" /-->
 																<p style="color:red;">
 																	By clicking <b>CONFIRM</b>, you are fully aware that the products you have purchased are not for resale and strictly for personal use (employee, families and friends).
@@ -315,27 +316,26 @@
 												<div class="well well-lg clearfix">
 													<ul class="pager">
 														<!--form id="cartForm" method="POST"-->
-															
-															<!--<input type="text" name="gross_amount" value="{format-number(floor(/sqroot/body/bodyContent/form/formPages/formPage[@pageNo='1']/formSections/formSection/formCols/formCol[@colNo='5']/formRows/formRow[@rowNo='2']/fields/field/textBox/value/.), '#')}" />-->
-															<xsl:if test="sqroot/body/bodyContent/form/info/state/status=0 or sqroot/body/bodyContent/form/info/state/status=120">
-																<li class="previous">
-																	<a href="index.aspx?code=tapcsd&amp;guid={/sqroot/body/bodyContent/form/info/GUID/.}">back</a>
+														<!--<input type="text" name="gross_amount" value="{format-number(floor(/sqroot/body/bodyContent/form/formPages/formPage[@pageNo='1']/formSections/formSection/formCols/formCol[@colNo='5']/formRows/formRow[@rowNo='2']/fields/field/textBox/value/.), '#')}" />-->
+														<xsl:if test="sqroot/body/bodyContent/form/info/state/status=0 or sqroot/body/bodyContent/form/info/state/status=120">
+															<li class="previous">
+																<a href="index.aspx?code=tapcsd&amp;guid={/sqroot/body/bodyContent/form/info/GUID/.}">back</a>
+															</li>
+														</xsl:if>
+														<xsl:choose>
+															<xsl:when test="sqroot/body/bodyContent/form/info/state/status=0">
+																<li class="next">
+																	<a style="cursor:pointer;" onclick="SaveData('taPCS1', 'formpayment', 'index.aspx?code=tapcs4', '{/sqroot/body/bodyContent/form/info/GUID/.}', '1', 'tapcso')">Confirm</a>
 																</li>
-															</xsl:if>
-															<xsl:choose>
-																<xsl:when test="sqroot/body/bodyContent/form/info/state/status=0">
-																	<li class="next">
-																		<a style="cursor:pointer;" onclick="SaveData('taPCS1', 'formpayment', 'index.aspx?code=tapcs4', '{/sqroot/body/bodyContent/form/info/GUID/.}', '1', 'tapcso')">Confirm</a>
-																	</li>
-																</xsl:when>
-																<xsl:when test="sqroot/body/bodyContent/form/info/state/status=120">
-																	<li class="next">
-																		<a style="cursor:pointer;" onclick="SaveData('taPCS1', 'formpayment', 'index.aspx?code=tapcs4', getGUID(), '1', 'tapcso')">Payment</a>
-																	</li>
-																</xsl:when>
-																<xsl:otherwise>
-																</xsl:otherwise>
-															</xsl:choose>
+															</xsl:when>
+															<xsl:when test="sqroot/body/bodyContent/form/info/state/status=120">
+																<li class="next">
+																	<a style="cursor:pointer;" onclick="SaveData('taPCS1', 'formpayment', 'index.aspx?code=tapcs4', getGUID(), '1', 'tapcso')">Payment</a>
+																</li>
+															</xsl:when>
+															<xsl:otherwise>
+															</xsl:otherwise>
+														</xsl:choose>
 														<!--/form-->
 													</ul>
 												</div>
@@ -348,12 +348,9 @@
 					</div>
 				</div>
 			</div>
-		
-
 		</section>
 	</xsl:template>
 	<xsl:template match="sqroot/body/bodyContent/form/formPages/formPage/formSections/formSection/formCols/formCol/formRows/formRow/fields/field[@fieldName = 'PAYMGUID']/autoSuggestBox">
-		
 		<label id="{../@fieldName}caption" style="margin:0;">
 			<xsl:value-of select="titlecaption"/>
 		</label>
@@ -366,7 +363,7 @@
 			</xsl:if>
 			<select class="form-control select2" style="width: 100%;" name="{../@fieldName}" id="{../@fieldName}" data-type="selectBox" data-old="{value/.}" data-oldText="{value/.}" data-value="{value/.}">
 				<xsl:attribute name="onchange">
-					autosuggest_onchange(this, '<xsl:value-of select="preview/."/>', getCode(), '<xsl:value-of select="/sqroot/body/bodyContent/form/info/GUID/."/>', 'formheader'); 
+					autosuggest_onchange(this, '<xsl:value-of select="preview/."/>', getCode(), '<xsl:value-of select="/sqroot/body/bodyContent/form/info/GUID/."/>', 'formheader');
 					SaveData('taPCS2','formpayment', 'index.aspx?code=tapcsd&amp;GUID=<xsl:value-of select="/sqroot/body/bodyContent/form/info/GUID/."/>', '<xsl:value-of select="/sqroot/body/bodyContent/form/info/GUID/."/>', '0', '', '0');
 				</xsl:attribute>
 				<option/>
@@ -412,8 +409,7 @@
 			}, 1000);
 			<xsl:if test="value!=''">
 				autosuggest_defaultValue('<xsl:value-of select="../@fieldName"/>',
-				'<xsl:value-of select='value'/>','<xsl:value-of select='translate(combovalue, "&#39;", "\&#39;")'/>') 
-				
+				'<xsl:value-of select='value'/>','<xsl:value-of select='translate(combovalue, "&#39;", "\&#39;")'/>')
 			</xsl:if>
 		</script>
 	</xsl:template>
@@ -521,7 +517,6 @@
 		</div>
 	</xsl:template>
 	<xsl:template match="autoSuggestBox">
-
 		<label id="{../@fieldName}caption">
 			<xsl:value-of select="titlecaption"/>
 		</label>
@@ -546,7 +541,7 @@
 			<div class="form-group col-xs-12">
 				<select class="form-control select2" style="width: 100%;" name="{../@fieldName}" id="{../@fieldName}" data-type="selectBox" data-old="{value/.}" data-oldText="{value/.}" data-value="{value/.}">
 					<xsl:attribute name="onchange">
-						autosuggest_onchange(this, '<xsl:value-of select="preview/."/>', getCode(), '<xsl:value-of select="/sqroot/body/bodyContent/form/info/GUID/."/>', 'formheader'); 
+						autosuggest_onchange(this, '<xsl:value-of select="preview/."/>', getCode(), '<xsl:value-of select="/sqroot/body/bodyContent/form/info/GUID/."/>', 'formheader');
 						//SaveData('taPCSd','formpayment', 'index.aspx?code=tapcsd&amp;GUID=<xsl:value-of select="/sqroot/body/bodyContent/form/info/GUID/."/>', '<xsl:value-of select="/sqroot/body/bodyContent/form/info/GUID/."/>', '0', '', '0');
 					</xsl:attribute>
 					<option/>
@@ -593,8 +588,7 @@
 			}, 1000);
 			<xsl:if test="value!=''">
 				autosuggest_defaultValue('<xsl:value-of select="../@fieldName"/>',
-				'<xsl:value-of select='value'/>','<xsl:value-of select='translate(combovalue, "&#39;", "\&#39;")'/>') 
-
+				'<xsl:value-of select='value'/>','<xsl:value-of select='translate(combovalue, "&#39;", "\&#39;")'/>')
 			</xsl:if>
 		</script>
 	</xsl:template>
