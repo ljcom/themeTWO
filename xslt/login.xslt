@@ -120,6 +120,7 @@
                       <input type="checkbox" id="rememberme"/> Remember Me
                     </label>
                   </div>
+
                   <div style="text-align:center">
                     <a class="btn btn-primary btn-block" onclick ="signInFrontEnd('{/sqroot/header/info/account}')">log in</a>
                   </div>
@@ -156,8 +157,8 @@
       <div class="container">
         <div class="row">
           <div class="col-sm-7 col-xs-12">
-            <p>
-              © 2019 Copyright <a style="color:white" href="http://www.loreal.com/">L'oreal Indonesia</a>
+            <p id="cp">
+              © #year# Copyright <a style="color:white" href="http://www.loreal.com/">L'oreal Indonesia</a>
             </p>
           </div>
           <!--<div class="col-sm-5 col-xs-12">

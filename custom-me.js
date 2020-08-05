@@ -550,7 +550,7 @@ function changeColorMenuFront() {
         menuCon = document.getElementById("prim-My Account")
     }
     if (menuCon != undefined && menuCon != null && menuCon != '') {
-        menuCon.style.color = '#47BAC1';
+        $('#'+menuCon).addClass('active');
     }
 }
 
