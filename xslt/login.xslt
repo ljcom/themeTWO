@@ -156,8 +156,8 @@
       <div class="container">
         <div class="row">
           <div class="col-sm-7 col-xs-12">
-            <p>
-              © 2019 Copyright <a style="color:white" href="http://www.loreal.com/">L'oreal Indonesia</a>
+            <p id="cp">
+              © #year# Copyright <a style="color:white" href="http://www.loreal.com/">L'oreal Indonesia</a>
             </p>
           </div>
           <!--<div class="col-sm-5 col-xs-12">
