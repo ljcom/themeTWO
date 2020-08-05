@@ -124,6 +124,11 @@
                     <label for="">Enter Code</label>
                     <input type="text" class="form-control" id="vercode" name="vercode"/>
                     </div>
+				  <div class="checkbox">
+                    <label>
+                      <input type="checkbox" id="policy"/> By check this box, you are agreed to comply our <a href="?code=termofuse">terms and privacy policy</a>.
+                    </label>
+                  </div>	
                   <a onclick="ForgotPwdMail('{/sqroot/header/info/account}', 'verifycode')" class="btn btn-primary btn-block">Submit</a>
                 </form>
               </div>
