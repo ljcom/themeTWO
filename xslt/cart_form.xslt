@@ -36,6 +36,10 @@
                     <li>
                       Total (Include PPN) <span>Rp.  <xsl:value-of select="format-number(sqroot/body/bodyContent/form/formPages/formPage[@pageNo='1']/formSections/formSection/formCols/formCol/formRows/formRow[@rowNo='2']/fields/field/textBox/value/., '#,##0', 'dot-dec')" /></span>
                     </li>
+					<li>
+						Total Weight 
+						<span>Rp.  <xsl:value-of select="format-number(sqroot/body/bodyContent/form/formPages/formPage/formSections/formSection/formCols/formCol/formRows/formRow/fields/field[@fieldName='totalWeight']/textBox/value/., '#,##0.00', 'dot-dec')" />&#160;kg</span>
+					</li>					
                     <!--<li>
                       UK Vat <span>Rp. xxx</span>
                     </li>
@@ -51,18 +55,4 @@
                   <ix class="fa fa-arrow-circle-right" aria-hidden="true"></ix>
                 </a>
                 <a onclick="goToProductBrowse()" 
-                   class="btn btn-primary " style="position:absolute;left:50px; width:250px;">
-                    <ix class="fa fa-arrow-circle-left" aria-hidden="true">&#xA0;</ix>
-                  <span> CONTINUE SHOPPING</span>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-   
-
-  </xsl:template>
-  
-</xsl:stylesheet>
+                   class="btn btn-primary " style="position:absolute;left:50px; width:250px;"

@@ -65,9 +65,7 @@
 		<td id="{field[@caption = 'productname']/@caption}">
           <xsl:value-of select="field[@caption = 'productname']/." />
 		</td>
-        <td style="text-align:center">
-          <xsl:value-of select="format-number(field[@caption = 'Price']/., '#,##0', 'dot-dec')" />
-        </td>
+
         <td class="col-xs-2" style="text-align:center" id="{field[@caption = 'Qty']/@caption}">
           <xsl:value-of select="format-number(field[@caption = 'Qty']/., '#,##0', 'dot-dec')" />
         </td>
@@ -79,18 +77,12 @@
 			</xsl:choose>
         </td>
         <td style="text-align:center">
+          <xsl:value-of select="format-number(field[@caption = 'Price']/., '#,##0', 'dot-dec')" />
+        </td>		
+        <td style="text-align:center">
           <xsl:value-of select="format-number(field[@caption = 'TotalPrice']/., '#,##0', 'dot-dec')" />
         </td>
-    <script>
-		var basket = document.getElementById('BASKET').value
-		document.getElementById('BASKET').value = basket + '<xsl:value-of select="field[@caption = 'productname']/." />'
-			+ ','+'<xsl:value-of select="field[@caption = 'Qty']/." />'
-			+ ','+<xsl:value-of select="format-number(field[@caption = 'Price']/., '#.00')" />
-			+ ','+<xsl:value-of select="format-number(field[@caption = 'TotalPrice']/., '#.00')" />+';';
-		document.getElementById('BASKETTOTAL').value = parseInt(document.getElementById('BASKETTOTAL').value) 
-			+ <xsl:value-of select="format-number(field[@caption = 'TotalPrice']/., '0')"/>;
-      
-    </script>
+
 
   </xsl:template>
 </xsl:stylesheet>

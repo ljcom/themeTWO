@@ -282,14 +282,26 @@
 															<div class="col-sm-12 col-xs-12">
 																<div class="checkbox">
 																	<label>
-																		<input type="checkbox" id="policy"/> By check this box, I agree to our <a href="?code=termofuse" target="term">terms and privacy policy</a>.
+																		<input type="hidden" id="isTerm" name="isTerm" value="{sqroot/body/bodyContent/form/formPages/formPage/formSections/formSection/formCols/formCol/formRows/formRow/fields/field[@fieldName='isTerm']/checkBox/value/.}"/>
+																		<input type="checkbox" id="cbisTerm" name="cbisTerm" onchange="checkCB('isTerm');">
+																			<xsl:if test="sqroot/body/bodyContent/form/formPages/formPage/formSections/formSection/formCols/formCol/formRows/formRow/fields/field[@fieldName='isTerm']/checkBox/value/.=1">
+																				<xsl:attribute name="checked">checked</xsl:attribute>
+																			</xsl:if>
+																		</input> By check this box, I agree to our <a href="?code=termofuse" target="term">terms and privacy policy</a>.
 																	</label>
 																</div>
 																<div class="checkbox">
 																	<label>
-																		<input type="checkbox" id="promotion"/> By check this box, I agree to recieve our update and promotion.
+																		<input type="hidden" id="isPromo" name="isPromo" value="{sqroot/body/bodyContent/form/formPages/formPage/formSections/formSection/formCols/formCol/formRows/formRow/fields/field[@fieldName='isPromo']/checkBox/value/.}"/>
+																		<input type="checkbox" id="cbisPromo" name="cbisPromo" onchange="checkCB('isPromo');">
+																			<xsl:if test="sqroot/body/bodyContent/form/formPages/formPage/formSections/formSection/formCols/formCol/formRows/formRow/fields/field[@fieldName='isPromo']/checkBox/value/.=1">
+																				<xsl:attribute name="checked">checked</xsl:attribute>
+																			</xsl:if>
+																		</input> By check this box, I agree to recieve our update and promotion.
 																	</label>
 																</div>
+																
+      
 																<!--xsl:value-of select="comments" /-->
 																<p style="color:red;">
 																	By clicking <b>CONFIRM</b>, you are fully aware that the products you have purchased are not for resale and strictly for personal use (employee, families and friends).
